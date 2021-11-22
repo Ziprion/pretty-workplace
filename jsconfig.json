@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
+      "components": [
+        "./src/components/index"
+      ],
+      "connectors": [
+        "./src/connectors/index"
+      ],
+      "hooks": [
+        "./src/hooks/index"
+      ],
+      "pages": [
+        "./src/pages/index"
+      ],
+      "redux-store": [
+        "./src/redux-store/index"
+      ],
+      "utils": [
+        "./src/utils/index"
+      ],
+      "api-effects": [
+        "./src/api-effects/index"
+      ],
+      "locales": [
+        "./src/locales/index"
+      ],
+      "style": [
+        "./src/style/index"
+      ],
+    },
+    "moduleResolution": "node"
+  }
+}
