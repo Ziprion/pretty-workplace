@@ -43,8 +43,7 @@ export const LoginForm = ({
 
   useEffect(() => {
     setTimeout(() => inputRef?.current?.focus());
-  }, [])
-
+  }, []);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

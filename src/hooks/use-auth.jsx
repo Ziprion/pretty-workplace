@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import { removeStorageItem, setStorageItem } from 'utils';
+import { GREETING_KEY, removeStorageItem, setStorageItem } from 'utils';
 
 export const TOKEN_KEY = 'token';
 
@@ -15,6 +15,7 @@ const useProvideAuth = () => {
 
   const signout = () => {
     removeStorageItem(TOKEN_KEY);
+    removeStorageItem(GREETING_KEY);
     changeStatus(false);
   };
 
