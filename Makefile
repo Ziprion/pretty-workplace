@@ -1,5 +1,5 @@
 install:
-	npm install
+	npm ci
 
 start-prod:
 	npm run build & npm run server
