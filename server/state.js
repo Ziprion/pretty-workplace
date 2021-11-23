@@ -4,7 +4,6 @@ export const users = [
     authInfo: {
       email: 'admin@mail.ru',
       password: 'admin',
-      token: 'qwe',
     },
     workplacesInfo: {
       workplacesId: [1],

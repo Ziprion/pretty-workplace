@@ -20,7 +20,7 @@ export const LoginConnector = ({ type, isSignup }) => {
 
   useEffect(() => {
     if (data) {
-      signin(data.token);
+      signin();
     }
   }, [data]);
 
