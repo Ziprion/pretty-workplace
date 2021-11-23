@@ -6,13 +6,14 @@ import { users, workplaces } from './state.js';
 export const router = express.Router();
 
 const TEMP_USER_ID = 1;
+const TEMP_SECRET_JWT = 'asdqwezxc';
 
 router.post('/auth/check', (req, res) => {
   const token = _.get(req, 'body.token');
   const user = users.find(({ authInfo }) => authInfo.token === token);
 
   if (!(token && user)) {
-    res.status(401).send('user does not exist with these token');
+    res.status(401).send({ message: 'user does not exist with these token' });
     return;
   }
 
@@ -28,7 +29,7 @@ router.post('/auth/signin', (req, res) => {
   const password = _.get(req, 'body.password');
 
   if (!(email && password)) {
-    res.status(400).send('login and password are required');
+    res.status(400).send({ message: 'login and password are required' });
     return;
   }
 
@@ -54,19 +55,19 @@ router.post('/auth/signup', (req, res) => {
   const confirm = _.get(req, 'body.confirm');
 
   if (!(email && password && confirm && lastName && firstName)) {
-    res.status(400).send('all inputs are required');
+    res.status(400).send({ message: 'all inputs are required' });
     return;
   }
 
   if (password !== confirm) {
-    res.status(409).send('password and confirm password do not equal');
+    res.status(409).send({ message: 'password and confirm password do not equal' });
     return;
   }
 
   const user = users.find(({ authInfo }) => authInfo.email === email);
 
   if (user) {
-    res.status(409).send('user is already exist');
+    res.status(409).send({ message: 'user is already exist' });
     return;
   }
 
@@ -75,6 +76,7 @@ router.post('/auth/signup', (req, res) => {
     authInfo: {
       email,
       password,
+      token: null,
     },
     workplacesInfo: {
       workplacesId: [],
@@ -91,7 +93,7 @@ router.post('/auth/signup', (req, res) => {
     },
   };
 
-  const token = jwt.sign({ id: newUser.id, email }, 'shhhhh');
+  const token = jwt.sign({ id: newUser.id, email }, TEMP_SECRET_JWT);
   newUser.authInfo.token = token;
   users.push(newUser);
 
@@ -104,7 +106,7 @@ router.get('/users/me', async (req, res) => {
   const user = users.find((u) => u.id === TEMP_USER_ID);
 
   if (!user) {
-    res.status(404).send('user does not exist');
+    res.status(404).send({ message: 'user does not exist' });
     return;
   }
 
@@ -119,7 +121,7 @@ router.get('/workplaces', async (req, res) => {
   const user = users.find((u) => u.id === TEMP_USER_ID);
 
   if (!user) {
-    res.status(404).send('user does not exist');
+    res.status(404).send({ message: 'user does not exist' });
     return;
   }
 
