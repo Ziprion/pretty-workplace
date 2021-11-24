@@ -6,4 +6,4 @@ export const apiVersionMiddleware = (req, res, next) => {
   }
 
   next();
-}
+};

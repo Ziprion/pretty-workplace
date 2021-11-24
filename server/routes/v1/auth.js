@@ -1,16 +1,16 @@
 import express from 'express';
-import _ from 'lodash'
-import jwt from 'jsonwebtoken'
+import _ from 'lodash';
+import jwt from 'jsonwebtoken';
 import { users } from '../../state.js';
 import { TEMP_SECRET_JWT } from '../../constants.js';
-import { getAuthUser, getReqUserEmail, getReqUserId, getUserByEmail } from '../../utils.js';
+import {
+  getAuthUser, getUserByEmail,
+} from '../../utils.js';
 
 export const authRouter = express.Router();
 
 authRouter.post('/check', (req, res) => {
-  const userId = getReqUserId(req);
-  const userEmail = getReqUserEmail(req);
-  const user = getAuthUser(userId, userEmail)
+  const user = getAuthUser(req);
 
   if (!(user)) {
     return res.status(401).send({ message: 'user does not exist with these token' });

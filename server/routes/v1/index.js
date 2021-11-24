@@ -3,8 +3,8 @@ import { authRouter } from './auth.js';
 import { userRouter } from './user.js';
 import { workplacesRouter } from './workplaces.js';
 
-export const router_v1 = express.Router();
+export const routerV1 = express.Router();
 
-router_v1.use('/auth', authRouter)
-router_v1.use('/user', userRouter)
-router_v1.use('/workplaces', workplacesRouter)
+routerV1.use('/auth', authRouter);
+routerV1.use('/user', userRouter);
+routerV1.use('/workplaces', workplacesRouter);
