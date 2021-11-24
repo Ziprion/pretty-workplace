@@ -1,5 +1,5 @@
 const WORKPLACES_ROUTES = {
-  MY_WORKPLACES: '/api/v1/workplaces',
+  MY_WORKPLACES: '/api/workplaces/myworkplaces',
 };
 
 export const MY_WORKPLACES = {

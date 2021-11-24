@@ -1,7 +1,7 @@
 export const AUTH_ROUTES = {
-  CHECK: '/api/v1/auth/check',
-  SIGNIN: '/api/v1/auth/signin',
-  SIGNUP: '/api/v1/auth/signup',
+  CHECK: '/api/auth/check',
+  SIGNIN: '/api/auth/signin',
+  SIGNUP: '/api/auth/signup',
 };
 
 export const CHECK = {

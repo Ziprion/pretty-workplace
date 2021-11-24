@@ -1,34 +1,16 @@
-import _ from 'lodash';
-import jwt from 'jsonwebtoken';
 import express from 'express';
-import { users, workplaces } from './state.js';
+import _ from 'lodash'
+import jwt from 'jsonwebtoken'
+import { users } from '../../state.js';
+import { TEMP_SECRET_JWT } from '../../constants.js';
+import { getAuthUser, getReqUserEmail, getReqUserId, getUserByEmail } from '../../utils.js';
 
-export const router = express.Router();
+export const authRouter = express.Router();
 
-const TEMP_SECRET_JWT = 'asdqwezxc';
-
-const authorization = (req, res, next) => {
-  const { token } = req.cookies;
-
-  if (!token) {
-    return res.status(401).send({ message: 'user does not exist with these token' });
-  }
-
-  try {
-    const data = jwt.verify(token, TEMP_SECRET_JWT);
-    req.userId = data.id;
-    req.userEmail = data.email;
-
-    return next();
-  } catch {
-    return res.status(401).send({ message: 'user does not exist with these token' });
-  }
-};
-
-router.post('/auth/check', authorization, (req, res) => {
-  const userId = _.get(req, 'userId');
-  const userEmail = _.get(req, 'userEmail').toLowerCase();
-  const user = users.find(({ id, authInfo: { email } }) => id === userId && email === userEmail);
+authRouter.post('/check', (req, res) => {
+  const userId = getReqUserId(req);
+  const userEmail = getReqUserEmail(req);
+  const user = getAuthUser(userId, userEmail)
 
   if (!(user)) {
     return res.status(401).send({ message: 'user does not exist with these token' });
@@ -37,7 +19,7 @@ router.post('/auth/check', authorization, (req, res) => {
   return res.sendStatus(200);
 });
 
-router.post('/auth/signin', (req, res) => {
+authRouter.post('/signin', (req, res) => {
   const email = _.get(req, 'body.email').toLowerCase();
   const password = _.get(req, 'body.password');
 
@@ -45,7 +27,7 @@ router.post('/auth/signin', (req, res) => {
     return res.status(400).send({ message: 'login and password are required' });
   }
 
-  const user = users.find(({ authInfo }) => authInfo.email === email);
+  const user = getUserByEmail(email);
 
   if (!user || user.authInfo.password !== password) {
     return res.status(401).send({ message: 'user does not exist with these login and password' });
@@ -63,7 +45,7 @@ router.post('/auth/signin', (req, res) => {
     .sendStatus(200);
 });
 
-router.post('/auth/signup', (req, res) => {
+authRouter.post('/signup', (req, res) => {
   const email = _.get(req, 'body.email').toLowerCase();
   const firstName = _.get(req, 'body.firstName').toLowerCase();
   const lastName = _.get(req, 'body.lastName').toLowerCase();
@@ -117,39 +99,4 @@ router.post('/auth/signup', (req, res) => {
       sameSite: 'Strict',
     })
     .sendStatus(201);
-});
-
-router.get('/users/me', authorization, async (req, res) => {
-  const { userId } = req;
-  const { userEmail } = req;
-  const user = users.find((u) => u.id === userId && u.authInfo.email === userEmail);
-
-  if (!user) {
-    return res.status(404).send({ message: 'user does not exist' });
-  }
-
-  const response = {
-    userInfo: user.userInfo,
-  };
-
-  return res.status(200).send(response);
-});
-
-router.get('/workplaces', authorization, async (req, res) => {
-  const { userId } = req;
-  const { userEmail } = req;
-  const user = users.find((u) => u.id === userId && u.authInfo.email === userEmail);
-
-  if (!user) {
-    return res.status(404).send({ message: 'user does not exist' });
-  }
-
-  const userWorkplaces = user.workplacesInfo.workplacesId
-    .map((workplaceId) => workplaces.find(({ id }) => id === workplaceId));
-
-  const response = {
-    workplaces: userWorkplaces, lastUsedWorkplaceId: user.workplacesInfo.lastUsedWorkplaceId,
-  };
-
-  return res.status(200).send(response);
 });

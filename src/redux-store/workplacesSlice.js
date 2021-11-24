@@ -5,13 +5,13 @@ const workplacesSlice = createSlice({
   name: 'workplaces',
   initialState: {
     lastUsedWorkplaceId: null,
-    workplacesInfo: null,
+    myWorkplaces: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(initialization, (state, { payload: { workplacesData: { lastUsedWorkplaceId, workplaces } } }) => {
       state.lastUsedWorkplaceId = lastUsedWorkplaceId;
-      state.workplacesInfo = workplaces;
+      state.myWorkplaces = workplaces;
     });
   },
 });

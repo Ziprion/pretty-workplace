@@ -49,7 +49,9 @@ export default {
     contentBase: path.join(dirname, 'assets'),
     watchContentBase: isDev,
     proxy: {
-      '/api/v1': `${process.env.SERVER_URL}:${process.env.SERVER_PORT}`,
+      '/api': {
+        target: `${process.env.SERVER_URL}:${process.env.SERVER_PORT}`,
+      },
     },
   },
   devtool: isDev ? 'source-map' : undefined,
