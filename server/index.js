@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import { routerV1 } from './routes/index.js';
 import { apiVersionMiddleware, authorizationMiddleware } from './middlewares/index.js';
-import { API_VERSION_1 } from './constants.js';
+import { API_VERSION_1 } from './constants/index.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 

@@ -1,15 +1,16 @@
 import express from 'express';
-import _ from 'lodash';
 import jwt from 'jsonwebtoken';
-import { users } from '../../state.js';
-import { TEMP_SECRET_JWT } from '../../constants.js';
+import { DEFAULT_COOKIE_HEADERS, TEMP_SECRET_JWT } from '../../constants/index.js';
 import {
-  getAuthUser, getUserByEmail,
-} from '../../utils.js';
+  getAuthUser,
+  getBodyData,
+  getUserByEmail,
+  setDefaultAvatar,
+} from '../../utils/index.js';
 
 export const authRouter = express.Router();
 
-authRouter.post('/check', (req, res) => {
+authRouter.get('/check', (req, res) => {
   const user = getAuthUser(req);
 
   if (!(user)) {
@@ -20,8 +21,7 @@ authRouter.post('/check', (req, res) => {
 });
 
 authRouter.post('/signin', (req, res) => {
-  const email = _.get(req, 'body.email').toLowerCase();
-  const password = _.get(req, 'body.password');
+  const { email, password } = getBodyData(req);
 
   if (!(email && password)) {
     return res.status(400).send({ message: 'login and password are required' });
@@ -29,28 +29,22 @@ authRouter.post('/signin', (req, res) => {
 
   const user = getUserByEmail(email);
 
-  if (!user || user.authInfo.password !== password) {
+  if (!user || user.authInfo?.password !== password) {
     return res.status(401).send({ message: 'user does not exist with these login and password' });
   }
 
-  const newToken = jwt.sign({ id: user.id, email: user.authInfo.email }, TEMP_SECRET_JWT);
+  const newToken = jwt.sign({ id: user.id, email }, TEMP_SECRET_JWT);
   user.authInfo.token = newToken;
 
   return res
-    .cookie('token', newToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
-    })
+    .cookie('token', newToken, DEFAULT_COOKIE_HEADERS)
     .sendStatus(200);
 });
 
 authRouter.post('/signup', (req, res) => {
-  const email = _.get(req, 'body.email').toLowerCase();
-  const firstName = _.get(req, 'body.firstName').toLowerCase();
-  const lastName = _.get(req, 'body.lastName').toLowerCase();
-  const password = _.get(req, 'body.password');
-  const confirm = _.get(req, 'body.confirm');
+  const {
+    email, firstName, lastName, password, confirm,
+  } = getBodyData(req);
 
   if (!(email && password && confirm && lastName && firstName)) {
     return res.status(400).send({ message: 'all inputs are required' });
@@ -60,14 +54,14 @@ authRouter.post('/signup', (req, res) => {
     return res.status(409).send({ message: 'password and confirm password do not equal' });
   }
 
-  const user = users.find(({ authInfo }) => authInfo.email === email);
+  const user = getUserByEmail(email);
 
   if (user) {
     return res.status(409).send({ message: 'user is already exist' });
   }
 
   const newUser = {
-    id: users.length + 1,
+    id: getNewUserId(),
     authInfo: {
       email,
       password,
@@ -80,23 +74,16 @@ authRouter.post('/signup', (req, res) => {
     userInfo: {
       lastName,
       firstName,
-      avatar: {
-        background: '#ac35ef',
-        initials: `${firstName[0]}${lastName[0]}`,
-        url: null,
-      },
+      avatar: setDefaultAvatar(),
     },
   };
 
-  const token = jwt.sign({ id: newUser.id, email: newUser.authInfo.email }, TEMP_SECRET_JWT);
+  const token = jwt.sign({ id: newUser.id, email }, TEMP_SECRET_JWT);
   newUser.authInfo.token = token;
-  users.push(newUser);
+
+  addNewUser(newUser);
 
   return res
-    .cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
-    })
+    .cookie('token', token, DEFAULT_COOKIE_HEADERS)
     .sendStatus(201);
 });

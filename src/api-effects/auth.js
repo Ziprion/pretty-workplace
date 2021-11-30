@@ -5,7 +5,7 @@ export const AUTH_ROUTES = {
 };
 
 export const CHECK = {
-  method: 'post',
+  method: 'get',
   url: AUTH_ROUTES.CHECK,
 };
 

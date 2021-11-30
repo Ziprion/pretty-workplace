@@ -1,22 +1,20 @@
 import express from 'express';
-import { users, workplaces } from '../../state.js';
+import { getAuthUser, getLastUsedWorkplaceIdByUser, getWorkplacesByUser } from '../../utils/index.js';
 
 export const workplacesRouter = express.Router();
 
 workplacesRouter.get('/myworkplaces', async (req, res) => {
-  const { userId } = req;
-  const { userEmail } = req;
-  const user = users.find((u) => u.id === userId && u.authInfo.email === userEmail);
+  const user = getAuthUser(req);
 
   if (!user) {
     return res.status(404).send({ message: 'user does not exist' });
   }
 
-  const userWorkplaces = user.workplacesInfo.workplacesId
-    .map((workplaceId) => workplaces.find(({ id }) => id === workplaceId));
+  const workplaces = getWorkplacesByUser(user);
+  const lastUsedWorkplaceId = getLastUsedWorkplaceIdByUser(user);
 
   const response = {
-    workplaces: userWorkplaces, lastUsedWorkplaceId: user.workplacesInfo.lastUsedWorkplaceId,
+    workplaces, lastUsedWorkplaceId,
   };
 
   return res.status(200).send(response);

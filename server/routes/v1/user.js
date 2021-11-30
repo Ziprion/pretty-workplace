@@ -1,12 +1,10 @@
 import express from 'express';
-import { users } from '../../state.js';
+import { getAuthUser } from '../../utils/index.js';
 
 export const userRouter = express.Router();
 
 userRouter.get('/me', async (req, res) => {
-  const { userId } = req;
-  const { userEmail } = req;
-  const user = users.find((u) => u.id === userId && u.authInfo.email === userEmail);
+  const user = getAuthUser(req);
 
   if (!user) {
     return res.status(404).send({ message: 'user does not exist' });

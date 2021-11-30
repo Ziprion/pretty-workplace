@@ -4,6 +4,7 @@ export const users = [
     authInfo: {
       email: 'admin@mail.ru',
       password: 'admin',
+      token: null,
     },
     workplacesInfo: {
       workplacesId: [1],
@@ -14,7 +15,6 @@ export const users = [
       firstName: 'Maxim',
       avatar: {
         background: '#ac35ef',
-        initials: 'MN',
         url: null,
       },
     },
