@@ -30,6 +30,9 @@
       "style": [
         "./src/style/index"
       ],
+      "data-connectors": [
+        "./src/data-connectors/index"
+      ],
     },
     "moduleResolution": "node"
   }

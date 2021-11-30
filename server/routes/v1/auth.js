@@ -6,6 +6,8 @@ import {
   getBodyData,
   getUserByEmail,
   setDefaultAvatar,
+  addNewUser,
+  getNewUserId,
 } from '../../utils/index.js';
 
 export const authRouter = express.Router();

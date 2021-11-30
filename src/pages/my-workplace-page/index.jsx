@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {
   getStorageItem, setStorageItem, l, GREETING_KEY, GREETING_HIDE, GREETING_DELAY,
 } from 'utils';
+import { HeaderDataConnector } from 'data-connectors';
 
 const Wrapper = styled.div`
   position: relative;
@@ -36,6 +37,7 @@ export const MyWorkplacePage = () => {
         {l('greeting')}
         !, That is MyWorkplacePage
       </Wrapper>
+      <HeaderDataConnector />
       {isShowGreeting && (
         <div style={{
           position: 'absolute', top: 0, left: 0, zIndex: 1, width: '100vw', height: '100vh', background: 'green',

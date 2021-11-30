@@ -33,6 +33,7 @@ export default {
       utils: path.resolve(dirname, 'src/utils'),
       locales: path.resolve(dirname, 'src/locales'),
       style: path.resolve(dirname, 'src/style'),
+      'data-connectors': path.resolve(dirname, 'src/data-connectors'),
     },
   },
   output: {
