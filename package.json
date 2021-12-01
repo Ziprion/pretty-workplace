@@ -8,6 +8,7 @@
     "node": "14.x"
   },
   "scripts": {
+    "prepare": "husky install",
     "prebuild": "rm -rf dist",
     "build": "env-cmd -f .env.production npx webpack --mode production",
     "server": "env-cmd -f .env.production nodemon bin/index.js",
@@ -51,6 +52,7 @@
     "eslint-plugin-react": "^7.23.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "husky": "^7.0.4",
     "nodemon": "^2.0.12",
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
