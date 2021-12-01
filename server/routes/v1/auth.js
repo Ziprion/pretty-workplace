@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { DEFAULT_COOKIE_HEADERS, TEMP_SECRET_JWT } from '../../constants/index.js';
 import {
   getAuthUser,
-  getBodyData,
+  getAuthBodyData,
   getUserByEmail,
   setDefaultAvatar,
   addNewUser,
@@ -23,7 +23,7 @@ authRouter.get('/check', (req, res) => {
 });
 
 authRouter.post('/signin', (req, res) => {
-  const { email, password } = getBodyData(req);
+  const { email, password } = getAuthBodyData(req);
 
   if (!(email && password)) {
     return res.status(400).send({ message: 'login and password are required' });
@@ -46,7 +46,7 @@ authRouter.post('/signin', (req, res) => {
 authRouter.post('/signup', (req, res) => {
   const {
     email, firstName, lastName, password, confirm,
-  } = getBodyData(req);
+  } = getAuthBodyData(req);
 
   if (!(email && password && confirm && lastName && firstName)) {
     return res.status(400).send({ message: 'all inputs are required' });

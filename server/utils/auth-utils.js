@@ -6,7 +6,7 @@ export const getAuthUser = (req) => {
   return users.find(({ id, authInfo: { email } }) => id === userId && email === userEmail?.toLowerCase());
 };
 
-export const getBodyData = (req) => {
+export const getAuthBodyData = (req) => {
   if (req?.body) {
     const {
       email, password, firstName, lastName, confirm,
