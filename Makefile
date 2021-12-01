@@ -15,7 +15,7 @@ start-backend:
 
 lint:
 	npx eslint . --ext js,jsx --fix
-	npx stylelint './src/**/*.jsx'
+	npx stylelint './src/**/*.{js,jsx}'
 
 test:
 	npm test -s

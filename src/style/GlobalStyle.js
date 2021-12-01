@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   main {
     z-index: 0;
     width: 100vw;
+    min-width: 375px;
     height: 100vh;
     color: ${({ theme }) => theme.colors.additional3};
     font-weight: ${({ theme }) => theme.fontWeight.normal};

@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { MainConnector } from 'connectors';
-import styled from 'styled-components';
 import {
-  getStorageItem, setStorageItem, l,
+  getStorageItem, setStorageItem,
 } from 'utils';
 import { GREETING_KEY, GREETING_HIDE, GREETING_DELAY } from 'constants';
 import { HeaderDataConnector } from 'data-connectors';
-
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-basis: 150px;
-  flex-grow: 1;
-  flex-shrink: 1;
-  width: 100%;
-  color: green;
-  background: red;
-`;
+import { Wrapper, Header, Main } from './parts';
 
 export const MyWorkplacePage = () => {
   const [isShowGreeting, setShowGreeting] = useState(false);
@@ -35,10 +24,11 @@ export const MyWorkplacePage = () => {
   return (
     <MainConnector>
       <Wrapper>
-        {l('greeting')}
-        !, That is MyWorkplacePage
+        <Header>
+          <HeaderDataConnector />
+        </Header>
+        <Main>Main</Main>
       </Wrapper>
-      <HeaderDataConnector />
       {isShowGreeting && (
         <div style={{
           position: 'absolute', top: 0, left: 0, zIndex: 1, width: '100vw', height: '100vh', background: 'green',
