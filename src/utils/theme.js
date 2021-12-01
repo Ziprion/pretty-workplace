@@ -1,10 +1,5 @@
 import { getStorageItem, setStorageItem } from 'utils';
-
-export const LIGHT_THEME = 'light';
-export const DARK_THEME = 'dark';
-
-const DEFAULT_THEME = LIGHT_THEME;
-const THEME_KEY = 'theme';
+import { THEME_KEY, DEFAULT_THEME } from 'constants';
 
 export const setNewTheme = (newTheme) => {
   setStorageItem(THEME_KEY, newTheme);

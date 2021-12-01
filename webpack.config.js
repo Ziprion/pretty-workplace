@@ -34,6 +34,7 @@ export default {
       locales: path.resolve(dirname, 'src/locales'),
       style: path.resolve(dirname, 'src/style'),
       'data-connectors': path.resolve(dirname, 'src/data-connectors'),
+      constants: path.resolve(dirname, 'src/constants'),
     },
   },
   output: {

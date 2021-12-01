@@ -1,4 +1,5 @@
 export * from './login-form';
-export * from './local-storage';
+export * from './routes';
 export * from './language';
 export * from './theme';
+export * from './greeting';

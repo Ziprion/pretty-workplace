@@ -1,5 +1,5 @@
 import React from 'react';
-import { SIGNUP_KEY, SIGNIN_KEY } from 'utils';
+import { SIGNUP_KEY, SIGNIN_KEY } from 'constants';
 import { useLocation } from 'react-router-dom';
 import { LoginConnector } from 'connectors';
 import { LoginPageWrapper } from './parts';

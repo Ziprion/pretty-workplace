@@ -1,5 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
-import { GREETING_KEY, removeStorageItem } from 'utils';
+import { removeStorageItem } from 'utils';
+import { GREETING_KEY } from 'constants';
 
 const AuthContext = createContext();
 

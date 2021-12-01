@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { MainConnector } from 'connectors';
 import styled from 'styled-components';
 import {
-  getStorageItem, setStorageItem, l, GREETING_KEY, GREETING_HIDE, GREETING_DELAY,
+  getStorageItem, setStorageItem, l,
 } from 'utils';
+import { GREETING_KEY, GREETING_HIDE, GREETING_DELAY } from 'constants';
 import { HeaderDataConnector } from 'data-connectors';
 
 const Wrapper = styled.div`

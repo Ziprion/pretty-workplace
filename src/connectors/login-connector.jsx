@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from 'hooks';
 import { useApiEffect, API_EFFECTS } from 'api-effects';
-import { FIELDS, INITIAL_VALUES, VALIDATION_SCHEMA } from 'utils';
+import { FIELDS, INITIAL_VALUES } from 'constants';
+import { VALIDATION_SCHEMA } from 'utils';
 import { LoginForm } from 'components';
 
 export const LoginConnector = ({ type, isSignup }) => {
