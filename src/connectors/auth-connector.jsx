@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAuth } from 'hooks';
 import { useApiEffect, API_EFFECTS } from 'api-effects';
+import { Loading } from 'components';
 
 export const AuthConnector = ({ children }) => {
   const { data, loading, run } = useApiEffect(API_EFFECTS.AUTH.CHECK);
@@ -17,7 +18,7 @@ export const AuthConnector = ({ children }) => {
   }, [data]);
 
   return (
-    loading ? <div>loading</div>
+    loading ? <Loading />
       : (
         <>
           {children}

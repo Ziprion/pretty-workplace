@@ -4,17 +4,17 @@ export const AvatarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 33px;
+  height: 33px;
   background-color: ${({ background }) => background};
   border-radius: 50%;
 `;
 
-export const Initials = styled.div`
+export const Initials = styled.span`
   color: white;
-  font-weight: 800;
-  font-size: 16px;
-  line-height: 16px;
-  text-transform: capitalize;
+  font-size: 14px;
+  font-family: 'RobotoThin', sans-serif;
+  line-height: 14px;
+  text-transform: uppercase;
   user-select: none;
 `;

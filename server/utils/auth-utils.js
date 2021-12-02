@@ -25,6 +25,6 @@ export const getAuthBodyData = (req) => {
 };
 
 export const setDefaultAvatar = () => ({
-  background: '#ac35ef',
+  background: '#001e51',
   url: null,
 });

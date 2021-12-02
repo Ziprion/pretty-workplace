@@ -5,7 +5,10 @@ import {
 } from 'utils';
 import { GREETING_KEY, GREETING_HIDE, GREETING_DELAY } from 'constants';
 import { HeaderDataConnector } from 'data-connectors';
-import { Wrapper, Header, Main } from './parts';
+import { Footer } from 'components';
+import {
+  Wrapper, HeaderWrapper, MainWrapper, FooterWrapper,
+} from './parts';
 
 export const MyWorkplacePage = () => {
   const [isShowGreeting, setShowGreeting] = useState(false);
@@ -24,10 +27,11 @@ export const MyWorkplacePage = () => {
   return (
     <MainConnector>
       <Wrapper>
-        <Header>
+        <HeaderWrapper>
           <HeaderDataConnector />
-        </Header>
-        <Main>Main</Main>
+        </HeaderWrapper>
+        <MainWrapper>Main</MainWrapper>
+        <FooterWrapper><Footer /></FooterWrapper>
       </Wrapper>
       {isShowGreeting && (
         <div style={{
@@ -37,7 +41,6 @@ export const MyWorkplacePage = () => {
           HELLO!
         </div>
       )}
-
     </MainConnector>
   );
 };

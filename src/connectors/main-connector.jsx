@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useApiEffect, API_EFFECTS } from 'api-effects';
 import { useDispatch } from 'react-redux';
 import { initialization } from 'redux-store';
+import { Loading } from 'components';
 
 export const MainConnector = ({ children }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export const MainConnector = ({ children }) => {
 
   return (
     <>
-      {isDataReady ? children : <div>loading</div>}
+      {isDataReady ? children : <Loading />}
     </>
   );
 };

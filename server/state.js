@@ -11,10 +11,10 @@ export const users = [
       lastUsedWorkplaceId: 1,
     },
     userInfo: {
-      lastName: 'Novikov',
-      firstName: 'Maxim',
+      lastName: 'novikov',
+      firstName: 'maxim',
       avatar: {
-        background: '#ac35ef',
+        background: '#001e51',
         url: null,
       },
     },
