@@ -9,11 +9,20 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const LogoImage = styled.img`
+  height: 30px;
+  margin: 0 8px;
+`;
+
+export const LogoTitle = styled.span`
   color: black;
   font-size: 20px;
   font-family: 'RobotoBold', sans-serif;
   text-transform: uppercase;
-  user-select: none;
 `;
 
 export const UserInfo = styled.div`
@@ -28,5 +37,4 @@ export const UserName = styled.div`
   justify-content: center;
   margin-right: 8px;
   text-transform: capitalize;
-  user-select: none;
 `;

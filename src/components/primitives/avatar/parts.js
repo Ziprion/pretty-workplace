@@ -16,5 +16,4 @@ export const Initials = styled.span`
   font-family: 'RobotoThin', sans-serif;
   line-height: 14px;
   text-transform: uppercase;
-  user-select: none;
 `;

@@ -11,5 +11,4 @@ export const Wrapper = styled.div`
 export const Spinner = styled.div`
   color: black;
   font-size: 20px;
-  user-select: none;
 `;

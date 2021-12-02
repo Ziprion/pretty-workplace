@@ -54,5 +54,6 @@ export const GlobalStyle = createGlobalStyle`
     line-height: ${({ theme }) => theme.lineHeight.default};
     letter-spacing: 0.2px;
     background: #f0f2fa;
+    user-select: none;
   }
 `;

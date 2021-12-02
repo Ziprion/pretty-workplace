@@ -3,12 +3,7 @@ import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import { ROUTES, FIELD_NAME } from 'constants';
 import {
-  Additional,
-  Feedback,
-  Form,
-  FormItem,
-  Label,
-  Link,
+  Additional, Feedback, Form, FormItem, Label, Link,
 } from './parts';
 
 const errorsMessage = {

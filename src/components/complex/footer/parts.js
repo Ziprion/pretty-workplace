@@ -23,12 +23,10 @@ export const Info = styled.div`
   color: #b9b9b9;
   font-size: 12px;
   text-transform: capitalize;
-  user-select: none;
 `;
 
 export const Item = styled.div`
   color: #b9b9b9;
   font-size: 12px;
   text-transform: capitalize;
-  user-select: none;
 `;
