@@ -1,9 +1,9 @@
-import { Button, Input } from 'components';
+import { Button, Input } from '@components';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
-import { ROUTES, FIELD_NAME } from 'constants';
+import { ROUTES, FIELD_NAME } from '@constants';
 import {
-  Additional, Feedback, Form, FormItem, Label, Link,
+  Additional, Feedback, Form, FormItem, Label, Link, Space,
 } from './parts';
 
 const errorsMessage = {
@@ -41,7 +41,9 @@ export const LoginForm = ({
 
   return (
     <Form onSubmit={formik.handleSubmit}>
-      {fields.map(({ name, type, label }) => (
+      {fields.map(({
+        name, type, label, placeholder,
+      }) => (
         <FormItem key={name}>
           <Label htmlFor={name}>{label}</Label>
           <Input
@@ -53,26 +55,29 @@ export const LoginForm = ({
             value={formik.values[name]}
             isInvalid={formik.errors[name] && formik.touched[name]}
             disabled={formik.isSubmitting}
+            placeholder={placeholder}
+            width="100%"
           />
           <Feedback>{formik.touched[name] ? formik.errors[name] : ''}</Feedback>
         </FormItem>
       ))}
       <Feedback>{errorsMessage[error?.status]}</Feedback>
-      <Button type="submit" disabled={formik.isSubmitting}>Submit</Button>
+      <Space />
+      <Button type="submit" disabled={formik.isSubmitting} width="100%">Submit</Button>
       <Additional>
         {isSignup ? (
           <>
             {' '}
             Do you have account?
             {' '}
-            <Link to={ROUTES.SIGNIN} onClick={handleSwitch}>Sign In</Link>
+            <Link to={ROUTES.SIGNIN} onClick={handleSwitch}>Login</Link>
           </>
         ) : (
           <>
             {' '}
             Do you have not account?
             {' '}
-            <Link to={ROUTES.SIGNUP} onClick={handleSwitch}>Sign Up</Link>
+            <Link to={ROUTES.SIGNUP} onClick={handleSwitch}>Create</Link>
           </>
         )}
       </Additional>

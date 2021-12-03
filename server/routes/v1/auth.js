@@ -22,6 +22,18 @@ authRouter.get('/check', (req, res) => {
   return res.sendStatus(200);
 });
 
+authRouter.get('/signout', (req, res) => {
+  const user = getAuthUser(req);
+
+  if (!(user)) {
+    return res.status(401).send({ message: 'user does not exist with these token' });
+  }
+
+  return res
+    .cookie('token', null, DEFAULT_COOKIE_HEADERS)
+    .sendStatus(200);
+});
+
 authRouter.post('/signin', (req, res) => {
   const { email, password } = getAuthBodyData(req);
 

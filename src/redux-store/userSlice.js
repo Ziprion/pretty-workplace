@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'; /* eslint no-param-reassign: 0 *
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {},
+  initialState: null,
   reducers: {
     initialization: (state, { payload: { userData: { userInfo } } }) => ({ ...state, ...userInfo }),
   },

@@ -2,6 +2,7 @@ export const AUTH_ROUTES = {
   CHECK: '/api/auth/check',
   SIGNIN: '/api/auth/signin',
   SIGNUP: '/api/auth/signup',
+  SIGNOUT: '/api/auth/signout',
 };
 
 export const CHECK = {
@@ -17,4 +18,9 @@ export const SIGNIN = {
 export const SIGNUP = {
   method: 'post',
   url: AUTH_ROUTES.SIGNUP,
+};
+
+export const SIGNOUT = {
+  method: 'get',
+  url: AUTH_ROUTES.SIGNOUT,
 };

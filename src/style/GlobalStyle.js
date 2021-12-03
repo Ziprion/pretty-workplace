@@ -41,19 +41,24 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    outline: none;
+    user-select: none;
   }
 
   main {
-    z-index: 0;
+    z-index: ${({ theme }) => theme.zIndex.below};
     width: 100vw;
     min-width: 375px;
     height: 100vh;
-    color: ${({ theme }) => theme.colors.additional3};
+    color: ${({ theme }) => theme.colors.additional1};
     font-size: ${({ theme }) => theme.fontSize.default};
     font-family: 'Roboto', sans-serif;
     line-height: ${({ theme }) => theme.lineHeight.default};
     letter-spacing: 0.2px;
-    background: #f0f2fa;
-    user-select: none;
+    background: ${({ theme }) => theme.colors.secondary2};
   }
 `;

@@ -1,17 +1,21 @@
 const defaultOffset = 8;
 
 const fontSize = {
+  large: '20px',
   default: '16px',
   medium: '14px',
-  small: '12.8px',
-  extraSmall: '8px',
+  small: '12px',
+  xSmall: '10px',
+  xxSmall: '8px',
 };
 
 const lineHeight = {
+  large: '30px',
   default: '24px',
   medium: '21px',
-  small: '19.2px',
-  extraSmall: '14px',
+  small: '18px',
+  xSmall: '15px',
+  xxSmall: '12px',
 };
 
 const headingFontSize = {
@@ -24,46 +28,47 @@ const headingFontSize = {
 };
 
 const headingLineHeight = {
-  h1: '46.88px',
-  h2: '37.5px',
-  h3: '32.81px',
-  h4: '28.13px',
-  h5: '23.44px',
-  h6: '18.75px',
-};
-
-const fontWeight = {
-  normal: 400,
-  bold: 800,
-};
-
-const breakpoints = {
-  tablet: '840px',
+  h1: '60px',
+  h2: '48px',
+  h3: '42px',
+  h4: '36px',
+  h5: '30px',
+  h6: '24px',
 };
 
 const borderRadius = {
+  medium: '10px',
   small: '5px',
-  normal: '10px',
-  large: '15px',
-  extraLarge: '20px',
+};
+
+const zIndex = {
+  below: 0,
+  default: 1,
+  above: 2,
+  modal: 9,
+};
+
+const logo = {
+  size: {
+    small: '32px',
+  },
+};
+
+const commonColors = {
+  danger: '#dc3545',
+  disabled1: '#dde1f6 ',
+  disabled2: '#6c7589',
+  white: '#ffffff',
 };
 
 const colors = {
-  danger: '#DC3545',
-  white: '#fff',
-  light: '#f4f6f9',
-  semiGray: '#f8f7fc',
-  gray: '#ccc',
-  dark: '#343A40',
-  purple: '#170a4b',
-  lightPurple: '#c0beff',
-  semiPurple: '#474063',
-  disabled1: '#d2d5db',
-  disabled2: '#6c7589',
+  white: '#ffffff',
+  blue: '#2f49d1',
+  darkBlue: '#152da7',
+  blueGray: '#f2f6ff',
+  dark: '#343a40',
+  gray: '#b9b9b9',
 };
-
-const headerHeight = '73px';
-const messageFormHeight = '73px';
 
 const defaultTheme = {
   offset: (n) => `${n * defaultOffset}px`,
@@ -71,40 +76,22 @@ const defaultTheme = {
   lineHeight,
   headingFontSize,
   headingLineHeight,
-  fontWeight,
-  breakpoints,
   borderRadius,
-  colors,
-  headerHeight,
-  messageFormHeight,
+  zIndex,
+  logo,
 };
 
 export const lightTheme = {
   ...defaultTheme,
   colors: {
-    ...colors,
-    primary: colors.purple,
-    primary2: colors.lightPurple,
-    primary3: colors.semiPurple,
-    secondary: colors.white,
-    secondary2: colors.light,
-    additional: colors.semiGray,
-    additional2: colors.gray,
-    additional3: colors.dark,
+    ...commonColors,
+    primary1: colors.blue,
+    primary2: colors.darkBlue,
+    secondary1: colors.gray,
+    secondary2: colors.blueGray,
+    additional1: colors.dark,
+    additional2: colors.white,
   },
 };
 
-export const darkTheme = {
-  ...defaultTheme,
-  colors: {
-    ...colors,
-    primary: colors.purple,
-    primary2: colors.lightPurple,
-    primary3: colors.semiPurple,
-    secondary: colors.white,
-    secondary2: colors.light,
-    additional: colors.semiGray,
-    additional2: colors.gray,
-    additional3: colors.dark,
-  },
-};
+export const darkTheme = lightTheme;

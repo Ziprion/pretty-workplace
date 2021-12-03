@@ -1,8 +1,9 @@
 import React from 'react';
-import { Wrapper, Spinner } from './parts';
+import { Spinner } from '@components';
+import { Wrapper } from './parts';
 
 export const Loading = () => (
   <Wrapper>
-    <Spinner>loading...</Spinner>
+    <Spinner />
   </Wrapper>
 );

@@ -2,9 +2,9 @@ import React, {
   useState, createContext, useContext,
 } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { getCurrentTheme, setNewTheme } from 'utils';
-import { LIGHT_THEME, DARK_THEME } from 'constants';
-import { lightTheme, darkTheme } from 'style';
+import { getCurrentTheme, setNewTheme } from '@utils';
+import { LIGHT_THEME, DARK_THEME } from '@constants';
+import { lightTheme, darkTheme } from '@style';
 
 const ThemeContext = createContext();
 

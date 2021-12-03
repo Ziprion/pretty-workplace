@@ -1,5 +1,5 @@
-import { getStorageItem, setStorageItem } from 'utils';
-import { THEME_KEY, DEFAULT_THEME } from 'constants';
+import { getStorageItem, setStorageItem } from '@utils';
+import { THEME_KEY, DEFAULT_THEME } from '@constants';
 
 export const setNewTheme = (newTheme) => {
   setStorageItem(THEME_KEY, newTheme);

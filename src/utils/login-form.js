@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { FIELD_NAME, SIGNUP_KEY, SIGNIN_KEY } from 'constants';
+import { FIELD_NAME, SIGNUP_KEY, SIGNIN_KEY } from '@constants';
 
 export const VALIDATION_SCHEMA = {
   [SIGNIN_KEY]: Yup.object().shape({

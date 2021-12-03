@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { getStorageItem, setStorageItem } from 'utils';
+import { getStorageItem, setStorageItem } from '@utils';
 import {
   LANGUAGE_KEY,
   DEFAULT_LANGUAGE,
   LANGUAGE_RU,
   LANGUAGE_EN,
-} from 'constants';
+} from '@constants';
 
 export const getCurrentLanguage = () => {
   const currentLanguage = getStorageItem(LANGUAGE_KEY);

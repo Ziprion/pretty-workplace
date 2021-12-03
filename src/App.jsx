@@ -2,8 +2,8 @@ import React from 'react';
 import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
-import { AuthConnector } from 'connectors';
-import { useAuth } from 'hooks';
+import { AuthConnector } from '@connectors';
+import { useAuth } from '@hooks';
 import { APP_ROUTES } from './routes';
 
 export const App = () => {

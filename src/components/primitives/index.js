@@ -1,4 +1,5 @@
 export * from './button';
 export * from './input';
-export * from './link';
 export * from './avatar';
+export * from './spinner';
+export * from './logo';

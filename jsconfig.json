@@ -3,37 +3,37 @@
     "baseUrl": ".",
     "jsx": "react",
     "paths": {
-      "components": [
+      "@components": [
         "./src/components/index"
       ],
-      "connectors": [
+      "@connectors": [
         "./src/connectors/index"
       ],
-      "hooks": [
+      "@hooks": [
         "./src/hooks/index"
       ],
-      "pages": [
+      "@pages": [
         "./src/pages/index"
       ],
-      "redux-store": [
+      "@redux-store": [
         "./src/redux-store/index"
       ],
-      "utils": [
+      "@utils": [
         "./src/utils/index"
       ],
-      "api-effects": [
+      "@api-effects": [
         "./src/api-effects/index"
       ],
-      "locales": [
+      "@locales": [
         "./src/locales/index"
       ],
-      "style": [
+      "@style": [
         "./src/style/index"
       ],
-      "data-connectors": [
+      "@data-connectors": [
         "./src/data-connectors/index"
       ],
-      "constants": [
+      "@constants": [
         "./src/constants/index"
       ],
     },

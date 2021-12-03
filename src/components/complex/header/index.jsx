@@ -1,17 +1,16 @@
 import React from 'react';
-import { Avatar } from 'components';
-import { getFullName } from 'utils';
+import { Avatar, Logo } from '@components';
+import { getFullName } from '@utils';
+import { LogoutConnector } from '@connectors';
 import {
-  Wrapper, Logo, UserInfo, UserName, LogoImage, LogoTitle,
+  Wrapper, UserInfo, UserName,
 } from './parts';
 
 export const Header = ({ userInfo }) => (
   <Wrapper>
-    <Logo>
-      <LogoImage src="images/icons/logo-small.png" alt="logo" />
-      <LogoTitle>Pretty Workplace</LogoTitle>
-    </Logo>
+    <Logo />
     <UserInfo>
+      <LogoutConnector />
       <UserName>{getFullName(userInfo)}</UserName>
       <Avatar {...userInfo} />
     </UserInfo>

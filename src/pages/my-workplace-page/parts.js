@@ -17,6 +17,7 @@ export const HeaderWrapper = styled.div`
 
 export const MainWrapper = styled.div`
   grid-area: main;
+  /* background: ${({ theme }) => theme.colors.secondary2}; */
 `;
 
 export const FooterWrapper = styled.div`

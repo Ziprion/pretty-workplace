@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useApiEffect, API_EFFECTS } from 'api-effects';
+import React, { useEffect } from 'react';
+import { useApiEffect, API_EFFECTS } from '@api-effects';
 import { useDispatch } from 'react-redux';
-import { initialization } from 'redux-store';
-import { Loading } from 'components';
+import { initialization } from '@redux-store';
+import { Loading } from '@components';
 
 export const MainConnector = ({ children }) => {
   const dispatch = useDispatch();
-  const { data: workplacesData, run: getMyWorkplaces } = useApiEffect(API_EFFECTS.WORKPLACES.MY_WORKPLACES);
-  const { data: userData, run: getUserMe } = useApiEffect(API_EFFECTS.USER.ME);
-
-  const [isDataReady, setDataReady] = useState(false);
+  const {
+    data: workplacesData, loading: workplacesLoading, run: getMyWorkplaces,
+  } = useApiEffect(API_EFFECTS.WORKPLACES.MY_WORKPLACES);
+  const {
+    data: userData, loading: userLoading, run: getUserMe,
+  } = useApiEffect(API_EFFECTS.USER.ME);
 
   useEffect(() => {
     getMyWorkplaces();
@@ -19,13 +21,12 @@ export const MainConnector = ({ children }) => {
   useEffect(() => {
     if (workplacesData && userData) {
       dispatch(initialization({ workplacesData, userData }));
-      setDataReady(() => true);
     }
   }, [workplacesData, userData]);
 
   return (
     <>
-      {isDataReady ? children : <Loading />}
+      {workplacesLoading || userLoading ? <Loading /> : children}
     </>
   );
 };

@@ -1,13 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-
-const SUCCESS = 'success';
-const PENDING = 'pending';
-const ERROR = 'error';
-const DEFAULT_STATE = {
-  error: null, loading: false, status: null, data: null,
-};
-const DEFAULT_TIMEOUT = 10000;
+import { STATUSES, DEFAULT_STATE, DEFAULT_TIMEOUT } from '@constants';
 
 export const useApiEffect = (apiEffect) => {
   const [state, setState] = useState(DEFAULT_STATE);
@@ -15,7 +8,7 @@ export const useApiEffect = (apiEffect) => {
 
   const run = async (data) => {
     try {
-      updateState({ loading: true, status: PENDING });
+      updateState({ loading: true, status: STATUSES.PENDING });
 
       const { data: responseData } = await axios({
         timeout: DEFAULT_TIMEOUT,
@@ -23,11 +16,11 @@ export const useApiEffect = (apiEffect) => {
         data,
       });
 
-      updateState({ data: responseData, error: null, status: SUCCESS });
+      updateState({ data: responseData, error: null, status: STATUSES.SUCCESS });
     } catch (e) {
       const { status, statusText, data: { message } } = e?.response;
 
-      updateState({ error: { status, statusText, message }, status: ERROR });
+      updateState({ error: { status, statusText, message }, status: STATUSES.ERROR });
     } finally {
       updateState({ loading: false });
     }

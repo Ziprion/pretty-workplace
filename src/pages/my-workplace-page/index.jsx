@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MainConnector } from 'connectors';
+import { MainConnector } from '@connectors';
 import {
   getStorageItem, setStorageItem,
-} from 'utils';
-import { GREETING_KEY, GREETING_HIDE, GREETING_DELAY } from 'constants';
-import { HeaderDataConnector } from 'data-connectors';
-import { Footer } from 'components';
+} from '@utils';
+import { GREETING_KEY, GREETING_HIDE, GREETING_DELAY } from '@constants';
+import { HeaderDataConnector } from '@data-connectors';
+import { Footer } from '@components';
 import {
   Wrapper, HeaderWrapper, MainWrapper, FooterWrapper,
 } from './parts';
