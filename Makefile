@@ -1,16 +1,19 @@
 install:
 	npm ci
 
+build:
+	npm run build
+
 start-prod:
-	npm run build & npm run server
+	npm run start
 
 start-dev:
-	make start-backend & make start-frontend
+	make start-backend-loc & make start-frontend-loc
 
-start-frontend:
+start-frontend-loc:
 	npx env-cmd -f .env.development webpack serve --mode development
 
-start-backend:
+start-backend-loc:
 	npx env-cmd -f .env.development nodemon bin/index.js
 
 lint:

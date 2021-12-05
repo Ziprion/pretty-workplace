@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "prebuild": "rm -rf dist",
     "build": "env-cmd -f .env.production npx webpack --mode production",
-    "server": "env-cmd -f .env.production nodemon bin/index.js",
+    "server": "env-cmd -f .env.production node bin/index.js",
     "start": "npm run build & npm run server"
   },
   "author": "Maxim Novikov <maximkanv@gmail.com>",

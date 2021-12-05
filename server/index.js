@@ -17,9 +17,9 @@ export const runServer = ({ isDev }) => {
   }
 
   app.use(
-    apiVersionMiddleware,
     cookieParser(),
     authorizationMiddleware,
+    apiVersionMiddleware,
     express.json(),
   );
 
