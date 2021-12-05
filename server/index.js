@@ -13,7 +13,7 @@ export const runServer = ({ isDev }) => {
   const app = express();
 
   if (!isDev) {
-    app.use(express.static(path.join(dirname, '..', 'dist')));
+    app.use(express.static(path.join(dirname, 'dist')));
   }
 
   app.use(
@@ -27,7 +27,7 @@ export const runServer = ({ isDev }) => {
 
   app.get('*', (req, res) => (isDev
     ? res.status(200).send('Server works')
-    : res.status(200).sendFile(path.join(dirname, '..', 'dist', 'index.html'))));
+    : res.status(200).sendFile(path.join(dirname, 'dist', 'index.html'))));
 
   const server = http.createServer(app);
 
