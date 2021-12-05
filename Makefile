@@ -4,13 +4,22 @@ install:
 build:
 	npm run build
 
-start-dev:
-	make start-backend-loc & make start-frontend-loc
+start-prod:
+	make frontend-prod-loc && make backend-prod-loc
 
-start-frontend-loc:
+frontend-prod-loc:
+	npx env-cmd -f .env.production.loc webpack --mode production
+
+backend-prod-loc:
+	npx env-cmd -f .env.production.loc node bin/index.js
+
+start-dev:
+	make frontend-dev-loc & make backend-dev-loc
+
+frontend-dev-loc:
 	npx env-cmd -f .env.development.loc webpack serve  --mode development
 
-start-backend-loc:
+backend-dev-loc:
 	npx env-cmd -f .env.development.loc nodemon bin/index.js
 
 lint:

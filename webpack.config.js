@@ -46,7 +46,7 @@ export default {
   devServer: {
     open: true,
     compress: true,
-    port: 3000,
+    port: process.env.CLIENT_PORT,
     historyApiFallback: true,
     contentBase: path.join(dirname, 'assets'),
     watchContentBase: isDev,
