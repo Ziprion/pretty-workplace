@@ -1,5 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import { getUsers } from '../../db/users.js';
 import { DEFAULT_COOKIE_HEADERS, TEMP_SECRET_JWT } from '../../constants/index.js';
 import {
   getAuthUser,
@@ -12,9 +13,10 @@ import {
 
 export const authRouter = express.Router();
 
-authRouter.get('/check', (req, res) => {
+authRouter.get('/check', async (req, res) => {
   const user = getAuthUser(req);
-
+  const users = await getUsers();
+  console.log(users);
   if (!(user)) {
     return res.status(401).send({ message: 'user does not exist with these token' });
   }
