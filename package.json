@@ -10,8 +10,8 @@
   "scripts": {
     "prepare": "husky install",
     "prebuild": "rm -rf dist",
-    "build": "npx env-cmd -f .env.production webpack --mode production",
-    "server": "npx env-cmd -f .env.production node bin/index.js",
+    "build": "npx webpack --mode production",
+    "server": "node bin/index.js",
     "start": "npm run build & npm run server"
   },
   "author": "Maxim Novikov <maximkanv@gmail.com>",
