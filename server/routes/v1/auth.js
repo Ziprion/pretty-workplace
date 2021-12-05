@@ -1,5 +1,4 @@
 import express from 'express';
-import { DEFAULT_COOKIE_HEADERS, TOKEN_KEY } from '../../constants/index.js';
 import {
   getAuthUser,
   getAuthBodyData,
@@ -8,6 +7,7 @@ import {
   addNewUser,
   getNewUserId,
   getToken,
+  setTokenToRes,
 } from '../../utils/index.js';
 
 export const authRouter = express.Router();
@@ -29,9 +29,7 @@ authRouter.get('/signout', (req, res) => {
     return res.status(401).send({ message: 'user does not exist with these token' });
   }
 
-  return res
-    .cookie(TOKEN_KEY, null, DEFAULT_COOKIE_HEADERS)
-    .sendStatus(200);
+  return setTokenToRes(res, null);
 });
 
 authRouter.post('/signin', (req, res) => {
@@ -50,9 +48,7 @@ authRouter.post('/signin', (req, res) => {
   const newToken = getToken(user.id, email);
   user.authInfo.token = newToken;
 
-  return res
-    .cookie(TOKEN_KEY, newToken, DEFAULT_COOKIE_HEADERS)
-    .sendStatus(200);
+  return setTokenToRes(res, newToken);
 });
 
 authRouter.post('/signup', (req, res) => {
@@ -97,7 +93,5 @@ authRouter.post('/signup', (req, res) => {
 
   addNewUser(newUser);
 
-  return res
-    .cookie('token', newToken, DEFAULT_COOKIE_HEADERS)
-    .sendStatus(201);
+  return setTokenToRes(res, newToken, 201);
 });
