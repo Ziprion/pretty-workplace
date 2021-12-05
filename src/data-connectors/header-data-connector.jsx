@@ -3,11 +3,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 export const HeaderDataConnector = () => {
-  const userInfo = useSelector(({ user }) => user);
+  const user = useSelector((state) => state.user);
 
   return (
     <>
-      {userInfo && <Header userInfo={userInfo} />}
+      {user && <Header user={user} />}
     </>
   );
 };

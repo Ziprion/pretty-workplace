@@ -6,13 +6,13 @@ import {
   Wrapper, UserInfo, UserName,
 } from './parts';
 
-export const Header = ({ userInfo }) => (
+export const Header = ({ user }) => (
   <Wrapper>
     <Logo />
     <UserInfo>
       <LogoutConnector />
-      <UserName>{getFullName(userInfo)}</UserName>
-      <Avatar {...userInfo} />
+      <UserName>{getFullName(user)}</UserName>
+      <Avatar {...user} />
     </UserInfo>
   </Wrapper>
 );

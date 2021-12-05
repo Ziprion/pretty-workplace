@@ -1,10 +1,4 @@
-import { users } from '../state.js';
-
-export const getAuthUser = (req) => {
-  const { userEmail, userId } = req;
-
-  return users.find(({ id, authInfo: { email } }) => id === userId && email === userEmail?.toLowerCase());
-};
+export const getAuthUserEmail = (req) => req?.userEmail?.toLowerCase();
 
 export const getAuthBodyData = (req) => {
   if (req?.body) {
@@ -23,8 +17,3 @@ export const getAuthBodyData = (req) => {
 
   return {};
 };
-
-export const setDefaultAvatar = () => ({
-  background: '#001e51',
-  url: null,
-});

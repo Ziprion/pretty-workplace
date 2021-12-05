@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState: null,
   reducers: {
-    initialization: (state, { payload: { userData: { userInfo } } }) => ({ ...state, ...userInfo }),
+    initialization: (state, { payload: { userData } }) => ({ ...state, ...userData }),
   },
 });
 

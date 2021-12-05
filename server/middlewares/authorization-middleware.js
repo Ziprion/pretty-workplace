@@ -17,8 +17,7 @@ export const authorizationMiddleware = (req, res, next) => {
   }
 
   try {
-    const { id, email } = verifyToken(token);
-    req.userId = id;
+    const { email } = verifyToken(token);
     req.userEmail = email;
 
     return next();
