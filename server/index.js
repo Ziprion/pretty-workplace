@@ -9,6 +9,7 @@ import { API_VERSION_1 } from './constants/index.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 console.log(dirname);
+console.log(path.resolve(), '!!!!!!!!');
 export const runServer = ({ isDev }) => {
   const app = express();
 
