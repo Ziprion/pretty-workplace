@@ -24,11 +24,15 @@ jobs:
   linters:
     needs: install
 
+    runs-on: ubuntu-latest
+
     steps:
       - name: Run linters
         run: make lint
   build:
     needs: install
+
+    runs-on: ubuntu-latest
 
     steps:
       - name: Run build
