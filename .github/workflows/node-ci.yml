@@ -6,7 +6,7 @@ on:
 
 jobs:
   install:
-  name: Install
+    name: Install
 
     runs-on: ubuntu-latest
 
@@ -23,7 +23,7 @@ jobs:
       - name: Install
         run: make install
   linters:
-  name: Linters
+    name: Linters
 
     needs: install
 
@@ -42,7 +42,7 @@ jobs:
       - name: Linters
         run: make lint
   build:
-  name: Build
+    name: Build
 
     runs-on: ubuntu-latest
 
