@@ -1,11 +1,11 @@
-name: Build
+name: NodeCI
 
 on:
   - push
   - pull_request
 
 jobs:
-  build:
+  install:
 
     runs-on: ubuntu-latest
 
@@ -21,7 +21,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install
         run: make install
+  linters:
+    needs: install
+
+    steps:
       - name: Run linters
         run: make lint
+  build:
+    needs: install
+
+    steps:
       - name: Run build
         run: make build
