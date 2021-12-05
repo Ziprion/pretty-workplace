@@ -3,7 +3,7 @@ import { useAuth } from '@hooks';
 import { useApiEffect, API_EFFECTS } from '@api-effects';
 
 export const AuthConnector = ({ children }) => {
-  const { data, loading, run } = useApiEffect(API_EFFECTS.AUTH.CHECK);
+  const { data, run } = useApiEffect(API_EFFECTS.AUTH.CHECK);
   const { signin } = useAuth();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const AuthConnector = ({ children }) => {
 
   return (
     <>
-      {!loading && children}
+      {children}
     </>
   );
 };

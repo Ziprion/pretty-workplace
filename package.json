@@ -10,9 +10,8 @@
   "scripts": {
     "prepare": "husky install",
     "prebuild": "rm -rf dist",
-    "build": "NODE_ENV=production npx webpack --mode production",
-    "app": "node bin/index.js --experimental-modules",
-    "start": "node bin/index.js --experimental-modules"
+    "build": "npx webpack --mode production",
+    "start": "node bin/index.js"
   },
   "author": "Maxim Novikov <maximkanv@gmail.com>",
   "license": "ISC",

@@ -46,13 +46,13 @@ export default {
   devServer: {
     open: true,
     compress: true,
-    port: process.env.CLIENT_PORT,
+    port: 3000,
     historyApiFallback: true,
     contentBase: path.join(dirname, 'assets'),
     watchContentBase: isDev,
     proxy: {
       '/api': {
-        target: `${process.env.SERVER_URL}:${process.env.SERVER_PORT}`,
+        target: `${process.env.API_PROXY_URL}:${process.env.PORT}`,
       },
     },
   },

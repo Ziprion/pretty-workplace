@@ -8,11 +8,13 @@ import { apiVersionMiddleware, authorizationMiddleware } from './middlewares/ind
 import { API_VERSION_1 } from './constants/index.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
-console.log(dirname);
+
 export const runServer = ({ isDev }) => {
   const app = express();
 
-  app.use(express.static(path.join(dirname, '..', 'dist')));
+  if (!isDev) {
+    app.use(express.static(path.join(dirname, '..', 'dist')));
+  }
 
   app.use(
     cookieParser(),
