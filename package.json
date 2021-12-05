@@ -10,7 +10,7 @@
   "scripts": {
     "prepare": "husky install",
     "prebuild": "rm -rf dist",
-    "build": "npx webpack --mode production",
+    "build": "NODE_ENV=production npx webpack --mode production",
     "app": "node bin/index.js --experimental-modules",
     "start": "npm run build && npm run app"
   },
