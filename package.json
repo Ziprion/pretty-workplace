@@ -12,7 +12,7 @@
     "prebuild": "rm -rf dist",
     "build": "NODE_ENV=production npx webpack --mode production",
     "app": "node bin/index.js --experimental-modules",
-    "start": "npm run build && npm run app"
+    "start": "node bin/index.js --experimental-modules"
   },
   "author": "Maxim Novikov <maximkanv@gmail.com>",
   "license": "ISC",
