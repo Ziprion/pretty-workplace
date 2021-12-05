@@ -9,13 +9,10 @@ import { API_VERSION_1 } from './constants/index.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 console.log(dirname);
-const asd = path.resolve();
 export const runServer = ({ isDev }) => {
   const app = express();
 
-  if (!isDev) {
-    app.use(express.static(path.join(asd, '..', 'dist')));
-  }
+  app.use(express.static(path.join(dirname, '..', 'dist')));
 
   app.use(
     cookieParser(),
@@ -28,7 +25,7 @@ export const runServer = ({ isDev }) => {
 
   app.get('*', (req, res) => (isDev
     ? res.status(200).send('Server works')
-    : res.status(200).sendFile(path.join(asd, '..', 'dist', 'index.html'))));
+    : res.status(200).sendFile(path.join(dirname, '..', 'dist', 'index.html'))));
 
   const server = http.createServer(app);
 
