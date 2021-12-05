@@ -1,7 +1,5 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
-import { getUsers } from '../../db/users.js';
-import { DEFAULT_COOKIE_HEADERS, TEMP_SECRET_JWT } from '../../constants/index.js';
+import { DEFAULT_COOKIE_HEADERS, TOKEN_KEY } from '../../constants/index.js';
 import {
   getAuthUser,
   getAuthBodyData,
@@ -9,14 +7,14 @@ import {
   setDefaultAvatar,
   addNewUser,
   getNewUserId,
+  getToken,
 } from '../../utils/index.js';
 
 export const authRouter = express.Router();
 
 authRouter.get('/check', async (req, res) => {
   const user = getAuthUser(req);
-  const users = await getUsers();
-  console.log(users);
+
   if (!(user)) {
     return res.status(401).send({ message: 'user does not exist with these token' });
   }
@@ -32,7 +30,7 @@ authRouter.get('/signout', (req, res) => {
   }
 
   return res
-    .cookie('token', null, DEFAULT_COOKIE_HEADERS)
+    .cookie(TOKEN_KEY, null, DEFAULT_COOKIE_HEADERS)
     .sendStatus(200);
 });
 
@@ -49,11 +47,11 @@ authRouter.post('/signin', (req, res) => {
     return res.status(401).send({ message: 'user does not exist with these login and password' });
   }
 
-  const newToken = jwt.sign({ id: user.id, email }, TEMP_SECRET_JWT);
+  const newToken = getToken(user.id, email);
   user.authInfo.token = newToken;
 
   return res
-    .cookie('token', newToken, DEFAULT_COOKIE_HEADERS)
+    .cookie(TOKEN_KEY, newToken, DEFAULT_COOKIE_HEADERS)
     .sendStatus(200);
 });
 
@@ -94,12 +92,12 @@ authRouter.post('/signup', (req, res) => {
     },
   };
 
-  const token = jwt.sign({ id: newUser.id, email }, TEMP_SECRET_JWT);
-  newUser.authInfo.token = token;
+  const newToken = getToken(newUser.id, email);
+  newUser.authInfo.token = newToken;
 
   addNewUser(newUser);
 
   return res
-    .cookie('token', token, DEFAULT_COOKIE_HEADERS)
+    .cookie('token', newToken, DEFAULT_COOKIE_HEADERS)
     .sendStatus(201);
 });

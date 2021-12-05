@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { TEMP_SECRET_JWT, NO_AUTHORIZATION_URL } from '../constants/index.js';
+import { verifyToken } from '../utils/index.js';
+import { NO_AUTHORIZATION_URL } from '../constants/index.js';
 
 export const authorizationMiddleware = (req, res, next) => {
   if (!(req.url.slice(0, 4) === '/api')) {
@@ -17,7 +17,7 @@ export const authorizationMiddleware = (req, res, next) => {
   }
 
   try {
-    const { id, email } = jwt.verify(token, TEMP_SECRET_JWT);
+    const { id, email } = verifyToken(token);
     req.userId = id;
     req.userEmail = email;
 
