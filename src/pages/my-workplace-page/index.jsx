@@ -4,7 +4,7 @@ import {
   getStorageItem, setStorageItem,
 } from '@utils';
 import { GREETING_KEY, GREETING_HIDE, GREETING_DELAY } from '@constants';
-import { HeaderDataConnector } from '@data-connectors';
+import { HeaderDataConnector, MyWorkplaceDataConnector } from '@data-connectors';
 import { Footer } from '@components';
 import {
   Wrapper, HeaderWrapper, MainWrapper, FooterWrapper,
@@ -30,8 +30,12 @@ export const MyWorkplacePage = () => {
         <HeaderWrapper>
           <HeaderDataConnector />
         </HeaderWrapper>
-        <MainWrapper>Main</MainWrapper>
-        <FooterWrapper><Footer /></FooterWrapper>
+        <MainWrapper>
+          <MyWorkplaceDataConnector />
+        </MainWrapper>
+        <FooterWrapper>
+          <Footer />
+        </FooterWrapper>
       </Wrapper>
       {isShowGreeting && (
         <div style={{

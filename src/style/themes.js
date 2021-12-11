@@ -37,6 +37,7 @@ const headingLineHeight = {
 };
 
 const borderRadius = {
+  large: '15px',
   medium: '10px',
   small: '5px',
 };
@@ -52,6 +53,10 @@ const logo = {
   size: {
     small: '32px',
   },
+};
+
+const boardPlate = {
+  width: '280px',
 };
 
 const commonColors = {
@@ -79,6 +84,7 @@ const defaultTheme = {
   borderRadius,
   zIndex,
   logo,
+  boardPlate,
 };
 
 export const lightTheme = {

@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 export const Button = styled.button`
   ${({ theme, width }) => css`
     width: ${width || 'max-content'};
-    min-width: 100px;
     padding: ${theme.offset(1)} ${theme.offset(2)};
     text-align: center;
     background: ${theme.colors.primary1};

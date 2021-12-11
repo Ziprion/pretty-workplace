@@ -45,13 +45,14 @@ export const GlobalStyle = createGlobalStyle`
     font-size: inherit;
     font-family: inherit;
     line-height: inherit;
+    text-decoration: none;
     outline: none;
     user-select: none;
   }
 
-  main {
+  body {
     z-index: ${({ theme }) => theme.zIndex.below};
-    width: 100vw;
+    width: 100%;
     min-width: 375px;
     height: 100vh;
     color: ${({ theme }) => theme.colors.additional1};
@@ -60,5 +61,9 @@ export const GlobalStyle = createGlobalStyle`
     line-height: ${({ theme }) => theme.lineHeight.default};
     letter-spacing: 0.2px;
     background: ${({ theme }) => theme.colors.secondary2};
+  }
+
+  main {
+    height: 100%;
   }
 `;

@@ -3,10 +3,13 @@ import { initialization } from './userSlice';
 
 const workplacesSlice = createSlice({
   name: 'workplaces',
-  initialState: [],
+  initialState: { myWorkplaces: [], activeWorkplaceId: null },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(initialization, (state, { payload: { workplacesData } }) => ([...state, ...workplacesData]));
+    builder.addCase(initialization, (state, { payload: { workplacesData } }) => {
+      state.myWorkplaces = workplacesData;
+      state.activeWorkplaceId = workplacesData[0]?.id;
+    });
   },
 });
 

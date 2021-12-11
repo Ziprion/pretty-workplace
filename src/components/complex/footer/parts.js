@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     padding: ${theme.offset(1)} 0;
     background: ${theme.colors.secondary2};
     border-radius: 1px;
-    box-shadow: 4px 4px 4px 2px ${theme.colors.secondary1};
+    box-shadow: 0px 1px 4px 0px ${theme.colors.secondary1};
 `}
 `;
 
