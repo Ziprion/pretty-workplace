@@ -5,7 +5,8 @@ const userSlice = createSlice({
   initialState: null,
   reducers: {
     initialization: (state, { payload: { userData } }) => ({ ...state, ...userData }),
+    cleanup: () => null,
   },
 });
 
-export const { reducer: userReducer, actions: { initialization } } = userSlice;
+export const { reducer: userReducer, actions: { initialization, cleanup } } = userSlice;
