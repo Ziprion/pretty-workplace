@@ -1,25 +1,32 @@
 import express from 'express';
-import { getAuthUserEmail, promise } from '../../utils/index.js';
-import { getUser } from '../../db/users.js';
-import { getWorkplaces, getBoards, getItems } from '../../db/index.js';
+
+import {
+  getBoards,
+  getItems,
+  getWorkplaces,
+} from '../../db/index.js';
+import {
+  getAuthUser,
+  promise,
+  toCamelCase,
+} from '../../utils/index.js';
 
 export const workplacesRouter = express.Router();
 
 workplacesRouter.get('/myworkplaces', async (req, res) => {
-  const email = getAuthUserEmail(req);
-  const user = await getUser(email);
+  const user = await getAuthUser(req);
 
-  if (!user) {
-    return res.status(404).send({ message: 'user does not exist' });
+  if (!(user)) {
+    return res.status(401).send({ message: 'Unauthorized' });
   }
 
-  const workplacesList = await getWorkplaces(user.id);
-  const workplacesWithBoards = workplacesList.map(async (workplace) => {
-    const boardsList = await getBoards(workplace.id);
-    const boardsWithItems = boardsList.map(async (board) => ({ ...board, items: await getItems(board.id) }));
+  const workplaces = await getWorkplaces(user.id);
+  const boards = toCamelCase((await promise(workplaces.map(({ id }) => getBoards(id)))).flat());
+  const items = toCamelCase((await promise(boards.map(({ id }) => getItems(id)))).flat());
 
-    return promise(boardsWithItems).then((boards) => ({ ...workplace, boards }));
+  return res.status(200).send({
+    workplaces,
+    boards,
+    items,
   });
-
-  return promise(workplacesWithBoards).then((workplaces) => res.status(200).send(workplaces));
 });

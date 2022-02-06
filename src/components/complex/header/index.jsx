@@ -1,10 +1,10 @@
 import React from 'react';
+
 import { Avatar, Logo } from '@components';
-import { getFullName } from '@utils';
 import { LogoutConnector } from '@connectors';
-import {
-  Wrapper, UserInfo, UserName,
-} from './parts';
+import { getFullName } from '@utils';
+
+import { UserInfo, UserName, Wrapper } from './parts';
 
 export const Header = ({ user }) => (
   <Wrapper>

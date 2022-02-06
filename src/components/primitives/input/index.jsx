@@ -1,32 +1,35 @@
 import styled, { css } from 'styled-components';
 
 export const Input = styled.input`
-  ${({ theme, isInvalid, width }) => css`
+  ${({
+    theme, isInvalid, width,
+  }) => css`
     width: ${width || 'max-content'};
     min-width: 250px;
     padding: ${theme.offset(1)} ${theme.offset(2)};
-    border: 1px solid  ${isInvalid ? `${theme.colors.danger}` : `${theme.colors.secondary2}`};
-    border-radius: ${theme.borderRadius.small};
+    border: 1px solid  ${isInvalid ? `${theme.colors.danger}` : `${theme.colors.secondary1}`};
+    border-radius: ${theme.borderRadius};
     color: ${theme.colors.additional1};
-    font-size: ${theme.fontSize.medium};
-    line-height: ${theme.lineHeight.medium};
-    background: ${theme.colors.secondary2};
+    background: ${theme.colors.additional2};
     user-select: auto;
-    box-shadow: 0px 0px 2px 0px ${theme.colors.secondary1};
+
+    &::placeholder {
+      color: ${theme.colors.secondary2};
+    }
 
     &:focus {
-      border: 1px solid ${theme.colors.secondary1};
+      border: 1px solid ${theme.colors.secondary2};
     }
 
     &:disabled {
       cursor: not-allowed;
       background: ${theme.colors.disabled1};
       border: 1px solid ${theme.colors.disabled1};
-      opacity: 0.4;
-    }
 
-    &::placeholder {
-      color: ${theme.colors.secondary1};
+      &::placeholder {
+        color: ${theme.colors.disabled2};
+        opacity: 1;
+      }
     }
   `}
 `;

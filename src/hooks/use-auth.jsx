@@ -1,11 +1,15 @@
-import React, { useState, useContext, createContext } from 'react';
-import { removeStorageItem } from '@utils';
+import React, {
+  createContext,
+  useContext, useState,
+} from 'react';
+
 import { GREETING_KEY } from '@constants';
+import { removeStorageItem } from '@utils';
 
 const AuthContext = createContext();
 
 const useProvideAuth = () => {
-  const [status, changeStatus] = useState(false);
+  const [ status, changeStatus ] = useState(false);
 
   const signin = () => {
     changeStatus(true);

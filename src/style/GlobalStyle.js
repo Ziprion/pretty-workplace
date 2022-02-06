@@ -1,13 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
+
 import Robotottf from '../../assets/fonts/roboto.ttf';
 import Robotowoff from '../../assets/fonts/roboto.woff';
 import Robotowoff2 from '../../assets/fonts/roboto.woff2';
-import RobotoThinttf from '../../assets/fonts/roboto-thin.ttf';
-import RobotoThinwoff from '../../assets/fonts/roboto-thin.woff';
-import RobotoThinwoff2 from '../../assets/fonts/roboto-thin.woff2';
 import RobotoBoldttf from '../../assets/fonts/roboto-bold.ttf';
 import RobotoBoldwoff from '../../assets/fonts/roboto-bold.woff';
 import RobotoBoldwoff2 from '../../assets/fonts/roboto-bold.woff2';
+import RobotoThinttf from '../../assets/fonts/roboto-thin.ttf';
+import RobotoThinwoff from '../../assets/fonts/roboto-thin.woff';
+import RobotoThinwoff2 from '../../assets/fonts/roboto-thin.woff2';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -50,8 +51,12 @@ export const GlobalStyle = createGlobalStyle`
     user-select: none;
   }
 
+  html {
+    scrollbar-width: none;
+  }
+
   body {
-    z-index: ${({ theme }) => theme.zIndex.below};
+    z-index: ${({ theme }) => theme.zIndex.default};
     width: 100%;
     min-width: 375px;
     height: 100vh;
@@ -60,7 +65,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     line-height: ${({ theme }) => theme.lineHeight.default};
     letter-spacing: 0.2px;
-    background: ${({ theme }) => theme.colors.secondary2};
+    background: ${({ theme }) => theme.colors.additional3};
   }
 
   main {

@@ -5,5 +5,4 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: ${({ theme }) => theme.colors.secondary2};
 `;

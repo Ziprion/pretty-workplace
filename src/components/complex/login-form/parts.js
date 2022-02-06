@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
 export const Form = styled.form`
   display: flex;
@@ -18,8 +18,8 @@ export const Feedback = styled.div`
   ${({ theme }) => css`
     height: ${theme.lineHeight.small};
     color: ${theme.colors.danger};
-    font-size: ${theme.fontSize.small};
-    line-height: ${theme.lineHeight.small};
+    font-size: ${theme.fontSize.medium};
+    line-height: ${theme.lineHeight.medium};
   `}
 `;
 
@@ -35,13 +35,18 @@ export const Space = styled.div`
 export const Additional = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.offset(4)};
-    font-size: ${theme.fontSize.small};
-    line-height: ${theme.lineHeight.small};
+    font-size: ${theme.fontSize.medium};
+    line-height: ${theme.lineHeight.medium};
   `}
 `;
 
 export const Link = styled(RouterLink)`
-  &:hover {
+  ${({ theme }) => css`
+    color: ${theme.colors.primary1};
     text-decoration: underline;
-  }
+
+    &:hover {
+      color: ${theme.colors.primary2};
+    }
+  `}
 `;

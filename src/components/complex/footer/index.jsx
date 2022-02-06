@@ -1,6 +1,10 @@
 import React from 'react';
+
 import {
-  Wrapper, Info, Navigation, Item,
+  Info,
+  Item,
+  Navigation,
+  Wrapper,
 } from './parts';
 
 export const Footer = () => (

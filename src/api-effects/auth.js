@@ -5,22 +5,24 @@ export const AUTH_ROUTES = {
   SIGNOUT: '/api/auth/signout',
 };
 
-export const CHECK = {
+export const CHECK = () => ({
   method: 'get',
   url: AUTH_ROUTES.CHECK,
-};
+});
 
-export const SIGNIN = {
+export const SIGNIN = (data) => ({
   method: 'post',
   url: AUTH_ROUTES.SIGNIN,
-};
+  data,
+});
 
-export const SIGNUP = {
+export const SIGNUP = (data) => ({
   method: 'post',
   url: AUTH_ROUTES.SIGNUP,
-};
+  data,
+});
 
-export const SIGNOUT = {
+export const SIGNOUT = () => ({
   method: 'get',
   url: AUTH_ROUTES.SIGNOUT,
-};
+});

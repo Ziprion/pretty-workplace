@@ -1,9 +1,12 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route,
+  BrowserRouter as Router, Route,
+  Switch,
 } from 'react-router-dom';
+
 import { AuthConnector } from '@connectors';
 import { useAuth } from '@hooks';
+
 import { APP_ROUTES } from './routes';
 
 export const App = () => {
@@ -15,7 +18,14 @@ export const App = () => {
         <Switch>
           {APP_ROUTES.map(({
             id, exact, path, getComponentByStatus,
-          }) => <Route key={id} exact={exact} path={path} component={getComponentByStatus(status)} />)}
+          }) => (
+            <Route
+              key={id}
+              exact={exact}
+              path={path}
+              component={getComponentByStatus(status)}
+            />
+          ))}
         </Switch>
       </Router>
     </AuthConnector>

@@ -5,7 +5,10 @@ export const STATUSES = {
 };
 
 export const DEFAULT_STATE = {
-  error: null, loading: false, status: null, data: null,
+  error: null,
+  loading: false,
+  status: null,
+  data: null,
 };
 
 export const DEFAULT_TIMEOUT = 10000;

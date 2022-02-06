@@ -1,5 +1,9 @@
 import React from 'react';
-import { LogoWrapper, LogoImage, LogoTitle } from './parts';
+
+import {
+  LogoImage, LogoTitle,
+  LogoWrapper,
+} from './parts';
 
 export const Logo = () => (
   <LogoWrapper>

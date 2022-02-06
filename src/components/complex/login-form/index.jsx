@@ -1,9 +1,17 @@
-import { Button, Input } from '@components';
-import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
-import { ROUTES, FIELD_NAME } from '@constants';
+import { useFormik } from 'formik';
+
+import { Button, Input } from '@components';
+import { FIELD_NAME } from '@constants';
+
 import {
-  Additional, Feedback, Form, FormItem, Label, Link, Space,
+  Additional,
+  Feedback,
+  Form,
+  FormItem,
+  Label,
+  Link,
+  Space,
 } from './parts';
 
 const errorsMessage = {
@@ -14,7 +22,13 @@ const errorsMessage = {
 };
 
 export const LoginForm = ({
-  error, clearError, onSubmit, validationSchema, initialValues, fields, isSignup,
+  error,
+  clearError,
+  onSubmit,
+  validationSchema,
+  initialValues,
+  fields,
+  additional,
 }) => {
   const formik = useFormik({
     initialValues,
@@ -22,6 +36,10 @@ export const LoginForm = ({
     validateOnBlur: false,
     onSubmit,
   });
+
+  const {
+    title, linkTo, linkText,
+  } = additional;
 
   const handleSwitch = () => {
     formik.resetForm();
@@ -38,7 +56,7 @@ export const LoginForm = ({
   useEffect(() => {
     setTimeout(() => inputRef?.current?.focus());
   }, []);
-
+  console.log('asd');
   return (
     <Form onSubmit={formik.handleSubmit}>
       {fields.map(({
@@ -63,23 +81,16 @@ export const LoginForm = ({
       ))}
       <Feedback>{errorsMessage[error?.status]}</Feedback>
       <Space />
-      <Button type="submit" disabled={formik.isSubmitting} width="100%">Submit</Button>
+      <Button
+        type="submit"
+        disabled={formik.isSubmitting}
+        width="100%"
+      >
+        Submit
+      </Button>
       <Additional>
-        {isSignup ? (
-          <>
-            {' '}
-            Do you have account?
-            {' '}
-            <Link to={ROUTES.SIGNIN} onClick={handleSwitch}>Login</Link>
-          </>
-        ) : (
-          <>
-            {' '}
-            Do you have not account?
-            {' '}
-            <Link to={ROUTES.SIGNUP} onClick={handleSwitch}>Create</Link>
-          </>
-        )}
+        {title}
+        <Link to={linkTo} onClick={handleSwitch}>{linkText}</Link>
       </Additional>
     </Form>
   );

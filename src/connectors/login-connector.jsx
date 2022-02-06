@@ -1,30 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '@hooks';
-import { useApiEffect, API_EFFECTS } from '@api-effects';
-import { FIELDS, INITIAL_VALUES } from '@constants';
-import { VALIDATION_SCHEMA } from '@utils';
-import { LoginForm } from '@components';
+import React, { useEffect, useState } from 'react';
 
-export const LoginConnector = ({ type, isSignup }) => {
-  const { error: loginError, run, data } = isSignup
-    ? useApiEffect(API_EFFECTS.AUTH.SIGNUP)
-    : useApiEffect(API_EFFECTS.AUTH.SIGNIN);
+import { useApiEffect } from '@api-effects';
+import { LoginForm } from '@components';
+import {
+  FIELDS,
+  INITIAL_VALUES,
+  LOGIN_FORM_ADDITIONAL,
+  STATUSES,
+  VALIDATION_SCHEMA,
+} from '@constants';
+import { useAuth } from '@hooks';
+
+export const LoginConnector = ({ type }) => {
+  const {
+    error: loginError,
+    run,
+    status,
+  } = useApiEffect(LOGIN_FORM_ADDITIONAL[type].apiEffect);
+
   const { signin } = useAuth();
-  const [error, setError] = useState(null);
+
+  const [ error, setError ] = useState(null);
   const clearError = () => setError(() => null);
 
   useEffect(() => {
     if (loginError) {
       setError(() => loginError);
     }
-  }, [loginError]);
+  }, [ loginError ]);
 
   useEffect(() => {
-    if (data) {
+    if (status === STATUSES.SUCCESS) {
       signin();
     }
-  }, [data]);
-
+  }, [ status ]);
+  console.log('qwe');
   return (
     <LoginForm
       error={error}
@@ -33,7 +43,7 @@ export const LoginConnector = ({ type, isSignup }) => {
       validationSchema={VALIDATION_SCHEMA[type]}
       initialValues={INITIAL_VALUES[type]}
       fields={FIELDS[type]}
-      isSignup={isSignup}
+      additional={LOGIN_FORM_ADDITIONAL[type]}
     />
   );
 };

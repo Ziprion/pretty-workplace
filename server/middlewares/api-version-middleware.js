@@ -1,7 +1,7 @@
-import { ACTUAL_API_VERSION } from '../constants/index.js';
+import { ACTUAL_API_VERSION, API } from '../constants/index.js';
 
-export const apiVersionMiddleware = (req, res, next) => {
-  if (req.url.slice(0, 4) === '/api') {
+export const apiVersionMiddleware = (req, _, next) => {
+  if (req.url.slice(0, 4) === API) {
     req.url = ACTUAL_API_VERSION.concat(req.url.slice(4));
   }
 

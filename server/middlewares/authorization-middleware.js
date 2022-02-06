@@ -1,8 +1,8 @@
+import { API, NO_AUTHORIZATION_URL } from '../constants/index.js';
 import { verifyToken } from '../utils/index.js';
-import { NO_AUTHORIZATION_URL } from '../constants/index.js';
 
 export const authorizationMiddleware = (req, res, next) => {
-  if (!(req.url.slice(0, 4) === '/api')) {
+  if (!(req.url.slice(0, 4) === API)) {
     return next();
   }
 
@@ -13,7 +13,7 @@ export const authorizationMiddleware = (req, res, next) => {
   const { cookies: { token } } = req;
 
   if (!token) {
-    return res.status(401).send({ message: 'user does not exist with these token' });
+    return res.status(401).send({ message: 'Unauthorized' });
   }
 
   try {
@@ -22,6 +22,6 @@ export const authorizationMiddleware = (req, res, next) => {
 
     return next();
   } catch {
-    return res.status(401).send({ message: 'user does not exist with these token' });
+    return res.status(401).send({ message: 'Token is invalid' });
   }
 };

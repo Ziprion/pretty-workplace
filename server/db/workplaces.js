@@ -11,3 +11,15 @@ export const getWorkplaces = async (userId) => {
     throw (e);
   }
 };
+
+export const getUserWorkplaceById = async (workplaceId, userId) => {
+  try {
+    const { rows } = await db.query(`SELECT * FROM workplaces WHERE user_id='${userId}' AND id='${workplaceId}'`);
+
+    return !!rows.length;
+  } catch (e) {
+    console.log(e.stack);
+
+    throw (e);
+  }
+};

@@ -1,4 +1,10 @@
-const EMPTY_FIELD = '';
+import * as Yup from 'yup';
+
+import { API_EFFECTS } from '@api-effects';
+
+import { ROUTES } from './routes';
+
+const EMPTY_FIELD = ''; // todo move to common form constants
 export const SIGNIN_KEY = 'signin';
 export const SIGNUP_KEY = 'signup';
 
@@ -26,6 +32,7 @@ const FIELD_PLACEHOLDER = {
   CONFIRM: 'Enter your confirm',
 };
 
+// todo move to common form constants
 const FIELD_TYPE = {
   TEXT: 'text',
   PASSWORD: 'password',
@@ -93,4 +100,62 @@ export const FIELDS = {
       placeholder: FIELD_PLACEHOLDER.CONFIRM,
     },
   ],
+};
+
+export const VALIDATION_SCHEMA = {
+  [SIGNIN_KEY]: Yup.object().shape({
+    [FIELD_NAME.EMAIL]: Yup
+      .string()
+      .email()
+      .required('Required')
+      .trim(),
+    [FIELD_NAME.PASSWORD]: Yup
+      .string()
+      .required('Required')
+      .trim(),
+  }),
+  [SIGNUP_KEY]: Yup.object().shape({
+    [FIELD_NAME.EMAIL]: Yup
+      .string()
+      .email()
+      .required('Required')
+      .trim(),
+    [FIELD_NAME.FIRST_NAME]: Yup
+      .string()
+      .max(20, 'Must be 20 characters at least')
+      .required('Required')
+      .trim(),
+    [FIELD_NAME.LAST_NAME]: Yup
+      .string()
+      .max(20, 'Must be 20 characters at least')
+      .required('Required')
+      .trim(),
+    [FIELD_NAME.PASSWORD]: Yup
+      .string()
+      .min(8, 'Must be 8 characters at least')
+      .required('Required')
+      .trim(),
+    [FIELD_NAME.CONFIRM]: Yup
+      .string()
+      .min(8, 'Must be 8 characters at least')
+      .required('Required')
+      .trim(),
+  }),
+};
+
+export const LOGIN_FORM_ADDITIONAL = {
+  [SIGNUP_KEY]: {
+    mainTitle: 'Create your account to continue',
+    title: 'Do you have account? ',
+    linkText: 'Login',
+    linkTo: ROUTES.SIGNIN,
+    apiEffect: API_EFFECTS.AUTH.SIGNUP,
+  },
+  [SIGNIN_KEY]: {
+    mainTitle: 'Login to your account to continue',
+    title: 'Do you have not account? ',
+    linkText: 'Create',
+    linkTo: ROUTES.SIGNUP,
+    apiEffect: API_EFFECTS.AUTH.SIGNIN,
+  },
 };

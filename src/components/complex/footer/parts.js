@@ -1,16 +1,10 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: ${theme.offset(1)} 0;
-    background: ${theme.colors.secondary2};
-    border-radius: 1px;
-    box-shadow: 0px 1px 4px 0px ${theme.colors.secondary1};
-`}
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Navigation = styled.div`
@@ -27,11 +21,16 @@ export const Navigation = styled.div`
 export const Info = styled.div`
   ${({ theme }) => css`
     display: flex;
+    width: 100%;
+    margin: 0 ${theme.offset(6)};
     align-items: center;
     justify-content: center;
-    color: ${theme.colors.secondary1};
-    font-size: ${theme.fontSize.xSmall};
+    color: ${theme.colors.secondary2};
+    font-size: ${theme.fontSize.small};
+    line-height: ${theme.lineHeight.small};
     text-transform: capitalize;
+    padding: ${theme.offset(1)} 0;
+    border-top: 1px solid ${theme.colors.secondary1};
   `}
 `;
 
@@ -40,6 +39,7 @@ export const Item = styled.div`
     margin-right: ${theme.offset(3)};
     color: ${theme.colors.secondary1};
     font-size: ${theme.fontSize.medium};
+    line-height: ${theme.lineHeight.medium};
     text-transform: capitalize;
   `}
 `;

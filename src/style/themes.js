@@ -1,78 +1,68 @@
 const defaultOffset = 8;
 
 const fontSize = {
-  large: '20px',
-  default: '16px',
-  medium: '14px',
-  small: '12px',
-  xSmall: '10px',
-  xxSmall: '8px',
+  large: '16px',
+  default: '14px',
+  medium: '12px',
+  small: '10px',
 };
 
 const lineHeight = {
-  large: '30px',
-  default: '24px',
-  medium: '21px',
-  small: '18px',
-  xSmall: '15px',
-  xxSmall: '12px',
+  large: '24px',
+  default: '21px',
+  medium: '18px',
+  small: '15px',
 };
 
 const headingFontSize = {
-  h1: '40px',
-  h2: '32px',
-  h3: '28px',
-  h4: '24px',
-  h5: '20px',
-  h6: '16px',
+  h1: '56px',
+  h2: '48px',
+  h3: '36px',
+  h4: '32px',
+  h5: '24px',
+  h6: '18px',
 };
 
 const headingLineHeight = {
-  h1: '60px',
-  h2: '48px',
-  h3: '42px',
-  h4: '36px',
-  h5: '30px',
-  h6: '24px',
+  h1: '77px',
+  h2: '66px',
+  h3: '50px',
+  h4: '44px',
+  h5: '33px',
+  h6: '25px',
 };
 
-const borderRadius = {
-  large: '15px',
-  medium: '10px',
-  small: '5px',
-};
+const borderRadius = '4px';
 
 const zIndex = {
-  below: 0,
   default: 1,
   above: 2,
   modal: 9,
 };
 
-const logo = {
-  size: {
-    small: '32px',
-  },
-};
+const logo = { size: { small: '32px' } };
 
-const boardPlate = {
-  width: '280px',
+export const boardPlate = {
+  minWidth: '320px',
+  addButtonHeight: '110px',
+  addButtonWidth: '200px',
 };
 
 const commonColors = {
   danger: '#dc3545',
-  disabled1: '#dde1f6 ',
-  disabled2: '#6c7589',
-  white: '#ffffff',
+  disabled1: '#e6e7e9',
+  disabled2: '#37415142',
 };
 
 const colors = {
   white: '#ffffff',
-  blue: '#2f49d1',
-  darkBlue: '#152da7',
-  blueGray: '#f2f6ff',
-  dark: '#343a40',
-  gray: '#b9b9b9',
+  dark: '#111827',
+  blue: '#0078d4',
+  darkBlue: '#005ba1',
+  gray: '#D1D5DB',
+  lightGray: '#f9fafb',
+  semiGray: '#6B7280',
+  darkGray: '#f3f4f6',
 };
 
 const defaultTheme = {
@@ -91,12 +81,14 @@ export const lightTheme = {
   ...defaultTheme,
   colors: {
     ...commonColors,
-    primary1: colors.blue,
-    primary2: colors.darkBlue,
-    secondary1: colors.gray,
-    secondary2: colors.blueGray,
-    additional1: colors.dark,
-    additional2: colors.white,
+    primary1: colors.blue, // action buttons
+    primary2: colors.darkBlue, // hover actions button
+    primary3: colors.darkGray, // ????hover elements in board or items
+    secondary1: colors.gray, // borders
+    secondary2: colors.semiGray, // additional text
+    additional1: colors.dark, // dark text
+    additional2: colors.white, // white text
+    additional3: colors.lightGray, // background
   },
 };
 

@@ -1,23 +1,32 @@
 import React from 'react';
-import { SIGNUP_KEY, SIGNIN_KEY } from '@constants';
 import { useLocation } from 'react-router-dom';
-import { LoginConnector } from '@connectors';
+
 import { Logo } from '@components';
-import { Wrapper, LoginFormWrapper, Message } from './parts';
+import { LoginConnector } from '@connectors';
+import {
+  LOGIN_FORM_ADDITIONAL,
+  SIGNIN_KEY, SIGNUP_KEY,
+} from '@constants';
+
+import {
+  LoginFormWrapper,
+  Message,
+  Wrapper,
+} from './parts';
 
 export const LoginPage = () => {
   const { pathname } = useLocation();
-  const isSignup = pathname.slice(1) === SIGNUP_KEY;
-  const type = isSignup ? SIGNUP_KEY : SIGNIN_KEY;
+  const type = pathname.slice(1) === SIGNUP_KEY ? SIGNUP_KEY : SIGNIN_KEY;
+  const { mainTitle } = LOGIN_FORM_ADDITIONAL[type];
 
   return (
     <Wrapper>
       <LoginFormWrapper>
         <Logo />
         <Message>
-          {isSignup ? 'Create your account to continue' : 'Login to your account to continue'}
+          {mainTitle}
         </Message>
-        <LoginConnector type={type} isSignup={isSignup} />
+        <LoginConnector type={type} />
       </LoginFormWrapper>
     </Wrapper>
   );

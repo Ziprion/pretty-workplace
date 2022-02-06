@@ -1,15 +1,17 @@
 import React, {
-  useState, createContext, useContext,
+  createContext, useContext,
+  useState,
 } from 'react';
 import { ThemeProvider } from 'styled-components';
+
+import { DARK_THEME, LIGHT_THEME } from '@constants';
+import { darkTheme, lightTheme } from '@style';
 import { getCurrentTheme, setNewTheme } from '@utils';
-import { LIGHT_THEME, DARK_THEME } from '@constants';
-import { lightTheme, darkTheme } from '@style';
 
 const ThemeContext = createContext();
 
 const useProvideTheme = () => {
-  const [theme, setTheme] = useState(getCurrentTheme());
+  const [ theme, setTheme ] = useState(getCurrentTheme());
 
   const toggleTheme = () => {
     const newTheme = theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME;
@@ -17,7 +19,10 @@ const useProvideTheme = () => {
     setTheme(() => setNewTheme(newTheme));
   };
 
-  return { theme, toggleTheme };
+  return {
+    theme,
+    toggleTheme,
+  };
 };
 
 export const ProvideTheme = ({ children }) => {

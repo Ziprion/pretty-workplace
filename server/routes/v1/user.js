@@ -1,15 +1,14 @@
 import express from 'express';
-import { getUser } from '../../db/users.js';
-import { getAuthUserEmail, toCamelCase } from '../../utils/index.js';
+
+import { getAuthUser, toCamelCase } from '../../utils/index.js';
 
 export const userRouter = express.Router();
 
 userRouter.get('/me', async (req, res) => {
-  const email = getAuthUserEmail(req);
-  const user = await getUser(email);
+  const user = await getAuthUser(req);
 
   if (!user) {
-    return res.status(404).send({ message: 'user does not exist' });
+    return res.status(401).send({ message: 'Unauthorized' });
   }
 
   const {
@@ -17,6 +16,9 @@ userRouter.get('/me', async (req, res) => {
   } = toCamelCase(user);
 
   return res.status(200).send({
-    lastName, firstName, avatarBackground, avatarUrl,
+    lastName,
+    firstName,
+    avatarBackground,
+    avatarUrl,
   });
 });

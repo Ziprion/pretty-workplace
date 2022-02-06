@@ -1,78 +1,84 @@
 import express from 'express';
+
 import {
-  getAuthBodyData,
+  createUser,
+  getToken,
+  getUser,
+  setToken,
+} from '../../db/index.js';
+import {
   generateToken,
-  getAuthUserEmail,
+  getAuthUser,
   getDefaultAvatar,
   setTokenToCookie,
 } from '../../utils/index.js';
-import {
-  getUser, setToken, createUser, updateToken, clearToken,
-} from '../../db/index.js';
 
 export const authRouter = express.Router();
 
 authRouter.get('/check', async (req, res) => {
-  const email = getAuthUserEmail(req);
-  const user = await getUser(email);
+  const user = await getAuthUser(req);
 
   if (!(user)) {
-    return res.status(401).send({ message: 'user does not exist with these token' });
+    return res.status(401).send({ message: 'Unauthorized' });
   }
 
   return res.sendStatus(200);
 });
 
 authRouter.get('/signout', async (req, res) => {
-  const email = getAuthUserEmail(req);
-  const user = await getUser(email);
+  const user = await getAuthUser(req);
 
   if (!(user)) {
-    return res.status(401).send({ message: 'user does not exist with these token' });
+    return res.status(401).send({ message: 'Unauthorized' });
   }
-
-  await clearToken(user.id);
 
   return setTokenToCookie(res, null);
 });
 
 authRouter.post('/signin', async (req, res) => {
-  const { email, password } = getAuthBodyData(req);
+  const email = req?.body?.email.toLowerCase();
+  const password = req?.body?.password;
 
   if (!(email && password)) {
-    return res.status(400).send({ message: 'login and password are required' });
+    return res.status(400).send({ message: 'Bad request' });
   }
 
   const user = await getUser(email);
 
   if (!user || user.password !== password) {
-    return res.status(401).send({ message: 'user does not exist with these login and password' });
+    return res.status(401).send({ message: 'Password or login is invalid' });
   }
 
-  const token = generateToken(user.id, email);
-
-  await updateToken(user.id, token);
+  const { token } = await getToken(user.id);
 
   return setTokenToCookie(res, token);
 });
 
 authRouter.post('/signup', async (req, res) => {
   const {
-    email, firstName, lastName, password, confirm,
-  } = getAuthBodyData(req);
+    email: rawEmail,
+    firstName: rawFirstName,
+    lastName: rawLastName,
+    password,
+    confirm,
+  } = req?.body;
+
+  const email = rawEmail?.toLowerCase();
+  const firstName = rawFirstName?.toLowerCase();
+  const lastName = rawLastName?.toLowerCase();
 
   if (!(email && password && confirm && lastName && firstName)) {
-    return res.status(400).send({ message: 'all inputs are required' });
+    return res.status(400).send({ message: 'Bad request' });
   }
 
   if (password !== confirm) {
-    return res.status(409).send({ message: 'password and confirm password do not equal' });
+    return res.status(409).send({ message: 'Passwords do not equal' });
   }
 
   const user = await getUser(email);
 
   if (user) {
-    return res.status(409).send({ message: 'user is already exist' });
+    return res.status(409).send({ message: 'User is already exist' });
   }
 
   const { avatarBackground, avatarUrl } = getDefaultAvatar();

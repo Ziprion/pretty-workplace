@@ -1,9 +1,8 @@
 import pkg from 'pg';
 
-const { Pool } = pkg;
+const { Client } = pkg;
 
-export const db = new Pool({
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+const db = new Client({ ssl: { rejectUnauthorized: false } });
+db.connect();
+
+export { db };

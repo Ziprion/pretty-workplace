@@ -1,9 +1,14 @@
 import React from 'react';
+
 import { getInitials } from '@utils';
+
 import { AvatarWrapper, Initials } from './parts';
 
 export const Avatar = ({
-  lastName, firstName, avatarBackground, avatarUrl,
+  lastName,
+  firstName,
+  avatarBackground,
+  avatarUrl,
 }) => {
   if (avatarUrl) {
     return <div>url</div>;

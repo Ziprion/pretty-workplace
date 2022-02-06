@@ -1,6 +1,6 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -9,7 +9,7 @@ const mode = process.env.NODE_ENV;
 const isDev = process.env.NODE_ENV === 'development';
 
 const babelLoaders = () => {
-  const loaders = ['babel-loader'];
+  const loaders = [ 'babel-loader' ];
 
   if (!isDev) {
     loaders.push('eslint-loader');
@@ -22,7 +22,7 @@ export default {
   target: isDev ? 'web' : 'browserslist',
   mode,
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [ '.js', '.jsx' ],
     alias: {
       '@components': path.resolve(dirname, 'src/components'),
       '@hooks': path.resolve(dirname, 'src/hooks'),
@@ -44,17 +44,16 @@ export default {
     clean: true,
   },
   devServer: {
+    liveReload: false,
     open: true,
     compress: true,
     port: process.env.CLIENT_PORT,
     historyApiFallback: true,
-    contentBase: path.join(dirname, 'assets'),
-    watchContentBase: isDev,
-    proxy: {
-      '/api': {
-        target: `${process.env.API_PROXY_URL}:${process.env.PORT}`,
-      },
+    static: {
+      directory: path.join(dirname, 'assets'),
+      watch: isDev,
     },
+    proxy: { '/api': { target: `${process.env.API_PROXY_URL}:${process.env.PORT}` } },
   },
   devtool: isDev ? 'source-map' : undefined,
   plugins: [
@@ -80,9 +79,7 @@ export default {
       },
       {
         test: /\.jsx?$/,
-        resolve: {
-          fullySpecified: false,
-        },
+        resolve: { fullySpecified: false },
         exclude: /node_modules/,
         use: babelLoaders(),
       },

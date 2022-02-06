@@ -5,8 +5,8 @@ export const AvatarWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background-color: ${background};
     border-radius: 50%;
   `}
@@ -14,10 +14,8 @@ export const AvatarWrapper = styled.div`
 
 export const Initials = styled.span`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
+    color: ${theme.colors.additional2};
     text-transform: uppercase;
-    line-height: ${theme.lineHeight.medium};
-    font-size: ${theme.fontSize.medium};
     font-family: 'RobotoThin', sans-serif;
   `}
 `;

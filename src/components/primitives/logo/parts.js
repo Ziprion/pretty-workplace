@@ -15,8 +15,8 @@ export const LogoImage = styled.img`
 export const LogoTitle = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.additional1};
-    font-size: ${theme.fontSize.large};
-    line-height: ${theme.lineHeight.large};
+    font-size: ${theme.headingFontSize.h6}; //todo
+    line-height: ${theme.headingLineHeight.h6};
     font-family: 'RobotoBold', sans-serif;
     text-transform: uppercase;
   `}

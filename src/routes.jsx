@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { LoginPage, MyWorkplacePage } from '@pages';
+
 import { ROUTES } from '@constants';
+import { LoginPage, MyWorkplacePage } from '@pages';
 
 const RedirectToMyWorkplacePage = () => <Redirect to={ROUTES.MY_WORKPLACE} />;
 const RedirectToLoginPage = () => <Redirect to={ROUTES.SIGNIN} />;

@@ -7,7 +7,9 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     padding: ${theme.offset(1)} ${theme.offset(3)};
     background: ${theme.colors.additional2};
-    box-shadow: 0px -1px 4px 1px ${theme.colors.secondary1};
+    box-shadow:
+      0px 4px 6px 0px #64748B1F,
+      0px 2px 4px 0px #1F29370F;
   `}
 `;
 
