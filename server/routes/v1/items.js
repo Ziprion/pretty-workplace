@@ -1,43 +1,68 @@
 import express from 'express';
+import omit from 'lodash/omit.js';
 
 import {
-  addItem,
+  createItem,
   deleteItem,
-  getBoardWorkplaceId,
-  getIsExistItem,
-  getUserWorkplaceById,
+  getActiveWorkplace,
+  getBoardById,
+  getItemById,
+  getItemByTitle,
+  getItemByUrl,
+  updateItem,
 } from '../../db/index.js';
-import { getAuthUser } from '../../utils/index.js';
+import { toCamelCase } from '../../utils/index.js';
 
 export const itemsRouter = express.Router();
 
-itemsRouter.post('/add', async (req, res) => {
-  const user = await getAuthUser(req);
+itemsRouter.post('', async (req, res) => {
+  const {
+    userId,
+    body: {
+      title: rawTitle,
+      url: rawUrl,
+      boardId,
+    },
+  } = req;
 
-  if (!user) {
-    return res.status(401).send({ message: 'Unauthorized' });
-  }
-
-  const { title, url, boardId } = req?.body;
+  const title = rawTitle?.trim();
+  const url = rawUrl?.trim();
 
   if (!(title && url && boardId)) {
-    return res.status(400).send({ message: 'Bad request' });
+    return res.status(400).send({ message: 'BadRequestError' });
   }
 
-  const workplaceId = await getBoardWorkplaceId(boardId);
-  const hasUserWorkplace = await getUserWorkplaceById(workplaceId, user.id);
+  const activeWorkplace = await getActiveWorkplace(userId);
 
-  if (!hasUserWorkplace) {
-    return res.status(400).send({ message: 'Workplace does not exist' });
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
   }
 
-  const isExistItem = await getIsExistItem(title, url, boardId);
+  const { id: workplaceId } = activeWorkplace;
 
-  if (isExistItem) {
-    return res.status(400).send({ message: 'Item is already exist' });
+  const board = toCamelCase(await getBoardById(boardId));
+
+  if (!(board && board.workplaceId === workplaceId)) {
+    return res.status(404).send({ message: 'BoardNotFoundError' });
   }
 
-  const { id } = await addItem(title, url, boardId);
+  const itemByTitle = await getItemByTitle(title, boardId);
+
+  if (itemByTitle) {
+    return res.status(400).send({ message: 'ItemSameTitleError' });
+  }
+
+  const itemByUrl = await getItemByUrl(url, boardId);
+
+  if (itemByUrl) {
+    return res.status(400).send({ message: 'ItemSameUrlError' });
+  }
+
+  const { id } = await createItem({
+    title,
+    url,
+    boardId,
+  });
 
   return res.status(201).send({
     id,
@@ -47,21 +72,106 @@ itemsRouter.post('/add', async (req, res) => {
   });
 });
 
-itemsRouter.delete('/delete', async (req, res) => {
-  // to do check users items
-  const user = await getAuthUser(req);
+itemsRouter.put('/:id', async (req, res) => {
+  const {
+    userId,
+    params: {
+      id,
+    },
+    body: {
+      title: rawTitle,
+      url: rawUrl,
+    },
+  } = req;
 
-  if (!user) {
-    return res.status(401).send({ message: 'Unauthorized' });
+  const title = rawTitle?.trim();
+  const url = rawUrl?.trim();
+
+  if (!id || id === 'null') {
+    return res.status(400).send({ message: 'BadRequestError' });
   }
 
-  const { id } = req?.body;
+  const activeWorkplace = await getActiveWorkplace(userId);
 
-  if (!id) {
-    return res.status(400).send({ message: 'Bad request' });
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+  }
+
+  const editedItem = toCamelCase(await getItemById(id));
+
+  if (!editedItem) {
+    return res.status(404).send({ message: 'ItemNotFoundError' });
+  }
+
+  const { id: workplaceId } = activeWorkplace;
+  const { boardId } = editedItem;
+
+  const board = toCamelCase(await getBoardById(boardId));
+
+  if (!(board && board.workplaceId === workplaceId)) {
+    return res.status(404).send({ message: 'BoardNotFoundError' });
+  }
+
+  if (title) {
+    const itemByTitle = await getItemByTitle(title, boardId);
+    if (itemByTitle && Number(id) !== itemByTitle.id) {
+      return res.status(400).send({ message: 'ItemSameTitleError' });
+    }
+  }
+
+  if (url) {
+    const itemByUrl = await getItemByUrl(url, boardId);
+
+    if (itemByUrl && Number(id) !== itemByUrl.id) {
+      return res.status(400).send({ message: 'ItemSameUrlError' });
+    }
+  }
+
+  const updatedItem = {
+    ...editedItem,
+    ...(title ? { title } : {}),
+    ...(url ? { url } : {}),
+  };
+
+  await updateItem(updatedItem);
+
+  return res.status(200).send(omit(updatedItem, 'boardId'));
+});
+
+itemsRouter.delete('/:id', async (req, res) => {
+  const {
+    userId,
+    params: {
+      id,
+    },
+  } = req;
+
+  if (!id || id === 'null') {
+    return res.status(400).send({ message: 'BadRequestError' });
+  }
+
+  const deletedItem = toCamelCase(await getItemById(id));
+
+  if (!deletedItem) {
+    return res.status(404).send({ message: 'ItemNotFoundError' });
+  }
+
+  const activeWorkplace = await getActiveWorkplace(userId);
+
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+  }
+
+  const { boardId } = deletedItem;
+  const { id: workplaceId } = activeWorkplace;
+
+  const board = toCamelCase(await getBoardById(boardId));
+
+  if (!(board && board.workplaceId === workplaceId)) {
+    return res.status(404).send({ message: 'BoardNotFoundError' });
   }
 
   await deleteItem(id);
 
-  return res.status(200).send({ id });
+  return res.sendStatus(200);
 });

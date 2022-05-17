@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-import {
-  DEFAULT_STATE, DEFAULT_TIMEOUT,
-  STATUSES,
-} from '@constants';
+export const STATUSES = {
+  SUCCESS: 'success',
+  PENDING: 'pending',
+  ERROR: 'error',
+};
+
+export const DEFAULT_STATE = {
+  error: null,
+  loading: false,
+  status: null,
+  data: null,
+};
+
+export const DEFAULT_TIMEOUT = 10000;
 
 export const useApiEffect = (apiEffect) => {
   const [ state, setState ] = useState(DEFAULT_STATE);

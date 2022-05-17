@@ -1,27 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: ${theme.offset(1)} ${theme.offset(3)};
-    background: ${theme.colors.additional2};
-    box-shadow:
-      0px 4px 6px 0px #64748B1F,
-      0px 2px 4px 0px #1F29370F;
-  `}
-`;
-
-export const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-`;
-
-export const UserName = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: ${({ theme }) => theme.offset(1)};
-  text-transform: capitalize;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: ${({ theme }) => `${theme.offset(1)} ${theme.offset(3)}`};
+  background: ${({ theme }) => theme.colors.additional2};
+  box-shadow:
+    0 4px 6px 0 #64748b1f,
+    0 2px 4px 0 #1f29370f;
 `;

@@ -1,20 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit'; /* eslint no-param-reassign: 0 */
+import { createSlice } from '@reduxjs/toolkit'; /* eslint no-param-reassign: 0, import/no-cycle: 0 */
 
-import { cleanup, initialization } from './userSlice';
+import { setActiveWorkplace } from './activeWorkplaceSlice';
+import { cleanup } from './userSlice';
+
+const initialState = [];
 
 const boardsSlice = createSlice({
   name: 'boards',
-  initialState: null,
+  initialState,
   reducers: {
-    addBoardAction: (state, { payload }) => {
-      state.push(payload);
+    addBoard: (state, { payload }) => ([ ...state, payload ]),
+    editBoard: (state, { payload: { id, title } }) => {
+      const editedBoard = state.find((board) => board.id === id);
+      editedBoard.title = title;
     },
-    deleteBoardAction: (state, { payload: { id } }) => state.filter((board) => board.id !== id),
+    deleteBoard: (state, { payload }) => state.filter(({ id }) => id !== payload),
   },
   extraReducers: (builder) => {
-    builder.addCase(initialization, (_, { payload: { workplacesData: { boards } } }) => boards);
-    builder.addCase(cleanup, () => null);
+    builder.addCase(setActiveWorkplace, (_, { payload: { boards } }) => boards);
+    builder.addCase(cleanup, () => initialState);
   },
 });
 
-export const { reducer: boardsReducer, actions: { addBoardAction, deleteBoardAction } } = boardsSlice;
+export const { reducer: boardsReducer, actions: { addBoard, editBoard, deleteBoard } } = boardsSlice;

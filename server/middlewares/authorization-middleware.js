@@ -13,15 +13,16 @@ export const authorizationMiddleware = (req, res, next) => {
   const { cookies: { token } } = req;
 
   if (!token) {
-    return res.status(401).send({ message: 'Unauthorized' });
+    return res.status(401).send({ message: 'UnauthorizedError' });
   }
 
   try {
-    const { email } = verifyToken(token);
+    const { id, email } = verifyToken(token);
     req.userEmail = email;
+    req.userId = id;
 
     return next();
   } catch {
-    return res.status(401).send({ message: 'Token is invalid' });
+    return res.status(401).send({ message: 'UnauthorizedError' });
   }
 };

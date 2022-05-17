@@ -1,15 +1,16 @@
-const ITEMS_ROUTES = {
-  ADD: '/api/items/add',
-  DELETE: '/api/items/delete',
-};
-
 export const ADD = (data) => ({
   method: 'post',
-  url: ITEMS_ROUTES.ADD,
+  url: '/api/items',
   data,
 });
 
-export const DELETE = ({ itemId }) => ({
+export const EDIT = ({ id, ...data }) => ({
+  method: 'put',
+  url: `/api/items/${id}`,
+  data,
+});
+
+export const DELETE = (id) => ({
   method: 'delete',
-  url: `${ITEMS_ROUTES.DELETE}/${itemId}`,
+  url: `/api/items/${id}`,
 });

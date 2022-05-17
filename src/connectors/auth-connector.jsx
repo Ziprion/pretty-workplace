@@ -1,26 +1,21 @@
 import React, { useEffect } from 'react';
 
-import { API_EFFECTS, useApiEffect } from '@api-effects';
-import { STATUSES } from '@constants';
+import { API_EFFECTS, STATUSES, useApiEffect } from '@api-effects';
 import { useAuth } from '@hooks';
 
 export const AuthConnector = ({ children }) => {
-  const { run, status } = useApiEffect(API_EFFECTS.AUTH.CHECK);
   const { signin } = useAuth();
+  const { run, status, error } = useApiEffect(API_EFFECTS.AUTH.CHECK);
 
-  useEffect(() => {
-    run();
-  }, []);
+  useEffect(run, []);
 
-  useEffect(() => {
-    if (status === STATUSES.SUCCESS) {
-      signin();
-    }
-  }, [ status ]);
+  useEffect(() => status === STATUSES.SUCCESS && signin(), [ status ]);
+
+  if (error && error.status !== 401) {
+    return <div>Something went wrong</div>;
+  }
 
   return (
-    <>
-      {(status === STATUSES.SUCCESS || status === STATUSES.ERROR) && children}
-    </>
+    !(status === STATUSES.PENDING || status === null) && children
   );
 };

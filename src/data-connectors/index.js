@@ -1,2 +1,2 @@
-export * from './header-data-connector';
-export * from './my-workplace-data-connector';
+export * from './workplace-data-connector';
+export * from './user-panel-data-connector';

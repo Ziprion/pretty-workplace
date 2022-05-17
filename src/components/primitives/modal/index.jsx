@@ -1,27 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
+import { useOutsideClick } from '@hooks';
+
+import { CloseIcon } from '../icons';
 import {
-  Body, CloseButton,
-  Mask, Title, Wrapper,
+  Body, CloseButton, Mask, Title, Wrapper,
 } from './parts';
 
 export const Modal = ({
-  isShow, title, onCancel, disabled, children,
+  isShow, title, onCancel, isDisabled, children,
 }) => {
-  const outerClick = (e) => (e?.target?.dataset?.role === 'modal-outer' && !disabled ? onCancel() : undefined);
+  const modalWrapper = useRef(null);
+
+  useOutsideClick(modalWrapper, onCancel, isDisabled);
 
   useEffect(() => {
-    document.querySelector('html').style.overflow = isShow ? 'hidden' : 'auto';
+    if (isShow) {
+      document.querySelector('html').style.overflow = 'hidden';
+
+      return () => { document.querySelector('html').style.overflow = 'auto'; };
+    }
   }, [ isShow ]);
 
   return isShow && (
-    <Mask
-      isShow={isShow}
-      onClick={outerClick}
-      data-role="modal-outer"
-    >
-      <Wrapper>
-        <CloseButton onClick={onCancel} disabled={disabled}>X</CloseButton>
+    <Mask>
+      <Wrapper ref={modalWrapper}>
+        <CloseButton
+          disabled={isDisabled}
+          isSecondary
+          onClick={onCancel}
+        >
+          <CloseIcon />
+        </CloseButton>
         <Title>{title}</Title>
         <Body>
           {children}

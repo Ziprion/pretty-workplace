@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const LogoWrapper = styled.div`
   display: flex;
@@ -6,18 +6,14 @@ export const LogoWrapper = styled.div`
 `;
 
 export const LogoImage = styled.img`
-  ${({ theme }) => css`
-    height: ${theme.logo.size.small};
-    margin-right: ${theme.offset(1)};
-  `}
+  width: ${({ theme, size = 'small' }) => theme.logo[size].width};
+  height: ${({ theme, size = 'small' }) => theme.logo[size].height};
+  margin-right: ${({ theme }) => theme.offset(1)};
 `;
 
-export const LogoTitle = styled.span`
-  ${({ theme }) => css`
-    color: ${theme.colors.additional1};
-    font-size: ${theme.headingFontSize.h6}; //todo
-    line-height: ${theme.headingLineHeight.h6};
-    font-family: 'RobotoBold', sans-serif;
-    text-transform: uppercase;
-  `}
+export const LogoTitle = styled.h1`
+  color: ${({ theme }) => theme.colors.additional1};
+  font-size: ${({ theme }) => theme.headingFontSize.h6};
+  line-height: ${({ theme }) => theme.headingLineHeight.h6};
+  text-transform: uppercase;
 `;

@@ -4,11 +4,11 @@ import {
   createUser,
   getToken,
   getUser,
+  setActiveWorkplace,
   setToken,
 } from '../../db/index.js';
 import {
   generateToken,
-  getAuthUser,
   getDefaultAvatar,
   setTokenToCookie,
 } from '../../utils/index.js';
@@ -16,37 +16,46 @@ import {
 export const authRouter = express.Router();
 
 authRouter.get('/check', async (req, res) => {
-  const user = await getAuthUser(req);
+  const { userEmail } = req;
 
-  if (!(user)) {
-    return res.status(401).send({ message: 'Unauthorized' });
+  const user = await getUser(userEmail);
+
+  if (!user) {
+    return res.status(401).send({ message: 'UnauthorizedError' });
   }
 
   return res.sendStatus(200);
 });
 
 authRouter.get('/signout', async (req, res) => {
-  const user = await getAuthUser(req);
+  const { userEmail } = req;
 
-  if (!(user)) {
-    return res.status(401).send({ message: 'Unauthorized' });
+  const user = await getUser(userEmail);
+
+  if (!user) {
+    return res.status(401).send({ message: 'UnauthorizedError' });
   }
 
   return setTokenToCookie(res, null);
 });
 
 authRouter.post('/signin', async (req, res) => {
-  const email = req?.body?.email.toLowerCase();
-  const password = req?.body?.password;
+  const {
+    body: {
+      email: rawEmail,
+      password,
+    },
+  } = req;
+  const email = rawEmail.toLowerCase();
 
   if (!(email && password)) {
-    return res.status(400).send({ message: 'Bad request' });
+    return res.status(400).send({ message: 'BadRequestError' });
   }
 
   const user = await getUser(email);
 
   if (!user || user.password !== password) {
-    return res.status(401).send({ message: 'Password or login is invalid' });
+    return res.status(401).send({ message: 'SigninError' });
   }
 
   const { token } = await getToken(user.id);
@@ -56,36 +65,46 @@ authRouter.post('/signin', async (req, res) => {
 
 authRouter.post('/signup', async (req, res) => {
   const {
-    email: rawEmail,
-    firstName: rawFirstName,
-    lastName: rawLastName,
-    password,
-    confirm,
-  } = req?.body;
+    body: {
+      email: rawEmail,
+      firstName: rawFirstName,
+      lastName: rawLastName,
+      password,
+      confirm,
+    },
+  } = req;
 
   const email = rawEmail?.toLowerCase();
   const firstName = rawFirstName?.toLowerCase();
   const lastName = rawLastName?.toLowerCase();
 
   if (!(email && password && confirm && lastName && firstName)) {
-    return res.status(400).send({ message: 'Bad request' });
+    return res.status(400).send({ message: 'BadRequestError' });
   }
 
   if (password !== confirm) {
-    return res.status(409).send({ message: 'Passwords do not equal' });
+    return res.status(400).send({ message: 'PasswordConfirmError' });
   }
 
   const user = await getUser(email);
 
   if (user) {
-    return res.status(409).send({ message: 'User is already exist' });
+    return res.status(400).send({ message: 'UserSameEmailError' });
   }
 
   const { avatarBackground, avatarUrl } = getDefaultAvatar();
-  const { id } = await createUser(email, password, lastName, firstName, avatarBackground, avatarUrl);
+  const { id } = await createUser({
+    email,
+    password,
+    lastName,
+    firstName,
+    avatarBackground,
+    avatarUrl,
+  });
   const token = generateToken(id, email);
 
   await setToken(id, token);
+  await setActiveWorkplace(id);
 
   return setTokenToCookie(res, token, 201);
 });

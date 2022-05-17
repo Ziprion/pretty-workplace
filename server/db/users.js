@@ -12,7 +12,9 @@ export const getUser = async (email) => {
   }
 };
 
-export const createUser = async (email, password, lastName, firstName, avatarBackground, avatarUrl) => {
+export const createUser = async ({
+  email, password, lastName, firstName, avatarBackground, avatarUrl,
+}) => {
   try {
     const { rows } = await db.query(`
       INSERT INTO users(

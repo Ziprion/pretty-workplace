@@ -1,2 +1,2 @@
 export * from './login-page';
-export * from './my-workplace-page';
+export * from './workplace-page';

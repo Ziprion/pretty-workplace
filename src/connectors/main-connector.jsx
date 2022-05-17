@@ -3,34 +3,63 @@ import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
 import { Loading } from '@components';
-import { initialization } from '@redux-store';
+import { setActiveWorkplace, setUser, setWorkplaces } from '@redux-store';
 
 export const MainConnector = ({ children }) => {
   const dispatch = useDispatch();
+
   const {
-    data: workplacesData, loading: workplacesLoading, run: getWorkplacesData,
-  } = useApiEffect(API_EFFECTS.WORKPLACES.MY_WORKPLACES);
-  const {
-    data: userData, loading: userLoading, run: getUserData,
+    data: user,
+    run: getUser,
+    error: userError,
+    loading: userLoading,
   } = useApiEffect(API_EFFECTS.USER.ME);
 
+  const {
+    data: activeWorkplace,
+    loading: activeWorkplaceLoading,
+    error: activeWorkplaceError,
+    run: getActiveWorkplace,
+  } = useApiEffect(API_EFFECTS.WORKPLACES.ACTIVE);
+
+  const {
+    data: workplaces,
+    loading: workplacesLoading,
+    error: workplacesError,
+    run: getWorkplaces,
+  } = useApiEffect(API_EFFECTS.WORKPLACES.ALL);
+
   useEffect(() => {
-    getWorkplacesData();
-    getUserData();
+    getActiveWorkplace();
+    getWorkplaces();
+    getUser();
   }, []);
 
   useEffect(() => {
-    if (workplacesData && userData) {
-      dispatch(initialization({
-        workplacesData,
-        userData,
-      }));
+    if (workplaces) {
+      dispatch(setWorkplaces(workplaces));
     }
-  }, [ workplacesData, userData ]);
+  }, [ workplaces ]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(setUser(user));
+    }
+  }, [ user ]);
+
+  useEffect(() => {
+    if (activeWorkplace) {
+      dispatch(setActiveWorkplace(activeWorkplace));
+    }
+  }, [ activeWorkplace ]);
+
+  if ((activeWorkplaceError && activeWorkplaceError.status !== 404) || userError || workplacesError) {
+    return <div>Something went wrong...</div>;
+  }
 
   return (
-    <>
-      {workplacesLoading || userLoading ? <Loading /> : children}
-    </>
+    activeWorkplaceLoading || userLoading || workplacesLoading || !user
+      ? <Loading />
+      : <>{children}</>
   );
 };

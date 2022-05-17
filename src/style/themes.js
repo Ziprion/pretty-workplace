@@ -40,7 +40,47 @@ const zIndex = {
   modal: 9,
 };
 
-const logo = { size: { small: '32px' } };
+const logo = {
+  small:
+  {
+    width: '24px',
+    height: '24px',
+  },
+};
+
+const avatar = {
+  small:
+  {
+    width: '32px',
+    height: '32px',
+  },
+};
+
+const spinner = {
+  small: {
+    width: '20px',
+    height: '20px',
+    borderSize: '3px',
+  },
+  medium: {
+    width: '40px',
+    height: '40px',
+    borderSize: '6px',
+  },
+};
+
+const dropdownPosition = {
+  right: {
+    top: '5px',
+    left: 0,
+    right: 'auto',
+  },
+  left: {
+    top: '5px',
+    left: 'auto',
+    right: 0,
+  },
+};
 
 export const boardPlate = {
   minWidth: '320px',
@@ -74,7 +114,10 @@ const defaultTheme = {
   borderRadius,
   zIndex,
   logo,
+  avatar,
   boardPlate,
+  spinner,
+  dropdownPosition,
 };
 
 export const lightTheme = {
@@ -83,7 +126,7 @@ export const lightTheme = {
     ...commonColors,
     primary1: colors.blue, // action buttons
     primary2: colors.darkBlue, // hover actions button
-    primary3: colors.darkGray, // ????hover elements in board or items
+    primary3: colors.darkGray, // hover elements in board or items
     secondary1: colors.gray, // borders
     secondary2: colors.semiGray, // additional text
     additional1: colors.dark, // dark text

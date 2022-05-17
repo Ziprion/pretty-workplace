@@ -2,13 +2,13 @@ import { combineReducers } from 'redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { activeWorkplaceIdReducer } from './activeWorkplaceIdSlice';
+import { activeWorkplaceReducer } from './activeWorkplaceSlice';
 import { boardsReducer } from './boardsSlice';
 import { itemsReducer } from './itemsSlice';
 import { userReducer } from './userSlice';
 import { workplacesReducer } from './workplacesSlice';
 
-export * from './activeWorkplaceIdSlice';
+export * from './activeWorkplaceSlice';
 export * from './boardsSlice';
 export * from './itemsSlice';
 export * from './userSlice';
@@ -17,7 +17,7 @@ export * from './workplacesSlice';
 const reducer = combineReducers({
   user: userReducer,
   workplaces: workplacesReducer,
-  activeWorkplaceId: activeWorkplaceIdReducer,
+  activeWorkplace: activeWorkplaceReducer,
   boards: boardsReducer,
   items: itemsReducer,
 });

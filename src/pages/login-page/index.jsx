@@ -2,21 +2,14 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Logo } from '@components';
-import { LoginConnector } from '@connectors';
-import {
-  LOGIN_FORM_ADDITIONAL,
-  SIGNIN_KEY, SIGNUP_KEY,
-} from '@constants';
+import { LoginFormConnector } from '@connectors';
+import { LOGIN_FORM_ADDITIONAL, SIGNIN, SIGNUP } from '@constants';
 
-import {
-  LoginFormWrapper,
-  Message,
-  Wrapper,
-} from './parts';
+import { LoginFormWrapper, Message, Wrapper } from './parts';
 
 export const LoginPage = () => {
   const { pathname } = useLocation();
-  const type = pathname.slice(1) === SIGNUP_KEY ? SIGNUP_KEY : SIGNIN_KEY;
+  const type = pathname.slice(1) === SIGNUP ? SIGNUP : SIGNIN;
   const { mainTitle } = LOGIN_FORM_ADDITIONAL[type];
 
   return (
@@ -26,7 +19,7 @@ export const LoginPage = () => {
         <Message>
           {mainTitle}
         </Message>
-        <LoginConnector type={type} />
+        <LoginFormConnector type={type} />
       </LoginFormWrapper>
     </Wrapper>
   );

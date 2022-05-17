@@ -1,77 +1,136 @@
 import express from 'express';
+import omit from 'lodash/omit.js';
 
 import {
-  addBoard,
+  addBoardsPosition,
+  createBoard,
   deleteBoard,
-  getIsExistBoardById,
-  getIsExistBoardByTitle,
-  getUserWorkplaceById,
+  deleteBoardPosition,
+  getActiveWorkplace,
+  getBoardById,
+  getBoardByTitle,
+  updateBoard,
 } from '../../db/index.js';
-import { getAuthUser } from '../../utils/index.js';
+import { toCamelCase } from '../../utils/index.js';
 
 export const boardsRouter = express.Router();
 
-boardsRouter.post('/add', async (req, res) => {
-  const user = await getAuthUser(req);
+boardsRouter.post('', async (req, res) => {
+  const {
+    userId,
+    body: {
+      title: rawTitle,
+    },
+  } = req;
+  const title = rawTitle?.trim();
 
-  if (!user) {
-    return res.status(401).send({ message: 'Unauthorized' });
+  if (!title) {
+    return res.status(400).send({ message: 'BadRequestError' });
   }
 
-  const { boardTitle, workplaceId, boardOrder = 0 } = req?.body;
+  const activeWorkplace = await getActiveWorkplace(userId);
 
-  if (!(boardTitle && workplaceId)) {
-    return res.status(400).send({ message: 'Bad request' });
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
   }
 
-  const hasUserWorkplace = await getUserWorkplaceById(workplaceId, user.id);
+  const { id: workplaceId } = activeWorkplace;
 
-  if (!hasUserWorkplace) {
-    return res.status(400).send({ message: 'Workplace does not exist' });
+  const boardByTitle = await getBoardByTitle(title, workplaceId);
+
+  if (boardByTitle) {
+    return res.status(400).send({ message: 'BoardSameTitleError' });
   }
 
-  const isExistBoard = await getIsExistBoardByTitle(boardTitle, workplaceId);
+  const { id } = await createBoard({
+    title,
+    workplaceId,
+  });
 
-  if (isExistBoard) {
-    return res.status(400).send({ message: 'Board with this title is already exist' });
-  }
-
-  const { id } = await addBoard(boardTitle, workplaceId, boardOrder);
+  await addBoardsPosition(id, workplaceId);
 
   return res.status(201).send({
     id,
-    boardOrder,
-    title: boardTitle,
-    workplaceId,
+    title,
   });
 });
 
-boardsRouter.delete('/delete', async (req, res) => {
-  const user = await getAuthUser(req);
+boardsRouter.put('/:id', async (req, res) => {
+  const {
+    userId,
+    params: {
+      id,
+    },
+    body: {
+      title: rawTitle,
+    },
+  } = req;
+  const title = rawTitle?.trim();
 
-  if (!user) {
-    return res.status(401).send({ message: 'Unauthorized' });
+  if (!id || id === 'null') {
+    return res.status(400).send({ message: 'BadRequestError' });
   }
 
-  const { boardId, workplaceId } = req?.body;
+  const activeWorkplace = await getActiveWorkplace(userId);
 
-  if (!(boardId && workplaceId)) {
-    return res.status(400).send({ message: 'Bad request' });
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
   }
 
-  const hasUserWorkplace = await getUserWorkplaceById(workplaceId, user.id);
+  const { id: workplaceId } = activeWorkplace;
 
-  if (!hasUserWorkplace) {
-    return res.status(400).send({ message: 'Workplace does not exist' });
+  const board = await getBoardById(id);
+
+  if (!board) {
+    return res.status(404).send({ message: 'BoardNotFoundError' });
   }
 
-  const isExistBoard = await getIsExistBoardById(boardId, workplaceId);
+  if (title) {
+    const boardByTitle = await getBoardByTitle(title, workplaceId);
 
-  if (!isExistBoard) {
-    return res.status(400).send({ message: 'Board is not exist' });
+    if (boardByTitle) {
+      return res.status(400).send({ message: 'BoardSameTitleError' });
+    }
   }
 
-  await deleteBoard(boardId);
+  const updatedBoard = {
+    ...board,
+    ...(title ? { title } : {}),
+  };
 
-  return res.status(200).send({ id: boardId });
+  await updateBoard(updatedBoard);
+
+  return res.status(200).send((omit(updatedBoard, 'workplace_id')));
+});
+
+boardsRouter.delete('/:id', async (req, res) => {
+  const {
+    userId,
+    params: {
+      id: deletedBoardId,
+    },
+  } = req;
+
+  if (!deletedBoardId || deletedBoardId === 'null') {
+    return res.status(400).send({ message: 'BadRequestError' });
+  }
+
+  const activeWorkplace = await getActiveWorkplace(userId);
+
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+  }
+
+  const { id: workplaceId } = activeWorkplace;
+
+  const board = toCamelCase(await getBoardById(deletedBoardId));
+
+  if (!(board && board.workplaceId === workplaceId)) {
+    return res.status(404).send({ message: 'BoardNotFoundError' });
+  }
+
+  await deleteBoard(deletedBoardId);
+  await deleteBoardPosition(deletedBoardId, workplaceId);
+
+  return res.sendStatus(200);
 });

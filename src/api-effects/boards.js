@@ -1,16 +1,16 @@
-const BOARDS_ROUTES = {
-  ADD: '/api/boards/add',
-  DELETE: '/api/boards/delete',
-};
-
 export const ADD = (data) => ({
   method: 'post',
-  url: BOARDS_ROUTES.ADD,
+  url: '/api/boards',
   data,
 });
 
-export const DELETE = (data) => ({
-  method: 'delete',
-  url: BOARDS_ROUTES.DELETE,
+export const EDIT = ({ id, data }) => ({
+  method: 'put',
+  url: `/api/boards/${id}`,
   data,
+});
+
+export const DELETE = (id) => ({
+  method: 'delete',
+  url: `/api/boards/${id}`,
 });

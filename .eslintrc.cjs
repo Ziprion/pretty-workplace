@@ -1,24 +1,18 @@
 module.exports = {
   root: true,
-
   parser: 'babel-eslint',
-
   env: {
     browser: true,
     node: true,
   },
-
   plugins: [ 'functional', 'simple-import-sort' ],
-
   extends: [
     'airbnb',
     'plugin:functional/external-recommended',
     'plugin:functional/recommended',
   ],
-
   rules: {
     'import/extensions': 'off',
-    'no-console': 'off',
     'react/prop-types': 'off',
     'functional/no-conditional-statement': 'off',
     'functional/no-expression-statement': 'off',
@@ -29,27 +23,32 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-unresolved': 'off',
     'react/jsx-props-no-spreading': 'off',
-    'max-len': [ 'error', {
-      code: 120,
-      ignoreUrls: true,
-      ignoreStrings: true,
-      ignoreTemplateLiterals: true,
-      ignoreRegExpLiterals: true,
-    } ],
-    'array-bracket-spacing': [ 'error', 'always' ],
-    'react/jsx-max-props-per-line': [
+    'consistent-return': 'off',
+    'max-len': [
       'error', {
-        maximum: {
-          single: 2,
-          multi: 1,
-        },
+        code: 120,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true,
       },
     ],
-    'simple-import-sort/imports': [ 'error', {
-      groups: [
-        [ '^react$', '^[a-z]' ],
-        [ '^@' ],
-      ],
-    } ],
+    'array-bracket-spacing': [ 'error', 'always' ],
+    'object-property-newline': [ 'error', { allowAllPropertiesOnSameLine: false } ],
+    'simple-import-sort/imports': [
+      'error', {
+        groups: [
+          [ '^react$', '^[a-z]' ],
+          [ '^@' ],
+        ],
+      },
+    ],
+    'react/jsx-sort-props': [
+      'error', {
+        callbacksLast: true,
+        shorthandLast: true,
+        reservedFirst: [ 'key', 'ref' ],
+      },
+    ],
   },
 };

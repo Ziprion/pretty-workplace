@@ -1,97 +1,74 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 
-import { Button, Input } from '@components';
-import { FIELD_NAME } from '@constants';
-
-import {
-  Additional,
-  Feedback,
-  Form,
-  FormItem,
-  Label,
-  Link,
-  Space,
-} from './parts';
-
-const errorsMessage = {
-  400: 'Bad request',
-  401: 'Not user',
-  408: 'Password must be equal',
-  409: 'username is invalid',
-};
+import { Form, Input } from '@components';
 
 export const LoginForm = ({
-  error,
-  clearError,
+  clearRequestError,
+  requestError,
   onSubmit,
   validationSchema,
   initialValues,
   fields,
-  additional,
+  isLoading,
+  additional: { title, linkTo, linkText },
 }) => {
-  const formik = useFormik({
+  const {
+    resetForm, handleChange, handleSubmit, errors, values, touched, isSubmitting,
+  } = useFormik({
     initialValues,
     validationSchema,
     validateOnBlur: false,
     onSubmit,
   });
 
-  const {
-    title, linkTo, linkText,
-  } = additional;
+  const isDisabled = isSubmitting || isLoading;
 
-  const handleSwitch = () => {
-    formik.resetForm();
-    clearError();
+  const onLinkClick = () => {
+    resetForm();
+    clearRequestError();
   };
 
-  const handleChange = (e) => {
-    formik.handleChange(e);
-    clearError();
+  const onChange = (e) => {
+    handleChange(e);
+    clearRequestError();
   };
 
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    setTimeout(() => inputRef?.current?.focus());
-  }, []);
-  console.log('asd');
   return (
-    <Form onSubmit={formik.handleSubmit}>
+    <Form.Wrapper onSubmit={handleSubmit}>
       {fields.map(({
         name, type, label, placeholder,
-      }) => (
-        <FormItem key={name}>
-          <Label htmlFor={name}>{label}</Label>
+      }, index) => (
+        <Form.Item key={name}>
+          <Form.Label htmlFor={name}>{label}</Form.Label>
           <Input
-            ref={name === FIELD_NAME.EMAIL ? inputRef : null}
+            autoFocus={index === 0}
+            disabled={isDisabled}
             id={name}
+            isInvalid={errors[name] && touched[name]}
             name={name}
-            type={type}
-            onChange={handleChange}
-            value={formik.values[name]}
-            isInvalid={formik.errors[name] && formik.touched[name]}
-            disabled={formik.isSubmitting}
             placeholder={placeholder}
+            type={type}
+            value={values[name]}
             width="100%"
+            onChange={onChange}
           />
-          <Feedback>{formik.touched[name] ? formik.errors[name] : ''}</Feedback>
-        </FormItem>
+          <Form.Feedback>{touched[name] && errors[name]}</Form.Feedback>
+        </Form.Item>
       ))}
-      <Feedback>{errorsMessage[error?.status]}</Feedback>
-      <Space />
-      <Button
+      <Form.Feedback>{requestError?.status}</Form.Feedback>
+      <Form.Space />
+      <Form.Button
+        disabled={isDisabled}
         type="submit"
-        disabled={formik.isSubmitting}
         width="100%"
       >
         Submit
-      </Button>
-      <Additional>
+      </Form.Button>
+      <Form.Additional>
         {title}
-        <Link to={linkTo} onClick={handleSwitch}>{linkText}</Link>
-      </Additional>
-    </Form>
+        <Form.Link to={linkTo} onClick={onLinkClick}>{linkText}</Form.Link>
+      </Form.Additional>
+    </Form.Wrapper>
   );
 };

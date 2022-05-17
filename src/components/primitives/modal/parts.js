@@ -1,6 +1,6 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-import { Button } from '../button';
+import { GhostButton } from '../ghost-button';
 
 const fadeOn = keyframes`
   0% { opacity: 0; }
@@ -8,62 +8,53 @@ const fadeOn = keyframes`
 `;
 
 export const Mask = styled.div`
-  ${({ theme }) => css`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: ${theme.zIndex.modal};
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: ${fadeOn} 0.3s ease;
-  `}
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: ${({ theme }) => theme.zIndex.modal};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: ${fadeOn} 0.3s ease;
 `;
 
 export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    position: relative;
-    width: 350px;
-    border-radius: ${theme.borderRadius};
-    background: ${theme.colors.additional2};
-    box-shadow:
-      0px 10px 15px -3px #64748B1F,
-      0px 4px 6px -2px #64748B0D;
-  `}
+  position: relative;
+  width: 350px;
+  background: ${({ theme }) => theme.colors.additional2};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow:
+    0 10px 15px -3px #64748b1f,
+    0 4px 6px -2px #64748b0d;
 `;
 
 export const Title = styled.div`
-  ${({ theme }) => css`
-    min-height: 40px;
-    font-size: ${theme.fontSize.large};
-    line-height: ${theme.lineHeight.large};
-    padding: ${theme.offset(2)} ${theme.offset(3)} ${theme.offset(1)};
-    border-radius: ${theme.borderRadius} ${theme.borderRadius} 0 0;
-    color: ${theme.colors.additional1};
-  `}
+  min-height: 40px;
+  padding: ${({ theme }) => `${theme.offset(2)} ${theme.offset(3)} ${theme.offset(1)}`};
+  color: ${({ theme }) => theme.colors.additional1};
+  font-size: ${({ theme }) => theme.fontSize.large};
+  line-height: ${({ theme }) => theme.lineHeight.large};
+  border-radius: ${({ theme }) => `${theme.borderRadius} ${theme.borderRadius} 0 0`};
 `;
 
 export const Body = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    padding: 0 ${theme.offset(2)} ${theme.offset(2.5)};
-  `}
+  display: flex;
+  flex-direction: column;
+  padding: ${({ theme }) => `0 ${theme.offset(2)} ${theme.offset(2.5)}`};
 `;
 
-export const CloseButton = styled(Button)`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 5px;
-    text-align: center;
-    right: 2px;
-    height: 30px;
-    padding: 0;
-    width: 30px;
-    font-size: ${theme.fontSize.medium};
-    line-height: ${theme.lineHeight.medium};
-  `}
+export const CloseButton = styled(GhostButton)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  line-height: ${({ theme }) => theme.lineHeight.medium};
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => theme.colors.additional1};
+  }
 `;

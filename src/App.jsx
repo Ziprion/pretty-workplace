@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Route,
+  BrowserRouter as Router,
+  Route,
   Switch,
 } from 'react-router-dom';
 
@@ -21,9 +22,9 @@ export const App = () => {
           }) => (
             <Route
               key={id}
+              component={getComponentByStatus(status)}
               exact={exact}
               path={path}
-              component={getComponentByStatus(status)}
             />
           ))}
         </Switch>

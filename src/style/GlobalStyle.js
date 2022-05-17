@@ -47,7 +47,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     line-height: inherit;
     text-decoration: none;
-    outline: none;
+    list-style-type: none;
     user-select: none;
   }
 
@@ -57,9 +57,12 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     z-index: ${({ theme }) => theme.zIndex.default};
-    width: 100%;
+    width: 100vw;
     min-width: 375px;
+    max-width: 100vw;
     height: 100vh;
+    min-height: 750px;
+    overflow-x: hidden;
     color: ${({ theme }) => theme.colors.additional1};
     font-size: ${({ theme }) => theme.fontSize.default};
     font-family: 'Roboto', sans-serif;

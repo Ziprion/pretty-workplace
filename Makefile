@@ -5,22 +5,22 @@ build:
 	npm run build
 
 start-prod:
-	make frontend-prod-loc && make backend-prod-loc
+	make frontend-prod && make backend-prod
 
-frontend-prod-loc:
+frontend-prod:
 	npx env-cmd -f .env.production.loc webpack --mode production
 
-backend-prod-loc:
+backend-prod:
 	npx env-cmd -f .env.production.loc node bin/index.js
 
 start-dev:
-	make frontend-dev-loc & make backend-dev-loc
+	make frontend-dev & make backend-dev
 
-frontend-dev-loc:
+frontend-dev:
 	npx env-cmd -f .env.development.loc webpack serve  --mode development
 
-backend-dev-loc:
-	npx env-cmd -f .env.development.loc nodemon bin/index.js
+backend-dev:
+	npx env-cmd -f .env.development.loc nodemon bin/index.js --trace-warnings
 
 lint:
 	npx eslint . --ext js,jsx --fix
