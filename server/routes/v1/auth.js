@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import express from 'express';
 
 import {
@@ -53,8 +54,9 @@ authRouter.post('/signin', async (req, res) => {
   }
 
   const user = await getUser(email);
+  const isCorrectPassword = await bcrypt.compare(password, user.password);
 
-  if (!user || user.password !== password) {
+  if (!user || !isCorrectPassword) {
     return res.status(401).send({ message: 'SigninError' });
   }
 
@@ -93,9 +95,11 @@ authRouter.post('/signup', async (req, res) => {
   }
 
   const { avatarBackground, avatarUrl } = getDefaultAvatar();
+  const hashPassword = await bcrypt.hash(password, 3);
+
   const { id } = await createUser({
     email,
-    password,
+    password: hashPassword,
     lastName,
     firstName,
     avatarBackground,
