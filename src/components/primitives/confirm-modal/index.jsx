@@ -26,7 +26,7 @@ export const ConfirmModal = ({
       <WarningIcon />
       <Title>{title}</Title>
     </TextGroup>
-    <Feedback>{requestError}</Feedback>
+    <Feedback>{requestError?.status}</Feedback>
     <ButtonGroup>
       <Button
         disabled={isDisabled}

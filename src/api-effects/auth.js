@@ -3,6 +3,11 @@ export const CHECK = () => ({
   url: '/api/auth/check',
 });
 
+export const REFRESH = () => ({
+  method: 'get',
+  url: '/api/auth/refresh',
+});
+
 export const SIGNIN = (data) => ({
   method: 'post',
   url: '/api/auth/signin',

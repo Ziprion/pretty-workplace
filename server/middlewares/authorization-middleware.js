@@ -1,23 +1,20 @@
-import { API, NO_AUTHORIZATION_URL } from '../constants/index.js';
-import { verifyToken } from '../utils/index.js';
+import { verifyAccessToken } from '../utils/index.js';
 
-export const authorizationMiddleware = (req, res, next) => {
-  if (!(req.url.slice(0, 4) === API)) {
-    return next();
-  }
+const NO_AUTHORIZATION_URL = [ '/api/auth/signin', '/api/auth/signup', '/api/auth/signout', '/api/auth/refresh' ];
 
+export const authorizationMiddleware = async (req, res, next) => {
   if (NO_AUTHORIZATION_URL.includes(req.url)) {
     return next();
   }
 
-  const { cookies: { token } } = req;
+  const { cookies: { accessToken } } = req;
 
-  if (!token) {
+  if (!accessToken) {
     return res.status(401).send({ message: 'UnauthorizedError' });
   }
 
   try {
-    const { id, email } = verifyToken(token);
+    const { id, email } = verifyAccessToken(accessToken);
     req.userEmail = email;
     req.userId = id;
 

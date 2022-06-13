@@ -1,5 +1,10 @@
-import { DEFAULT_COOKIE_HEADERS, TOKEN_KEY } from '../constants/index.js';
+const DEFAULT_COOKIE_HEADERS = {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'Strict',
+};
 
-export const setTokenToCookie = (res, token, status = 200) => res
-  .cookie(TOKEN_KEY, token, DEFAULT_COOKIE_HEADERS)
+export const setTokensToCookie = (res, { accessToken, refreshToken }, status = 200) => res
+  .cookie('accessToken', accessToken, DEFAULT_COOKIE_HEADERS)
+  .cookie('refreshToken', refreshToken, DEFAULT_COOKIE_HEADERS)
   .sendStatus(status);

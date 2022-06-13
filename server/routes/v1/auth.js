@@ -3,42 +3,41 @@ import express from 'express';
 
 import {
   createUser,
-  getToken,
   getUser,
   setActiveWorkplace,
-  setToken,
 } from '../../db/index.js';
 import {
-  generateToken,
+  generateTokens,
   getDefaultAvatar,
-  setTokenToCookie,
+  setTokensToCookie,
+  verifyRefreshToken,
 } from '../../utils/index.js';
 
 export const authRouter = express.Router();
 
-authRouter.get('/check', async (req, res) => {
-  const { userEmail } = req;
+authRouter.get('/check', async (_, res) => res.sendStatus(200));
 
-  const user = await getUser(userEmail);
+authRouter.get('/refresh', async (req, res) => {
+  const { cookies: { refreshToken } } = req;
 
-  if (!user) {
+  if (!refreshToken) {
     return res.status(401).send({ message: 'UnauthorizedError' });
   }
 
-  return res.sendStatus(200);
-});
+  try {
+    const { id, email } = verifyRefreshToken(refreshToken);
+    const tokens = generateTokens(id, email);
 
-authRouter.get('/signout', async (req, res) => {
-  const { userEmail } = req;
-
-  const user = await getUser(userEmail);
-
-  if (!user) {
+    return setTokensToCookie(res, tokens);
+  } catch {
     return res.status(401).send({ message: 'UnauthorizedError' });
   }
-
-  return setTokenToCookie(res, null);
 });
+
+authRouter.get('/signout', async (_, res) => res
+  .clearCookie('refreshToken')
+  .clearCookie('accessToken')
+  .sendStatus(200));
 
 authRouter.post('/signin', async (req, res) => {
   const {
@@ -57,12 +56,12 @@ authRouter.post('/signin', async (req, res) => {
   const isCorrectPassword = await bcrypt.compare(password, user.password);
 
   if (!user || !isCorrectPassword) {
-    return res.status(401).send({ message: 'SigninError' });
+    return res.status(403).send({ message: 'SigninError' });
   }
 
-  const { token } = await getToken(user.id);
+  const tokens = generateTokens(user.id, email);
 
-  return setTokenToCookie(res, token);
+  return setTokensToCookie(res, tokens);
 });
 
 authRouter.post('/signup', async (req, res) => {
@@ -105,10 +104,10 @@ authRouter.post('/signup', async (req, res) => {
     avatarBackground,
     avatarUrl,
   });
-  const token = generateToken(id, email);
 
-  await setToken(id, token);
+  const tokens = generateTokens(user.id, email);
+
   await setActiveWorkplace(id);
 
-  return setTokenToCookie(res, token, 201);
+  return setTokensToCookie(res, tokens, 201);
 });
