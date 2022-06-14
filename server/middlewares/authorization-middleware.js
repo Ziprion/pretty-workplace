@@ -1,9 +1,8 @@
+import { API, NO_AUTHORIZATION_URL } from '../constants/index.js';
 import { verifyAccessToken } from '../utils/index.js';
 
-const NO_AUTHORIZATION_URL = [ '/api/auth/signin', '/api/auth/signup', '/api/auth/signout', '/api/auth/refresh', '/signin' ];
-
 export const authorizationMiddleware = async (req, res, next) => {
-  if (NO_AUTHORIZATION_URL.includes(req.url)) {
+  if (NO_AUTHORIZATION_URL.includes(req.url) || !(req.url).includes(API)) {
     return next();
   }
 

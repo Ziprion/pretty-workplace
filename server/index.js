@@ -4,9 +4,8 @@ import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { API_VERSION_1 } from './constants/index.js';
 import { apiVersionMiddleware, authorizationMiddleware } from './middlewares/index.js';
-import { routerV1 } from './routes/index.js';
+import { apiV1, routerV1 } from './routes/index.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,7 +23,7 @@ export const runServer = ({ isDev }) => {
     express.json(),
   );
 
-  app.use(API_VERSION_1, routerV1);
+  app.use(apiV1, routerV1);
 
   app.get('*', (_, res) => (isDev
     ? res.status(200).send('Server works')
