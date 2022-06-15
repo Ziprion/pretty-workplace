@@ -45,7 +45,7 @@ export const Board = ({
           >
             <Header {...provided.dragHandleProps} onClick={toggleExpand}>
               <Title>{title}</Title>
-              <ActionBar>
+              <ActionBar onClick={(e) => e.stopPropagation()}>
                 <AddItemConnector boardId={id} />
                 <BoardMenuConnector id={id} title={title} />
               </ActionBar>
