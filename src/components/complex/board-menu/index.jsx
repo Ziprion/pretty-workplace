@@ -13,7 +13,10 @@ const BoardMenuToggle = ({ onClick }) => (
 export const BoardMenu = ({ onDeleteCallback, onEditCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
   const closeDropdown = () => setShowDropdown(() => false);
-  const toggleDropdown = () => setShowDropdown((prev) => !prev);
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
+    setShowDropdown((prev) => !prev);
+  };
 
   const onEditClick = () => {
     closeDropdown();

@@ -11,7 +11,10 @@ export const AddItemConnector = ({ boardId }) => {
   const dispatch = useDispatch();
 
   const [ isShowModal, setShowModal ] = useState(false);
-  const openModal = () => setShowModal(true);
+  const openModal = (e) => {
+    e.stopPropagation();
+    setShowModal(true);
+  };
   const closeModal = () => setShowModal(false);
 
   const [ requestError, setRequestError ] = useState(null);
