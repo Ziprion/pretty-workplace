@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; /* eslint react/no-array-index-key: 0, no-unused-vars: 0 */
+import React from 'react'; /* eslint react/no-array-index-key: 0, no-unused-vars: 0 */
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { Board } from '@components';
@@ -12,9 +12,6 @@ export const Workplace = ({
 }) => {
   const { columnCount } = useColumnCount();
   const { boards, onDragEnd } = useBoardDnd(boardsByPosition, columnCount, onBoardsPositionChange);
-  const [ isReady, setReady ] = useState(false);
-
-  useEffect(() => setTimeout(() => setReady(true), 20), []);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -45,7 +42,7 @@ export const Workplace = ({
             </Droppable>
           ))}
         </Boards>
-        {isReady && activeWorkplaceId && boards && <AddBoardConnector activeWorkplaceId={activeWorkplaceId} />}
+        {activeWorkplaceId && boards && <AddBoardConnector activeWorkplaceId={activeWorkplaceId} />}
       </Wrapper>
     </DragDropContext>
   );

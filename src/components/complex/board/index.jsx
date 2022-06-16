@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'; /* eslint no-unused-vars: 0 */
+import React, { useCallback, useEffect, useState } from 'react'; /* eslint no-unused-vars: 0 */
 import { Draggable } from 'react-beautiful-dnd';
 
 import { Item } from '@components';
 import { AddItemConnector, BoardMenuConnector } from '@connectors';
+import { getStorageItem, setStorageItem } from '@utils';
 
 import {
   ActionBar, Body, Header, Title, Wrapper,
@@ -11,57 +12,59 @@ import {
 export const Board = ({
   id, title, items = [], index,
 }) => {
-  const [ isRendered, setRendered ] = useState(false);
-  const [ isExpanded, setExpanded ] = useState(false);
-  const [ isOverflow, setOverflow ] = useState(false);
+  const [ isExpanded, setExpanded ] = useState(getStorageItem(id) === 'true');
+  const [ isOverflow, setOverflow ] = useState(getStorageItem(id) !== 'true');
 
-  const toggleExpand = () => setExpanded((prev) => !prev);
+  const toggleExpand = useCallback(() => {
+    setExpanded((prev) => !prev);
+
+    const currentValue = getStorageItem(id) === 'true';
+    setStorageItem(id, !currentValue);
+  }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line functional/no-let
+    let timer;
+
     if (isExpanded) {
-      setTimeout(() => setOverflow((prev) => !prev), isExpanded ? 200 : 0);
+      timer = setTimeout(() => setOverflow(false), 200);
     } else {
-      setOverflow((prev) => !prev);
+      clearTimeout(timer);
+      setOverflow(true);
     }
 
-    if (!isRendered) {
-      setRendered(true);
-    }
+    return () => clearTimeout(timer);
   }, [ isExpanded ]);
 
   return (
-    <>
-      {isRendered && (
-      <Draggable
-        key={id}
-        draggableId={String(id)}
-        index={Number(index)}
-      >
-        {(provided, snapshot) => (
-          <Wrapper
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.draggableProps.style}
+    <Draggable
+      key={id}
+      draggableId={String(id)}
+      index={Number(index)}
+    >
+      {(provided, snapshot) => (
+        <Wrapper
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.draggableProps.style}
+        >
+          <Header {...provided.dragHandleProps} onClick={toggleExpand}>
+            <Title>{title}</Title>
+            <ActionBar onClick={(e) => e.stopPropagation()}>
+              <AddItemConnector boardId={id} />
+              <BoardMenuConnector id={id} title={title} />
+            </ActionBar>
+          </Header>
+          <Body
+            isExpanded={isExpanded}
+            isOverflow={isOverflow}
+            itemCount={items.length}
           >
-            <Header {...provided.dragHandleProps} onClick={toggleExpand}>
-              <Title>{title}</Title>
-              <ActionBar onClick={(e) => e.stopPropagation()}>
-                <AddItemConnector boardId={id} />
-                <BoardMenuConnector id={id} title={title} />
-              </ActionBar>
-            </Header>
-            <Body
-              isExpanded={isExpanded}
-              isOverflow={isOverflow}
-              itemCount={items.length}
-            >
-              {items.map((item) => <Item key={item.id} {...item} />)}
-            </Body>
-            {provided.placeholder}
-          </Wrapper>
-        )}
-      </Draggable>
+            {items.map((item) => <Item key={item.id} {...item} />)}
+          </Body>
+          {provided.placeholder}
+        </Wrapper>
       )}
-    </>
+    </Draggable>
   );
 };
