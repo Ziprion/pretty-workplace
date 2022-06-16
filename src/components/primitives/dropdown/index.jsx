@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 
 import { useOutsideClick } from '@hooks';
 
@@ -10,12 +12,19 @@ export const Dropdown = ({
   const dropdownWrapper = useRef(null);
   const [ direction, setDirection ] = useState('right');
 
+  const setDropdownDirection = useCallback(() => {
+    const { right } = dropdownWrapper?.current.getBoundingClientRect();
+    setDirection(() => (right + 170 > window.innerWidth ? 'left' : 'right'));
+  }, []);
+
   useOutsideClick(dropdownWrapper, close);
 
   useEffect(() => {
-    const { right } = dropdownWrapper?.current.getBoundingClientRect();
+    setDropdownDirection();
 
-    setDirection(() => (right + 170 > window.innerWidth ? 'left' : 'right'));
+    window.addEventListener('resize', setDropdownDirection);
+
+    return () => window.removeEventListener('resize', setDropdownDirection);
   }, []);
 
   return (
