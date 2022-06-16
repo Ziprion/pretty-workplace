@@ -91,7 +91,7 @@ workplacesRouter.get('/active', async (req, res) => {
   });
 });
 
-workplacesRouter.put('/active/boardsPosition', async (req, res) => {
+workplacesRouter.patch('/active/boardsPosition', async (req, res) => {
   const {
     userId,
     body: {
@@ -118,7 +118,7 @@ workplacesRouter.put('/active/boardsPosition', async (req, res) => {
   return res.sendStatus(200);
 });
 
-workplacesRouter.put('/active/change', async (req, res) => {
+workplacesRouter.patch('/active/change', async (req, res) => {
   const {
     userId,
     body: {
@@ -148,7 +148,7 @@ workplacesRouter.put('/active/change', async (req, res) => {
   });
 });
 
-workplacesRouter.put('/active', async (req, res) => {
+workplacesRouter.patch('/active', async (req, res) => {
   const {
     userId,
     body: {

@@ -15,7 +15,7 @@ export const ACTIVE = () => ({
 });
 
 export const EDIT = (data) => ({
-  method: 'put',
+  method: 'patch',
   url: '/api/workplaces/active',
   data,
 });
@@ -26,13 +26,13 @@ export const DELETE = () => ({
 });
 
 export const CHANGE_ACTIVE = (data) => ({
-  method: 'put',
+  method: 'patch',
   url: '/api/workplaces/active/change',
   data,
 });
 
 export const CHANGE_BOARDS_POSITION = (data) => ({
-  method: 'put',
+  method: 'patch',
   url: '/api/workplaces/active/boardsPosition',
   data,
 });

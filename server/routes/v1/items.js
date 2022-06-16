@@ -72,7 +72,7 @@ itemsRouter.post('', async (req, res) => {
   });
 });
 
-itemsRouter.put('/:id', async (req, res) => {
+itemsRouter.patch('/:id', async (req, res) => {
   const {
     userId,
     params: {

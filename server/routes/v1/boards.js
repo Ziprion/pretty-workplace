@@ -55,7 +55,7 @@ boardsRouter.post('', async (req, res) => {
   });
 });
 
-boardsRouter.put('/:id', async (req, res) => {
+boardsRouter.patch('/:id', async (req, res) => {
   const {
     userId,
     params: {

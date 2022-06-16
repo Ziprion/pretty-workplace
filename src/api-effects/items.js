@@ -5,7 +5,7 @@ export const ADD = (data) => ({
 });
 
 export const EDIT = ({ id, ...data }) => ({
-  method: 'put',
+  method: 'patch',
   url: `/api/items/${id}`,
   data,
 });
