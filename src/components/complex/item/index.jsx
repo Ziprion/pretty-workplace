@@ -1,8 +1,12 @@
 import React from 'react';
+import ReactImageFallback from 'react-image-fallback';
 
 import { ItemMenuConnector } from '@connectors';
+import { getUrlIcon } from '@utils';
 
-import { Link, Menu, Wrapper } from './parts';
+import {
+  Icon, Link, Menu, Wrapper,
+} from './parts';
 
 export const Item = ({
   id, title, url, boardId,
@@ -14,6 +18,13 @@ export const Item = ({
       rel="noopener noreferrer"
       target="_blank"
     >
+      <Icon>
+        <ReactImageFallback
+          alt="icon"
+          fallbackImage="/images/icons/fallback-icon.png"
+          src={getUrlIcon(url)}
+        />
+      </Icon>
       {title}
     </Link>
     <Menu>

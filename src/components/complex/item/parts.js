@@ -11,7 +11,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Link = styled.a`
-  display: block;
+  display: flex;
+  gap: ${({ theme }) => theme.offset(1)};
+  align-items: center;
   width: 100%;
   padding: ${({ theme }) => `${theme.offset(1.5)} ${theme.offset(2)}`};
 `;
@@ -23,4 +25,17 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
+`;
+
+export const Icon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
