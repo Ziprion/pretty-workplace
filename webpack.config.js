@@ -60,7 +60,7 @@ export default {
     new HtmlWebpackPlugin({
       title: 'Pretty Workplace',
       template: path.join(dirname, 'src/template/index.pug'),
-      favicon: './assets/images/icons/favicon.png',
+      favicon: './assets/images/icons/favicon.ico',
     }),
     new CopyWebpackPlugin({
       patterns: [
