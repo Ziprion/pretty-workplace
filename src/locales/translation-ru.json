@@ -60,5 +60,7 @@
   "workplaceTitleLabel": "Название",
   "workplaceTitlePlaceholder": "Введите название рабочего места",
   "editWorkplaceButtonText": "Редактировать рабочее место",
-  "deleteWorkplaceButtonText": "Удалить рабочее место"
+  "deleteWorkplaceButtonText": "Удалить рабочее место",
+
+  "addWorkplaceMessageText": "Добавьте, пожалуйста, рабочее место"
 }

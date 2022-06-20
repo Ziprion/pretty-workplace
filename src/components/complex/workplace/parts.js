@@ -24,3 +24,8 @@ export const BoardPlateWrapper = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
+export const Message = styled.p`
+  display: flex;
+  align-items: center;
+`;

@@ -4,19 +4,23 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Board } from '@components';
 import { AddBoardConnector } from '@connectors';
 import { useBoardDnd, useColumnCount } from '@hooks';
+import { l } from '@utils';
 
-import { BoardColumn, Boards, Wrapper } from './parts';
+import {
+  BoardColumn, Boards, Message, Wrapper,
+} from './parts';
 
 export const Workplace = ({
   activeWorkplaceId, boardsByPosition, itemsByBoardId, onBoardsPositionChange,
 }) => {
   const { columnCount } = useColumnCount();
   const { boards, onDragEnd } = useBoardDnd(boardsByPosition, columnCount, onBoardsPositionChange);
+  const notFoundWorkplaceMessage = l('addWorkplaceMessageText');
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
-        {!activeWorkplaceId && <div>You don not have active workplace. Please create new</div>}
+        {!activeWorkplaceId && <Message>{notFoundWorkplaceMessage}</Message>}
         {activeWorkplaceId && !boardsByPosition.length && <div>You do not have boards</div>}
         <Boards>
           {[ ...Array(columnCount) ].map((_, columnIndex) => (

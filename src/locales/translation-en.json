@@ -60,5 +60,7 @@
   "workplaceTitleLabel": "Title",
   "workplaceTitlePlaceholder": "Enter workplace's title",
   "editWorkplaceButtonText": "Edit workplace",
-  "deleteWorkplaceButtonText": "Delete workplace"
+  "deleteWorkplaceButtonText": "Delete workplace",
+  
+  "addWorkplaceMessageText": "Please add a workplace"
 }
