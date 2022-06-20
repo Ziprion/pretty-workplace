@@ -14,7 +14,7 @@ export const Dropdown = ({
 
   const setDropdownDirection = useCallback(() => {
     const { right } = dropdownWrapper?.current.getBoundingClientRect();
-    setDirection(() => (right + 170 > window.innerWidth ? 'left' : 'right'));
+    setDirection(() => (right + 210 > window.innerWidth ? 'left' : 'right'));
   }, []);
 
   useOutsideClick(dropdownWrapper, close);

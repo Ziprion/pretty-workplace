@@ -7,11 +7,11 @@ export const WORKPLACE_FORM_FIELD_NAME = {
 };
 
 const WORKPLACE_FORM_FIELD_LABEL = {
-  TITLE: 'workplace title',
+  TITLE: 'workplaceTitleLabel',
 };
 
 const WORKPLACE_FORM_FIELD_PLACEHOLDER = {
-  TITLE: 'Enter workplace title',
+  TITLE: 'workplaceTitlePlaceholder',
 };
 
 export const WORKPLACE_FORM_FIELDS = [

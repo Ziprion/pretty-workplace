@@ -6,6 +6,7 @@ import {
   ConfirmModal, Modal, WorkplaceForm, WorkplaceMenu,
 } from '@components';
 import { deleteWorkplace, editWorkplace, setActiveWorkplace } from '@redux-store';
+import { l } from '@utils';
 
 export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId }) => {
   const dispatch = useDispatch();
@@ -75,14 +76,14 @@ export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}
         requestError={deletingError}
-        title={`Are you sure to delete workplace ${activeWorkplaceTitle}?`}
+        title={`${l('deleteWorkplaceModalTitle')} ${activeWorkplaceTitle}?`}
         onCancel={closeDeleteModal}
         onOk={onDeleteConfirm}
       />
       <Modal
         isDisabled={editingLoading}
         isShow={isShowEditModal}
-        title="Rename workplace"
+        title={l('editWorkplaceModalTitle')}
         onCancel={closeEditModal}
       >
         <WorkplaceForm

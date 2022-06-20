@@ -5,6 +5,7 @@ import { Form, Input } from '@components';
 import {
   FORM_EMPTY_FIELD, WORKPLACE_FORM_FIELD_NAME, WORKPLACE_FORM_FIELDS, WORKPLACE_FORM_VALIDATION_SCHEMA,
 } from '@constants';
+import { l } from '@utils';
 
 export const WorkplaceForm = ({
   requestError,
@@ -13,8 +14,8 @@ export const WorkplaceForm = ({
   onCancel,
   isLoading,
   initialTitle = FORM_EMPTY_FIELD,
-  onOkText = 'ok',
-  onCancelText = 'cancel',
+  onOkText = 'okModalButtonText',
+  onCancelText = 'cancelModalButtonText',
 }) => {
   const {
     resetForm, handleSubmit, handleChange, errors, touched, values, isSubmitting,
@@ -46,14 +47,14 @@ export const WorkplaceForm = ({
         name, type, label, placeholder,
       }, index) => (
         <Form.Item key={name}>
-          <Form.Label htmlFor={name}>{label}</Form.Label>
+          <Form.Label htmlFor={name}>{l(label)}</Form.Label>
           <Input
             autoFocus={index === 0}
             disabled={isDisabled}
             id={name}
             isInvalid={errors[name] && touched[name]}
             name={name}
-            placeholder={placeholder}
+            placeholder={l(placeholder)}
             type={type}
             value={values[name]}
             width="100%"
@@ -70,10 +71,10 @@ export const WorkplaceForm = ({
           isSecondary
           onClick={onCancel}
         >
-          {onCancelText}
+          {l(onCancelText)}
         </Form.Button>
         <Form.Button disabled={isDisabled || isSameTitle} type="submit">
-          {onOkText}
+          {l(onOkText)}
         </Form.Button>
       </Form.ButtonGroup>
     </Form.Wrapper>

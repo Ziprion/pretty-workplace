@@ -7,11 +7,11 @@ export const BOARD_FORM_NAME = {
 };
 
 const BOARD_FORM_LABEL = {
-  TITLE: 'boardTitle',
+  TITLE: 'boardTitleLabel',
 };
 
 const BOARD_FORM_PLACEHOLDER = {
-  TITLE: 'Enter board title',
+  TITLE: 'boardTitlePlaceholder',
 };
 
 export const BOARD_FORM_FIELDS = [

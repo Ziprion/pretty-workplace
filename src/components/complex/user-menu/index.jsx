@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   Avatar, Dropdown, LogoutIcon, VerticalMenu,
 } from '@components';
+import { l } from '@utils';
 
 import { AvatarButton } from './parts';
 
@@ -31,7 +32,7 @@ export const UserMenu = ({ user, onLogoutCallback }) => {
       <VerticalMenu.Wrapper>
         <VerticalMenu.Item onClick={onLogoutClick}>
           <LogoutIcon />
-          logout
+          {l('logoutButtonText')}
         </VerticalMenu.Item>
       </VerticalMenu.Wrapper>
     </Dropdown>

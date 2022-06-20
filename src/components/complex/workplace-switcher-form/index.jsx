@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import {
   ArrowDownIcon, Form, Option, Select, SelectIcon,
 } from '@components';
+import { l } from '@utils';
 
 export const WorkplaceSwitcherForm = ({
   requestError,
@@ -41,7 +42,7 @@ export const WorkplaceSwitcherForm = ({
   return (
     <Form.Wrapper onSubmit={handleSubmit}>
       <Form.Item>
-        <Form.Label htmlFor={name}>select workplace</Form.Label>
+        <Form.Label htmlFor={name}>{l('selectWorkplaceLabel')}</Form.Label>
         <Select
           disabled={isDisabled}
           id={name}
@@ -67,10 +68,10 @@ export const WorkplaceSwitcherForm = ({
           isSecondary
           onClick={onCancel}
         >
-          cancel
+          {l('cancelModalButtonText')}
         </Form.Button>
         <Form.Button disabled={isDisabled || isSameId} type="submit">
-          change
+          {l('okModalButtonText')}
         </Form.Button>
       </Form.ButtonGroup>
     </Form.Wrapper>

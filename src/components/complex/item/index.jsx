@@ -20,7 +20,7 @@ export const Item = ({
     >
       <Icon>
         <ReactImageFallback
-          alt="icon"
+          alt={title}
           fallbackImage="/images/icons/fallback-icon.png"
           src={getUrlIcon(url)}
         />

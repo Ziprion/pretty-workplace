@@ -13,7 +13,6 @@ const Wrapper = styled.form`
 const Label = styled.label`
   display: block;
   margin: ${({ theme }) => `${theme.offset(1)} 0`};
-  text-transform: capitalize;
 `;
 
 const Feedback = styled.div`

@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 
 import { Form, Input } from '@components';
+import { l } from '@utils';
 
 export const LoginForm = ({
   clearRequestError,
@@ -11,7 +12,9 @@ export const LoginForm = ({
   initialValues,
   fields,
   isLoading,
-  additional: { title, linkTo, linkText },
+  additional: {
+    additionalMessage, linkTo, linkText, submitText,
+  },
 }) => {
   const {
     resetForm, handleChange, handleSubmit, errors, values, touched, isSubmitting,
@@ -40,14 +43,14 @@ export const LoginForm = ({
         name, type, label, placeholder,
       }, index) => (
         <Form.Item key={name}>
-          <Form.Label htmlFor={name}>{label}</Form.Label>
+          <Form.Label htmlFor={name}>{l(label)}</Form.Label>
           <Input
             autoFocus={index === 0}
             disabled={isDisabled}
             id={name}
             isInvalid={errors[name] && touched[name]}
             name={name}
-            placeholder={placeholder}
+            placeholder={l(placeholder)}
             type={type}
             value={values[name]}
             width="100%"
@@ -63,11 +66,11 @@ export const LoginForm = ({
         type="submit"
         width="100%"
       >
-        Submit
+        {l(submitText)}
       </Form.Button>
       <Form.Additional>
-        {title}
-        <Form.Link to={linkTo} onClick={onLinkClick}>{linkText}</Form.Link>
+        {`${l(additionalMessage)} `}
+        <Form.Link to={linkTo} onClick={onLinkClick}>{l(linkText)}</Form.Link>
       </Form.Additional>
     </Form.Wrapper>
   );

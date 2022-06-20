@@ -6,6 +6,7 @@ import {
   AddBoardButton, AddIcon, BoardForm, Modal,
 } from '@components';
 import { addBoard } from '@redux-store';
+import { l } from '@utils';
 
 export const AddBoardConnector = ({ activeWorkplaceId }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ export const AddBoardConnector = ({ activeWorkplaceId }) => {
       <Modal
         isDisabled={loading}
         isShow={isShowModal}
-        title="Add new board"
+        title={l('addBoardModalTitle')}
         onCancel={closeModal}
       >
         <BoardForm
@@ -56,7 +57,7 @@ export const AddBoardConnector = ({ activeWorkplaceId }) => {
           requestError={requestError}
           onCancel={closeModal}
           onOk={onAddConfirm}
-          onOkText="add"
+          onOkText="addModalButtonText"
         />
       </Modal>
     </>

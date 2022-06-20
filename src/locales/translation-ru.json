@@ -1,3 +1,64 @@
 {
-  "greeting": "Привет"
+  "signupWelcomeText": "Создайте новый аккаунт, чтобы продолжить",
+  "signupAdditionalText": "Есть аккаунт?",
+  "signupLinkText": "Войти",
+  "signupSubmitText": "Зарегистрироваться",
+  "signinWelcomeText": "Войдите в аккаунт, чтобы продолжить",
+  "signinAdditionalText": "Нет аккаунт?",
+  "signinLinkText": "Зарегистрироваться",
+  "signinSubmitText": "Войти",
+
+  "emailLabel": "Почта",
+  "emailPlaceholder": "Введите почту",
+  "firstNameLabel": "Имя",
+  "firstNamePlaceholder": "Введите имя",
+  "lastNameLabel": "Фамилия",
+  "lastNamePlaceholder": "Введите фамилию",
+  "passwordLabel": "Пароль",
+  "passwordPlaceholder": "Введите пароль",
+  "confirmPasswordLabel": "Подтвердите пароль",
+  "confirmPasswordPlaceholder": "Введите пароль еще раз",
+
+  "addBoardModalTitle": "Добавить новую группу",
+  "editBoardModalTitle": "Редактировать группу",
+  "deleteBoardModalTitle": "Удалить группу",
+  "deleteBoardButtonText": "Удалить группу",
+  "editBoardButtonText": "Редактировать группу",
+  "boardTitleLabel": "Название",
+  "boardTitlePlaceholder": "Введите название группы",
+
+  "addItemModalTitle": "Добавить новую закладку",
+  "editItemModalTitle": "Редактировать закладку",
+  "deleteItemModalTitle": "Удалить закладку",
+  "editItemButtonText": "Редактировать закладку",
+  "deleteItemButtonText": "Удалить закладку",
+  "itemTitleLabel": "Название",
+  "itemTitlePlaceholder": "Введите название закладки",
+  "urlTitleLabel": "Ссылка",
+  "urlTitlePlaceholder": "Введите ссылку",
+
+  "okModalButtonText": "Применить",
+  "addModalButtonText": "Добавить",
+  "cancelModalButtonText": "Отмена",
+  "okConfirmModalButtonText": "Да",
+  "cancelConfirmModalButtonText": "Нет",
+
+  "aboutFooterText": "О Нас",
+  "supportFooterText": "Поддержка",
+  
+  
+  "logoutModalTitle": "Вы уверены, что хотите выйти?",
+  "logoutButtonText": "Выйти",
+
+  "switchWorkplaceButtonText": "Сменить",
+  "switchWorkplaceModalTitle": "Сменить рабочее место",
+  "selectWorkplaceLabel": "Выберите рабочее место",
+  "addWorkplaceModalTitle": "Добавить рабочее место",
+  "editWorkplaceModalTitle": "Редактировать рабочее место",
+  "deleteWorkplaceModalTitle": "Удалить рабочее место",
+  "addWorkplaceButtonText": "Добавить",
+  "workplaceTitleLabel": "Название",
+  "workplaceTitlePlaceholder": "Введите название рабочего места",
+  "editWorkplaceButtonText": "Редактировать рабочее место",
+  "deleteWorkplaceButtonText": "Удалить рабочее место"
 }

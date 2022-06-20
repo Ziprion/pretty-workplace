@@ -5,6 +5,7 @@ import { Form, Input } from '@components';
 import {
   FORM_EMPTY_FIELD, ITEM_FORM_FIELDS, ITEM_FORM_NAME, ITEM_FORM_VALIDATION_SCHEMA,
 } from '@constants';
+import { l } from '@utils';
 
 export const ItemForm = ({
   requestError,
@@ -14,8 +15,8 @@ export const ItemForm = ({
   isLoading,
   initialTitle = FORM_EMPTY_FIELD,
   initialUrl = FORM_EMPTY_FIELD,
-  onOkText = 'ok',
-  onCancelText = 'cancel',
+  onOkText = 'okModalButtonText',
+  onCancelText = 'cancelModalButtonText',
 }) => {
   const {
     resetForm, touched, errors, values, isSubmitting, handleSubmit, handleChange,
@@ -48,14 +49,14 @@ export const ItemForm = ({
         name, type, label, placeholder,
       }, index) => (
         <Form.Item key={name}>
-          <Form.Label htmlFor={name}>{label}</Form.Label>
+          <Form.Label htmlFor={name}>{l(label)}</Form.Label>
           <Input
             autoFocus={index === 0}
             disabled={isDisabled}
             id={name}
             isInvalid={errors[name] && touched[name]}
             name={name}
-            placeholder={placeholder}
+            placeholder={l(placeholder)}
             type={type}
             value={values[name]}
             width="100%"
@@ -72,10 +73,10 @@ export const ItemForm = ({
           isSecondary
           onClick={onCancel}
         >
-          {onCancelText}
+          {l(onCancelText)}
         </Form.Button>
         <Form.Button disabled={isDisabled || isSameTitle} type="submit">
-          {onOkText}
+          {l(onOkText)}
         </Form.Button>
       </Form.ButtonGroup>
     </Form.Wrapper>

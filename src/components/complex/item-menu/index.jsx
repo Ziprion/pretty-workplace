@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   DeleteIcon, Dropdown, EditIcon, GhostButton, HorizontalDotsIcon, VerticalMenu,
 } from '@components';
+import { l } from '@utils';
 
 const ItemMenuToggle = ({ onClick }) => (
   <GhostButton
@@ -42,11 +43,11 @@ export const ItemMenu = ({ onDeleteCallback, onEditCallback }) => {
       <VerticalMenu.Wrapper>
         <VerticalMenu.Item onClick={onEditClick}>
           <EditIcon />
-          edit
+          {l('editItemButtonText')}
         </VerticalMenu.Item>
         <VerticalMenu.Item onClick={onDeleteClick}>
           <DeleteIcon />
-          delete
+          {l('deleteItemButtonText')}
         </VerticalMenu.Item>
       </VerticalMenu.Wrapper>
     </Dropdown>

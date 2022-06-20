@@ -6,6 +6,7 @@ import {
   ConfirmModal, ItemForm, ItemMenu, Modal,
 } from '@components';
 import { deleteItem, editItem } from '@redux-store';
+import { l } from '@utils';
 
 export const ItemMenuConnector = ({
   title, id, url, boardId,
@@ -80,14 +81,14 @@ export const ItemMenuConnector = ({
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}
         requestError={deletingError}
-        title={`Are you sure to delete item ${title}?`}
+        title={`${l('deleteItemModalTitle')} ${title}?`}
         onCancel={closeDeleteModal}
         onOk={onDeleteConfirm}
       />
       <Modal
         isDisabled={editingLoading}
         isShow={isShowEditModal}
-        title="Rename item"
+        title={l('editItemModalTitle')}
         onCancel={closeEditModal}
       >
         <ItemForm

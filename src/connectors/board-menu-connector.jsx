@@ -6,6 +6,7 @@ import {
   BoardForm, BoardMenu, ConfirmModal, Modal,
 } from '@components';
 import { deleteBoard, editBoard } from '@redux-store';
+import { l } from '@utils';
 
 export const BoardMenuConnector = ({ title, id }) => {
   const dispatch = useDispatch();
@@ -77,14 +78,14 @@ export const BoardMenuConnector = ({ title, id }) => {
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}
         requestError={deletingError}
-        title={`Are you sure to delete board ${title}?`}
+        title={`${l('deleteBoardModalTitle')} ${title}?`}
         onCancel={closeDeleteModal}
         onOk={onDeleteConfirm}
       />
       <Modal
         isDisabled={editingLoading}
         isShow={isShowEditModal}
-        title="Rename board"
+        title={l('editBoardModalTitle')}
         onCancel={closeEditModal}
       >
         <BoardForm

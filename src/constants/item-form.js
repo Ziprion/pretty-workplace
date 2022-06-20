@@ -8,13 +8,13 @@ export const ITEM_FORM_NAME = {
 };
 
 const ITEM_FORM_LABEL = {
-  TITLE: 'title',
-  URL: 'url',
+  TITLE: 'itemTitleLabel',
+  URL: 'urlTitleLabel',
 };
 
 const ITEM_FORM_PLACEHOLDER = {
-  TITLE: 'Enter title',
-  URL: 'Enter url',
+  TITLE: 'itemTitlePlaceholder',
+  URL: 'urlTitlePlaceholder',
 };
 
 export const ITEM_FORM_FIELDS = [

@@ -5,6 +5,7 @@ import { API_EFFECTS, STATUSES, useApiEffect } from '@api-effects';
 import { ConfirmModal, UserMenu } from '@components';
 import { useAuth } from '@hooks';
 import { cleanup } from '@redux-store';
+import { l } from '@utils';
 
 export const UserMenuConnector = (props) => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export const UserMenuConnector = (props) => {
         isDisabled={loading}
         isShow={isShowLogoutModal}
         requestError={error}
-        title="Are you sure to logout?"
+        title={l('logoutModalTitle')}
         onCancel={closeLogoutModal}
         onOk={onLogoutConfirm}
       />

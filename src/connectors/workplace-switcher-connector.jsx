@@ -6,6 +6,7 @@ import {
   Button, Modal, SwitchIcon, WorkplaceSwitcherForm,
 } from '@components';
 import { setActiveWorkplace } from '@redux-store';
+import { l } from '@utils';
 
 export const WorkplaceSwitcherConnector = (props) => {
   const dispatch = useDispatch();
@@ -44,12 +45,12 @@ export const WorkplaceSwitcherConnector = (props) => {
         onClick={openModal}
       >
         <SwitchIcon />
-        switch
+        {l('switchWorkplaceButtonText')}
       </Button>
       <Modal
         isDisabled={loading}
         isShow={isShowModal}
-        title="Change active workplace"
+        title={l('switchWorkplaceModalTitle')}
         onCancel={closeModal}
       >
         <WorkplaceSwitcherForm

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { l } from '@utils';
+
 import { Button } from '../button';
 import { WarningIcon } from '../icons';
 import { Modal } from '../modal';
@@ -14,8 +16,8 @@ export const ConfirmModal = ({
   onCancel,
   isDisabled,
   requestError,
-  cancelText = 'cancel',
-  okText = 'ok',
+  cancelText = 'cancelConfirmModalButtonText',
+  okText = 'okConfirmModalButtonText',
 }) => (
   <Modal
     isDisabled={isDisabled}
@@ -34,14 +36,14 @@ export const ConfirmModal = ({
         isSecondary
         onClick={onCancel}
       >
-        {cancelText}
+        {l(cancelText)}
       </Button>
       <Button
         disabled={isDisabled}
         type="button"
         onClick={onOk}
       >
-        {okText}
+        {l(okText)}
       </Button>
     </ButtonGroup>
   </Modal>

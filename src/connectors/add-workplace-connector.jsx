@@ -6,6 +6,7 @@ import {
   AddIcon, Button, Modal, WorkplaceForm,
 } from '@components';
 import { addWorkplace, setActiveWorkplace } from '@redux-store';
+import { l } from '@utils';
 
 export const AddWorkplaceConnector = () => {
   const dispatch = useDispatch();
@@ -39,12 +40,12 @@ export const AddWorkplaceConnector = () => {
     <>
       <Button textSize="medium" onClick={openModal}>
         <AddIcon />
-        new
+        {l('addWorkplaceButtonText')}
       </Button>
       <Modal
         isDisabled={loading}
         isShow={isShowModal}
-        title="Create new workplace"
+        title={l('addWorkplaceModalTitle')}
         onCancel={closeModal}
       >
         <WorkplaceForm
@@ -53,7 +54,7 @@ export const AddWorkplaceConnector = () => {
           requestError={requestError}
           onCancel={closeModal}
           onOk={run}
-          onOkText="add"
+          onOkText="addModalButtonText"
         />
       </Modal>
     </>

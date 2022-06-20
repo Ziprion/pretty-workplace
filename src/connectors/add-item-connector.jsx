@@ -6,6 +6,7 @@ import {
   AddIcon, GhostButton, ItemForm, Modal,
 } from '@components';
 import { addItem } from '@redux-store';
+import { l } from '@utils';
 
 export const AddItemConnector = ({ boardId }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ export const AddItemConnector = ({ boardId }) => {
       <Modal
         isDisabled={loading}
         isShow={isShowModal}
-        title="Add new item"
+        title={l('addItemModalTitle')}
         onCancel={closeModal}
       >
         <ItemForm
@@ -56,7 +57,7 @@ export const AddItemConnector = ({ boardId }) => {
           requestError={requestError}
           onCancel={closeModal}
           onOk={onAddConfirm}
-          onOkText="add"
+          onOkText="addModalButtonText"
         />
       </Modal>
     </>

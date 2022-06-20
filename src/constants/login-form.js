@@ -17,19 +17,19 @@ const FIELD_NAME = {
 };
 
 const FIELD_LABEL = {
-  EMAIL: 'email',
-  FIRST_NAME: 'firstName',
-  LAST_NAME: 'lastName',
-  PASSWORD: 'password',
-  CONFIRM: 'confirm',
+  EMAIL: 'emailLabel',
+  FIRST_NAME: 'firstNameLabel',
+  LAST_NAME: 'lastNameLabel',
+  PASSWORD: 'passwordLabel',
+  CONFIRM: 'confirmPasswordLabel',
 };
 
 const FIELD_PLACEHOLDER = {
-  EMAIL: 'Enter your email',
-  FIRST_NAME: 'Enter your firstName',
-  LAST_NAME: 'Enter your lastName',
-  PASSWORD: 'Enter your password',
-  CONFIRM: 'Enter your confirm',
+  EMAIL: 'emailPlaceholder',
+  FIRST_NAME: 'firstNamePlaceholder',
+  LAST_NAME: 'lastNamePlaceholder',
+  PASSWORD: 'passwordPlaceholder',
+  CONFIRM: 'confirmPasswordPlaceholder',
 };
 
 export const INITIAL_VALUES = {
@@ -111,16 +111,18 @@ export const VALIDATION_SCHEMA = {
 
 export const LOGIN_FORM_ADDITIONAL = {
   [SIGNUP]: {
-    mainTitle: 'Create your account to continue',
-    title: 'Do you have account? ',
-    linkText: 'Login',
+    welcomeMessage: 'signupWelcomeText',
+    additionalMessage: 'signupAdditionalText',
+    linkText: 'signupLinkText',
+    submitText: 'signupSubmitText',
     linkTo: ROUTES.SIGNIN,
     apiEffect: API_EFFECTS.AUTH.SIGNUP,
   },
   [SIGNIN]: {
-    mainTitle: 'Login to your account to continue',
-    title: 'Do you have not account? ',
-    linkText: 'Create',
+    welcomeMessage: 'signinWelcomeText',
+    additionalMessage: 'signinAdditionalText',
+    linkText: 'signinLinkText',
+    submitText: 'signinSubmitText',
     linkTo: ROUTES.SIGNUP,
     apiEffect: API_EFFECTS.AUTH.SIGNIN,
   },
