@@ -1,3 +1,64 @@
 {
-  "greeting": "Hello"
+  "signupWelcomeText": "Sign up to continue",
+  "signupAdditionalText": "Already have an account?",
+  "signupLinkText": "Sign in",
+  "signupSubmitText": "Sign up",
+  "signinWelcomeText": "Sign in to continue",
+  "signinAdditionalText": "Do not have an account?",
+  "signinLinkText": "Create an account",
+  "signinSubmitText": "Sign in",
+
+  "emailLabel": "Email",
+  "emailPlaceholder": "Enter your email",
+  "firstNameLabel": "Name",
+  "firstNamePlaceholder": "Enter your name",
+  "lastNameLabel": "Surname",
+  "lastNamePlaceholder": "Enter your surname",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "Enter your password",
+  "confirmPasswordLabel": "Confirm password",
+  "confirmPasswordPlaceholder": "Enter your password again",
+
+  "addBoardModalTitle": "Add board",
+  "editBoardModalTitle": "Edit board",
+  "deleteBoardModalTitle": "Delete board",
+  "deleteBoardButtonText": "Delete board",
+  "editBoardButtonText": "Edit board",
+  "boardTitleLabel": "Title",
+  "boardTitlePlaceholder": "Enter board's title",
+
+  "addItemModalTitle": "Add bookmark",
+  "editItemModalTitle": "Edit bookmark",
+  "deleteItemModalTitle": "Delete bookmark",
+  "editItemButtonText": "Edit bookmark",
+  "deleteItemButtonText": "Delete bookmark",
+  "itemTitleLabel": "Title",
+  "itemTitlePlaceholder": "Enter bookmark's title",
+  "urlTitleLabel": "Url",
+  "urlTitlePlaceholder": "Enter url",
+
+  "okModalButtonText": "Ok",
+  "addModalButtonText": "Add",
+  "cancelModalButtonText": "Cancel",
+  "okConfirmModalButtonText": "Yes",
+  "cancelConfirmModalButtonText": "No",
+
+  "aboutFooterText": "About us",
+  "supportFooterText": "Support",
+  
+  
+  "logoutModalTitle": "Are you sure to sign out?",
+  "logoutButtonText": "Sign out",
+
+  "switchWorkplaceButtonText": "Switch",
+  "switchWorkplaceModalTitle": "Switch workplace",
+  "selectWorkplaceLabel": "Select workplace",
+  "addWorkplaceModalTitle": "Add workplace",
+  "editWorkplaceModalTitle": "Edit workplace",
+  "deleteWorkplaceModalTitle": "Delete workplace",
+  "addWorkplaceButtonText": "Add",
+  "workplaceTitleLabel": "Title",
+  "workplaceTitlePlaceholder": "Enter workplace's title",
+  "editWorkplaceButtonText": "Edit workplace",
+  "deleteWorkplaceButtonText": "Delete workplace"
 }

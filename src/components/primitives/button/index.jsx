@@ -12,7 +12,6 @@ export const Button = styled.button`
   color: ${({ theme, isSecondary }) => (isSecondary ? theme.colors.primary1 : theme.colors.additional2)};
   font-size: ${({ theme, textSize = 'default' }) => theme.fontSize[textSize]};
   line-height: ${({ theme, textSize = 'default' }) => theme.lineHeight[textSize]};
-  text-transform: capitalize;
   background: ${({ theme, isSecondary }) => (isSecondary ? theme.colors.additional2 : theme.colors.primary1)};
   border: 1px solid ${({ theme }) => theme.colors.primary1};
   border-radius: ${({ theme }) => theme.borderRadius};

@@ -19,7 +19,7 @@
   "confirmPasswordLabel": "Подтвердите пароль",
   "confirmPasswordPlaceholder": "Введите пароль еще раз",
 
-  "addBoardModalTitle": "Добавить новую группу",
+  "addBoardModalTitle": "Добавить группу",
   "editBoardModalTitle": "Редактировать группу",
   "deleteBoardModalTitle": "Удалить группу",
   "deleteBoardButtonText": "Удалить группу",
@@ -27,7 +27,7 @@
   "boardTitleLabel": "Название",
   "boardTitlePlaceholder": "Введите название группы",
 
-  "addItemModalTitle": "Добавить новую закладку",
+  "addItemModalTitle": "Добавить закладку",
   "editItemModalTitle": "Редактировать закладку",
   "deleteItemModalTitle": "Удалить закладку",
   "editItemButtonText": "Редактировать закладку",

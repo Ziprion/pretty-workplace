@@ -38,7 +38,6 @@ const ButtonGroup = styled.div`
 const Button = styled(DefaultButton)`
   min-width: 80px;
   margin-left: ${({ theme }) => theme.offset(1)};
-  text-transform: capitalize;
 `;
 
 const Space = styled.div`
