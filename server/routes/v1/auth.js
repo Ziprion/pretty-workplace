@@ -105,7 +105,7 @@ authRouter.post('/signup', async (req, res) => {
     avatarUrl,
   });
 
-  const tokens = generateTokens(user.id, email);
+  const tokens = generateTokens(id, email);
 
   await setActiveWorkplace(id);
 
