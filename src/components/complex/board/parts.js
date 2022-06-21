@@ -1,4 +1,17 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  to {
+    background: #005ba1;
+    transform: scale(1);
+    opacity: 0.75;
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,6 +24,9 @@ export const Wrapper = styled.div`
   box-shadow:
     0 2px 4px 0 #64748b1a,
     0 1px 1px 0 #64748b0f;
+  ${({ isNew }) => isNew && css`
+    animation: ${fadeIn} 1.5s ease 1
+  `}
 `;
 
 export const Header = styled.div`

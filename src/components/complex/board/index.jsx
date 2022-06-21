@@ -3,6 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import { Item } from '@components';
 import { AddItemConnector, BoardMenuConnector } from '@connectors';
+import { DEFAULT_NEW_BOARD, NEW_BOARD_KEY } from '@constants';
 import { getStorageItem, setStorageItem } from '@utils';
 
 import {
@@ -14,6 +15,7 @@ export const Board = ({
 }) => {
   const [ isExpanded, setExpanded ] = useState(getStorageItem(id) === 'true');
   const [ isOverflow, setOverflow ] = useState(getStorageItem(id) !== 'true');
+  const [ isNew ] = useState(Number(getStorageItem(NEW_BOARD_KEY)) === id);
 
   const toggleExpand = useCallback(() => {
     setExpanded((prev) => !prev);
@@ -21,6 +23,19 @@ export const Board = ({
     const currentValue = getStorageItem(id) === 'true';
     setStorageItem(id, !currentValue);
   }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line functional/no-let
+    let timer;
+
+    if (isNew) {
+      timer = setTimeout(() => setStorageItem(NEW_BOARD_KEY, DEFAULT_NEW_BOARD));
+    } else {
+      clearTimeout(timer);
+    }
+
+    return () => clearTimeout(timer);
+  }, [ isNew ]);
 
   useEffect(() => {
     // eslint-disable-next-line functional/no-let
@@ -45,6 +60,7 @@ export const Board = ({
       {(provided, snapshot) => (
         <Wrapper
           ref={provided.innerRef}
+          isNew={isNew}
           {...provided.draggableProps}
           {...provided.draggableProps.style}
         >
