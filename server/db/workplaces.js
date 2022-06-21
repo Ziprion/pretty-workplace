@@ -50,7 +50,9 @@ export const createWorkplace = async ({ title, userId }) => {
 
 export const updateBoardsPosition = async (id, boardsPosition) => {
   try {
-    await db.query(`UPDATE workplaces SET boards_position='{${boardsPosition.toString()}}' WHERE id='${id}'`);
+    const { rows } = await db.query(`UPDATE workplaces SET boards_position='{${boardsPosition.toString()}}' WHERE id='${id}' RETURNING boards_position`);
+
+    return rows[0];
   } catch (e) {
     console.log(e.stack);
 

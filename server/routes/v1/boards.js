@@ -6,6 +6,7 @@ import {
   createBoard,
   deleteBoard,
   deleteBoardPosition,
+  deleteItemsByBoardId,
   getActiveWorkplace,
   getBoardById,
   getBoardByTitle,
@@ -131,6 +132,7 @@ boardsRouter.delete('/:id', async (req, res) => {
 
   await deleteBoard(deletedBoardId);
   await deleteBoardPosition(deletedBoardId, workplaceId);
+  await deleteItemsByBoardId(deletedBoardId);
 
   return res.sendStatus(200);
 });

@@ -6,7 +6,7 @@ const db = new Pool({
   ssl: {
     rejectUnauthorized: false,
   },
-  max: 20,
+  max: 19,
 });
 db.connect();
 

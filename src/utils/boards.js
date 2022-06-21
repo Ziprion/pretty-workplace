@@ -28,12 +28,14 @@ export const getBoardsByColumn = (boardsByPosition, columnCount) => {
 
 export const getFormattedBoardsPosition = (boardsByColumn, columnCount) => Object.values(boardsByColumn)
   .reduce((acc, boardColumn, columnIndex) => {
-    boardColumn.forEach((board, boardIndex) => {
-      if (board) {
-        const index = boardIndex * (columnCount - 1) + columnIndex + boardIndex;
-        acc[index] = board.id;
-      }
-    });
+    boardColumn
+      .filter((board) => !!board)
+      .forEach((board, boardIndex) => {
+        if (board) {
+          const index = boardIndex * (columnCount - 1) + columnIndex + boardIndex;
+          acc[index] = board.id;
+        }
+      });
 
     return acc;
   }, []);

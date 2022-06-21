@@ -113,9 +113,9 @@ workplacesRouter.patch('/active/boardsPosition', async (req, res) => {
 
   const formattedBoardsPosition = boardsPosition.map((boardId) => (boardId || 0));
 
-  await updateBoardsPosition(workplaceId, formattedBoardsPosition);
+  const updatedBoardsPosition = toCamelCase(await updateBoardsPosition(workplaceId, formattedBoardsPosition));
 
-  return res.sendStatus(200);
+  return res.status(200).send(updatedBoardsPosition);
 });
 
 workplacesRouter.patch('/active/change', async (req, res) => {

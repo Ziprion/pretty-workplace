@@ -15,13 +15,13 @@ export const Workplace = ({
 }) => {
   const { columnCount } = useColumnCount();
   const { boards, onDragEnd } = useBoardDnd(boardsByPosition, columnCount, onBoardsPositionChange);
+
   const notFoundWorkplaceMessage = l('addWorkplaceMessageText');
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
         {!activeWorkplaceId && <Message>{notFoundWorkplaceMessage}</Message>}
-        {activeWorkplaceId && !boardsByPosition.length && <div>You do not have boards</div>}
         <Boards>
           {[ ...Array(columnCount) ].map((_, columnIndex) => (
             <Droppable key={columnIndex} droppableId={String(columnIndex)}>
