@@ -51,10 +51,6 @@ export const GlobalStyle = createGlobalStyle`
     user-select: none;
   }
 
-  html {
-    scrollbar-width: none;
-  }
-
   body {
     z-index: ${({ theme }) => theme.zIndex.default};
     width: 100vw;
