@@ -40,6 +40,7 @@ export const Header = styled.div`
 
 export const ToggleIcon = styled.div`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 14px;
@@ -55,13 +56,16 @@ export const ToggleIcon = styled.div`
 
 export const Title = styled.div`
   flex-grow: 1;
+  overflow: hidden;
   font-size: ${({ theme }) => theme.fontSize.large};
   font-family: 'RobotoBold', sans-serif;
   line-height: ${({ theme }) => theme.lineHeight.large};
+  text-overflow: ellipsis;
 `;
 
 export const ActionBar = styled.div`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
 `;
 

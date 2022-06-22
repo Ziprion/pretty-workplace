@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'; /* eslint no-unused-vars: 0 */
+import React, {
+  memo, useCallback, useEffect, useState,
+} from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 import { ChevronDoubleDownIcon, Item } from '@components';
@@ -10,7 +12,7 @@ import {
   ActionBar, Body, Header, Title, ToggleIcon, Wrapper,
 } from './parts';
 
-export const Board = ({
+export const Board = memo(({
   id, title, items = [], index,
 }) => {
   const [ isExpanded, setExpanded ] = useState(false);
@@ -54,6 +56,7 @@ export const Board = ({
       draggableId={String(id)}
       index={Number(index)}
     >
+      {/* eslint-disable-next-line no-unused-vars */}
       {(provided, snapshot) => (
         <Wrapper
           ref={provided.innerRef}
@@ -84,4 +87,4 @@ export const Board = ({
       )}
     </Draggable>
   );
-};
+});

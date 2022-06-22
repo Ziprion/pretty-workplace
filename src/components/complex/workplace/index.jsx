@@ -3,7 +3,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { Board } from '@components';
 import { AddBoardConnector } from '@connectors';
-import { useBoardDnd, useColumnCount } from '@hooks';
+import { useBoardDnd, useColumnParameters } from '@hooks';
 import { l } from '@utils';
 
 import {
@@ -13,7 +13,7 @@ import {
 export const Workplace = ({
   activeWorkplaceId, boardsByPosition, itemsByBoardId, onBoardsPositionChange,
 }) => {
-  const { columnCount } = useColumnCount();
+  const { columnCount, columnWidth } = useColumnParameters();
   const { boards, onDragEnd } = useBoardDnd(boardsByPosition, columnCount, onBoardsPositionChange);
 
   const notFoundWorkplaceMessage = l('addWorkplaceMessageText');
@@ -29,6 +29,8 @@ export const Workplace = ({
                 <BoardColumn
                   key={columnIndex}
                   ref={provided.innerRef}
+                  columnCount={columnCount}
+                  columnWidth={columnWidth}
                 >
                   {boards && (boards[columnIndex] || [])
                     .map((board, index) => (board && (

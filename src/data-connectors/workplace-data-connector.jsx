@@ -32,7 +32,6 @@ export const WorkplaceDataConnector = () => {
         boardsByPosition={boardsByPosition}
         itemsByBoardId={itemsByBoardId}
       />
-
     </>
   );
 };

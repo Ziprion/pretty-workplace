@@ -17,6 +17,7 @@ export const BoardColumn = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: ${({ columnWidth }) => `${columnWidth}px`};
 `;
 
 export const BoardPlateWrapper = styled.div`
