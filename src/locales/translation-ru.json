@@ -26,6 +26,7 @@
   "editBoardButtonText": "Редактировать группу",
   "boardTitleLabel": "Название",
   "boardTitlePlaceholder": "Введите название группы",
+  "emptyBoard": "Группа пуста",
 
   "addItemModalTitle": "Добавить закладку",
   "editItemModalTitle": "Редактировать закладку",

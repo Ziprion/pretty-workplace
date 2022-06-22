@@ -77,9 +77,10 @@ export const Board = ({
           <Body
             isExpanded={isExpanded}
             isOverflow={isOverflow}
-            itemCount={items.length}
+            itemCount={items.length || 1}
           >
             {items.map((item) => <Item key={item.id} {...item} />)}
+            {!items.length && <Item key={0} isEmpty />}
           </Body>
           {provided.placeholder}
         </Wrapper>

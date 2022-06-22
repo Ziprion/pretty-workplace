@@ -26,6 +26,7 @@
   "editBoardButtonText": "Edit board",
   "boardTitleLabel": "Title",
   "boardTitlePlaceholder": "Enter board's title",
+  "emptyBoard": "Empty board",
 
   "addItemModalTitle": "Add bookmark",
   "editItemModalTitle": "Edit bookmark",
