@@ -13,15 +13,12 @@ import {
 export const Board = ({
   id, title, items = [], index,
 }) => {
-  const [ isExpanded, setExpanded ] = useState(getStorageItem(id) === 'true');
-  const [ isOverflow, setOverflow ] = useState(getStorageItem(id) !== 'true');
+  const [ isExpanded, setExpanded ] = useState(false);
+  const [ isOverflow, setOverflow ] = useState(true);
   const [ isNew ] = useState(Number(getStorageItem(NEW_BOARD_KEY)) === id);
 
   const toggleExpand = useCallback(() => {
     setExpanded((prev) => !prev);
-
-    const currentValue = getStorageItem(id) === 'true';
-    setStorageItem(id, !currentValue);
   }, []);
 
   useEffect(() => {
