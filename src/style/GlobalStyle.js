@@ -53,12 +53,13 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     z-index: ${({ theme }) => theme.zIndex.default};
-    width: 100vw;
+    width: 100%;
     min-width: 375px;
-    max-width: 100vw;
+    max-width: 100%;
     height: 100vh;
     min-height: 750px;
     overflow-x: hidden;
+    overflow-y: scroll;
     color: ${({ theme }) => theme.colors.additional1};
     font-size: ${({ theme }) => theme.fontSize.default};
     font-family: 'Roboto', sans-serif;
