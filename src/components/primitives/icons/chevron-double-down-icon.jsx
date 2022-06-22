@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ArrowDownIcon = () => (
+export const ChevronDoubleDownIcon = () => (
   <svg
     fill="none"
     height="20"
@@ -9,7 +9,7 @@ export const ArrowDownIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M15.8333 7.5L10 13.3333L4.16667 7.5"
+      d="M15.8333 10.8333L10 16.6667L4.16667 10.8333M15.8333 4.16666L10 9.99999L4.16667 4.16666"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"

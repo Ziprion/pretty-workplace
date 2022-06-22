@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 import {
-  DeleteIcon, DotsIcon, Dropdown, EditIcon, GhostButton, VerticalMenu,
+  DeleteIcon, Dropdown, EditIcon, GhostButton, VerticalDotsIcon, VerticalMenu,
 } from '@components';
 import { l } from '@utils';
 
 const WorkplaceMenuToggle = ({ onClick }) => (
   <GhostButton isSecondary onClick={onClick}>
-    <DotsIcon />
+    <VerticalDotsIcon />
   </GhostButton>
 );
 

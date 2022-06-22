@@ -16,5 +16,4 @@ export const HorizontalDotsIcon = () => (
       strokeWidth="2"
     />
   </svg>
-
 );

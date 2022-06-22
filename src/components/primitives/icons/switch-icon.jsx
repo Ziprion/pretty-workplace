@@ -16,5 +16,4 @@ export const SwitchIcon = () => (
       strokeWidth="2"
     />
   </svg>
-
 );

@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'; /* eslint no-unused-vars: 0 */
 import { Draggable } from 'react-beautiful-dnd';
 
-import { Item } from '@components';
+import { ChevronDoubleDownIcon, Item } from '@components';
 import { AddItemConnector, BoardMenuConnector } from '@connectors';
 import { DEFAULT_NEW_BOARD, NEW_BOARD_KEY } from '@constants';
 import { getStorageItem, setStorageItem } from '@utils';
 
 import {
-  ActionBar, Body, Header, Title, Wrapper,
+  ActionBar, Body, Header, Title, ToggleIcon, Wrapper,
 } from './parts';
 
 export const Board = ({
@@ -65,6 +65,9 @@ export const Board = ({
           {...provided.draggableProps.style}
         >
           <Header {...provided.dragHandleProps} onClick={toggleExpand}>
+            <ToggleIcon isExpanded={isExpanded}>
+              <ChevronDoubleDownIcon />
+            </ToggleIcon>
             <Title>{title}</Title>
             <ActionBar onClick={(e) => e.stopPropagation()}>
               <AddItemConnector boardId={id} />

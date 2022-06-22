@@ -31,14 +31,30 @@ export const Wrapper = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  gap: ${({ theme }) => theme.offset(2)};
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   padding: ${({ theme }) => `${theme.offset(1)} ${theme.offset(2)}`};
   border-radius: ${({ theme }) => `0 0 ${theme.borderRadius} ${theme.borderRadius}`};
 `;
 
+export const ToggleIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  transform: ${({ isExpanded }) => (isExpanded ? 'rotate(180deg)' : 'rotate(0deg)')};
+  transition: 0.2s ease;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export const Title = styled.div`
+  flex-grow: 1;
   font-size: ${({ theme }) => theme.fontSize.large};
   font-family: 'RobotoBold', sans-serif;
   line-height: ${({ theme }) => theme.lineHeight.large};

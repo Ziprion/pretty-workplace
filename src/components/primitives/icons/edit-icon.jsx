@@ -16,5 +16,4 @@ export const EditIcon = () => (
       strokeWidth="2"
     />
   </svg>
-
 );

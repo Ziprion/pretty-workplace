@@ -16,5 +16,4 @@ export const LogoutIcon = () => (
       strokeWidth="2"
     />
   </svg>
-
 );

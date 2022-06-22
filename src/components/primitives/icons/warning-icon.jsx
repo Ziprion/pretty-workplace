@@ -16,5 +16,4 @@ export const WarningIcon = () => (
       strokeWidth="2"
     />
   </svg>
-
 );

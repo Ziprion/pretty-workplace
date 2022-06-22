@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const DotsIcon = () => (
+export const VerticalDotsIcon = () => (
   <svg
     fill="none"
     height="20"

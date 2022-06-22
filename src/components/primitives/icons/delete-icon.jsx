@@ -16,5 +16,4 @@ export const DeleteIcon = () => (
       strokeWidth="2"
     />
   </svg>
-
 );
