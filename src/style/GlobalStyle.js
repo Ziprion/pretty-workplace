@@ -51,6 +51,11 @@ export const GlobalStyle = createGlobalStyle`
     user-select: none;
   }
 
+  html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
   body {
     z-index: ${({ theme }) => theme.zIndex.default};
     width: 100%;
@@ -58,7 +63,6 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     height: 100vh;
     min-height: 750px;
-    overflow-x: hidden;
     overflow-y: scroll;
     color: ${({ theme }) => theme.colors.additional1};
     font-size: ${({ theme }) => theme.fontSize.default};

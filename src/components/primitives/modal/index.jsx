@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { useOutsideClick } from '@hooks';
 
@@ -13,14 +13,6 @@ export const Modal = ({
   const modalWrapper = useRef(null);
 
   useOutsideClick(modalWrapper, onCancel, isDisabled);
-
-  useEffect(() => {
-    if (isShow) {
-      document.querySelector('html').style.overflow = 'hidden';
-
-      return () => { document.querySelector('html').style.overflow = 'auto'; };
-    }
-  }, [ isShow ]);
 
   return isShow && (
     <Mask>
