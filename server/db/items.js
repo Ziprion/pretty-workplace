@@ -12,9 +12,11 @@ export const getItems = async (boardId) => {
   }
 };
 
-export const createItem = async ({ title, url, boardId }) => {
+export const createItem = async ({
+  title, url, boardId, pathToIcon,
+}) => {
   try {
-    const { rows } = await db.query(`INSERT INTO items(title, url, board_id) VALUES ('${title}', '${url}', '${boardId}') RETURNING items.id`);
+    const { rows } = await db.query(`INSERT INTO items(title, url, board_id, path_to_icon) VALUES ('${title}', '${url}', '${boardId}', '${pathToIcon}') RETURNING items.id`);
 
     return rows[0];
   } catch (e) {
@@ -60,9 +62,11 @@ export const getItemById = async (id) => {
   }
 };
 
-export const updateItem = async ({ id, title, url }) => {
+export const updateItem = async ({
+  id, title, url, pathToIcon,
+}) => {
   try {
-    await db.query(`UPDATE items SET title='${title}', url='${url}' WHERE id='${id}'`);
+    await db.query(`UPDATE items SET title='${title}', url='${url}', path_to_icon='${pathToIcon}' WHERE id='${id}'`);
   } catch (e) {
     console.log(e.stack);
 

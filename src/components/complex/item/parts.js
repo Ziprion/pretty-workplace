@@ -28,7 +28,15 @@ export const Link = styled.a`
   gap: ${({ theme }) => theme.offset(1)};
   align-items: center;
   width: 100%;
-  padding: ${({ theme }) => `${theme.offset(1.5)} ${theme.offset(2)}`};
+  padding: ${({ theme }) => `${theme.offset(1.5)} ${theme.offset(6)} ${theme.offset(1.5)} ${theme.offset(2)}`};
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const Text = styled.p`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const Menu = styled.div`
@@ -42,6 +50,7 @@ export const Menu = styled.div`
 
 export const Icon = styled.div`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 16px;

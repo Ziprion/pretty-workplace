@@ -1,3 +1,8 @@
+export const formatBoards = (boards) => boards.map((board) => ({
+  ...board,
+  isExpanded: false,
+}));
+
 export const getBoardsByPosition = (boards, boardsPosition = []) => {
   const boardsById = boards
     .filter((id) => !!id)

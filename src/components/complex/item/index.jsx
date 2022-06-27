@@ -2,15 +2,14 @@ import React from 'react';
 import ReactImageFallback from 'react-image-fallback';
 
 import { ItemMenuConnector } from '@connectors';
-import { getUrlIcon, l } from '@utils';
+import { l } from '@utils';
 
 import {
-  EmptyWrapper,
-  Icon, Link, Menu, Wrapper,
+  EmptyWrapper, Icon, Link, Menu, Text, Wrapper,
 } from './parts';
 
 export const Item = ({
-  id, title, url, boardId, isEmpty,
+  id, title, url, boardId, pathToIcon, isEmpty,
 }) => (
   isEmpty
     ? <EmptyWrapper>{l('emptyBoard')}</EmptyWrapper>
@@ -25,11 +24,12 @@ export const Item = ({
           <Icon>
             <ReactImageFallback
               alt={title}
-              fallbackImage="/images/icons/fallback-icon.png"
-              src={getUrlIcon(url)}
+              fallbackImage="/images/favicons/fallback-icon.ico"
+              initialImage={pathToIcon}
+              src={pathToIcon}
             />
           </Icon>
-          {title}
+          <Text>{title}</Text>
         </Link>
         <Menu>
           <ItemMenuConnector

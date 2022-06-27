@@ -11,7 +11,7 @@ import {
   getItemByUrl,
   updateItem,
 } from '../../db/index.js';
-import { toCamelCase } from '../../utils/index.js';
+import { downloadIcon, toCamelCase } from '../../utils/index.js';
 
 export const itemsRouter = express.Router();
 
@@ -58,10 +58,13 @@ itemsRouter.post('', async (req, res) => {
     return res.status(400).send({ message: 'ItemSameUrlError' });
   }
 
+  const pathToIcon = await downloadIcon(url);
+
   const { id } = await createItem({
     title,
     url,
     boardId,
+    pathToIcon,
   });
 
   return res.status(201).send({
@@ -69,6 +72,7 @@ itemsRouter.post('', async (req, res) => {
     title,
     url,
     boardId,
+    pathToIcon,
   });
 });
 
@@ -127,10 +131,13 @@ itemsRouter.patch('/:id', async (req, res) => {
     }
   }
 
+  const pathToIcon = url ? await downloadIcon(url) : '';
+
   const updatedItem = {
     ...editedItem,
     ...(title ? { title } : {}),
     ...(url ? { url } : {}),
+    ...(url ? { pathToIcon } : {}),
   };
 
   await updateItem(updatedItem);

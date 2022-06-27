@@ -2,10 +2,12 @@ import React, {
   memo, useCallback, useEffect, useState,
 } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
 
 import { ChevronDoubleDownIcon, Item } from '@components';
 import { AddItemConnector, BoardMenuConnector } from '@connectors';
 import { DEFAULT_NEW_BOARD, NEW_BOARD_KEY } from '@constants';
+import { toggleExpandBoard } from '@redux-store';
 import { getStorageItem, setStorageItem } from '@utils';
 
 import {
@@ -13,14 +15,14 @@ import {
 } from './parts';
 
 export const Board = memo(({
-  id, title, items = [], index,
+  id, title, items = [], index, isExpanded,
 }) => {
-  const [ isExpanded, setExpanded ] = useState(false);
-  const [ isOverflow, setOverflow ] = useState(true);
+  const dispatch = useDispatch();
+  const [ isOverflow, setOverflow ] = useState(!isExpanded);
   const [ isNew ] = useState(Number(getStorageItem(NEW_BOARD_KEY)) === id);
 
   const toggleExpand = useCallback(() => {
-    setExpanded((prev) => !prev);
+    dispatch(toggleExpandBoard(id));
   }, []);
 
   useEffect(() => {
