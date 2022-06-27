@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+  min-height: 100vh;
 `;
 
 export const LoginFormWrapper = styled.div`

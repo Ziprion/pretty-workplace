@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   grid-template-rows: max-content 1fr max-content;
   grid-template-columns: 1fr;
   height: 100%;
+  min-height: 100vh;
 `;
 
 export const HeaderWrapper = styled.div`

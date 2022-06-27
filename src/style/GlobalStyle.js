@@ -53,7 +53,7 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: scroll;
   }
 
   body {
@@ -63,7 +63,6 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     height: 100vh;
     min-height: 750px;
-    overflow-y: scroll;
     color: ${({ theme }) => theme.colors.additional1};
     font-size: ${({ theme }) => theme.fontSize.default};
     font-family: 'Roboto', sans-serif;
@@ -74,5 +73,6 @@ export const GlobalStyle = createGlobalStyle`
 
   main {
     height: 100%;
+    min-height: 100vh;
   }
 `;
