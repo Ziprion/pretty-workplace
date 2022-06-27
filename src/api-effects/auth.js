@@ -1,8 +1,3 @@
-export const CHECK = () => ({
-  method: 'get',
-  url: '/api/auth/check',
-});
-
 export const REFRESH = () => ({
   method: 'get',
   url: '/api/auth/refresh',

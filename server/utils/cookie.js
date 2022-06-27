@@ -4,7 +4,6 @@ const DEFAULT_COOKIE_HEADERS = {
   sameSite: 'Strict',
 };
 
-export const setTokensToCookie = (res, { accessToken, refreshToken }, status = 200) => res
+export const setTokensToCookie = (res, { accessToken, refreshToken }) => res
   .cookie('accessToken', accessToken, DEFAULT_COOKIE_HEADERS)
-  .cookie('refreshToken', refreshToken, DEFAULT_COOKIE_HEADERS)
-  .sendStatus(status);
+  .cookie('refreshToken', refreshToken, DEFAULT_COOKIE_HEADERS);

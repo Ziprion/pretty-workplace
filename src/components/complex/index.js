@@ -1,3 +1,4 @@
+export * from './greeting';
 export * from './footer';
 export * from './header';
 export * from './login-form';

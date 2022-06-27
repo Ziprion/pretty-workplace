@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import express from 'express';
+import omit from 'lodash/omit.js';
 
 import {
   createUser,
@@ -10,12 +11,11 @@ import {
   generateTokens,
   getDefaultAvatar,
   setTokensToCookie,
+  toCamelCase,
   verifyRefreshToken,
 } from '../../utils/index.js';
 
 export const authRouter = express.Router();
-
-authRouter.get('/check', async (_, res) => res.sendStatus(200));
 
 authRouter.get('/refresh', async (req, res) => {
   const { cookies: { refreshToken } } = req;
@@ -28,7 +28,7 @@ authRouter.get('/refresh', async (req, res) => {
     const { id, email } = verifyRefreshToken(refreshToken);
     const tokens = generateTokens(id, email);
 
-    return setTokensToCookie(res, tokens);
+    return setTokensToCookie(res, tokens).sendStatus(200);
   } catch {
     return res.status(401).send({ message: 'UnauthorizedError' });
   }
@@ -52,16 +52,18 @@ authRouter.post('/signin', async (req, res) => {
     return res.status(400).send({ message: 'BadRequestError' });
   }
 
-  const user = await getUser(email);
+  const user = toCamelCase(await getUser(email));
   const isCorrectPassword = await bcrypt.compare(password, user.password);
 
   if (!user || !isCorrectPassword) {
-    return res.status(403).send({ message: 'SigninError' });
+    return res.status(404).send({ message: 'SigninError' });
   }
 
   const tokens = generateTokens(user.id, email);
 
-  return setTokensToCookie(res, tokens);
+  return setTokensToCookie(res, tokens)
+    .status(200)
+    .send(omit(user, [ 'id', 'password', 'email' ]));
 });
 
 authRouter.post('/signup', async (req, res) => {
@@ -87,27 +89,31 @@ authRouter.post('/signup', async (req, res) => {
     return res.status(400).send({ message: 'PasswordConfirmError' });
   }
 
-  const user = await getUser(email);
+  const sameUser = await getUser(email);
 
-  if (user) {
+  if (sameUser) {
     return res.status(400).send({ message: 'UserSameEmailError' });
   }
 
   const { avatarBackground, avatarUrl } = getDefaultAvatar();
   const hashPassword = await bcrypt.hash(password, 3);
 
-  const { id } = await createUser({
+  const newUser = {
     email,
     password: hashPassword,
     lastName,
     firstName,
     avatarBackground,
     avatarUrl,
-  });
+  };
+
+  const { id } = await createUser(newUser);
 
   const tokens = generateTokens(id, email);
 
   await setActiveWorkplace(id);
 
-  return setTokensToCookie(res, tokens, 201);
+  return setTokensToCookie(res, tokens)
+    .status(201)
+    .send(omit(newUser, [ 'id', 'password', 'email' ]));
 });

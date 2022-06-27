@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 import { API_EFFECTS } from '@api-effects';
+import { useAuth } from '@hooks';
 
 export const STATUSES = {
   SUCCESS: 'success',
@@ -9,10 +10,8 @@ export const STATUSES = {
   ERROR: 'error',
 };
 
-const NO_REDIRECT_URL = [ '/api/auth/signin', '/api/auth/signup', '/api/auth/check' ];
-const NO_REFRESH_URL = [ '/api/auth/signin', '/api/auth/signup' ];
+const NO_AUTHORIZATION_URL = [ '/api/auth/signin', '/api/auth/signup' ];
 const NO_AUTHORIZATION_STATUS = 401;
-const REDIRECT_URL = '/signin';
 
 const DEFAULT_STATE = {
   error: null,
@@ -42,7 +41,7 @@ axiosInstance.interceptors.response.use(
       error.response?.status === NO_AUTHORIZATION_STATUS
       && originalRequest
       && !originalRequest.isRetry
-      && !NO_REFRESH_URL.includes(originalRequest.url)
+      && !NO_AUTHORIZATION_URL.includes(originalRequest.url)
     ) {
       originalRequest.isRetry = true;
 
@@ -63,6 +62,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export const useApiEffect = (apiEffect) => {
+  const { signout } = useAuth();
   const [ state, setState ] = useState(DEFAULT_STATE);
   const updateState = (nextState) => setState((prevState) => ({
     ...prevState,
@@ -87,12 +87,14 @@ export const useApiEffect = (apiEffect) => {
         data,
         error: null,
         status: STATUSES.SUCCESS,
+        loading: false,
       });
     } catch (e) {
       if (!e.response) {
         updateState({
           error: UNKNOWN_ERROR,
           status: STATUSES.ERROR,
+          loading: false,
         });
 
         throw e;
@@ -109,6 +111,11 @@ export const useApiEffect = (apiEffect) => {
         },
       } = e.response;
 
+      if (!NO_AUTHORIZATION_URL.includes(url) && status === NO_AUTHORIZATION_STATUS) {
+        signout();
+        if (url !== '/api/user/me') return;
+      }
+
       updateState({
         error: {
           status,
@@ -116,13 +123,8 @@ export const useApiEffect = (apiEffect) => {
           message,
         },
         status: STATUSES.ERROR,
+        loading: false,
       });
-
-      if (!NO_REDIRECT_URL.includes(url) && status === NO_AUTHORIZATION_STATUS) {
-        window.location.replace(REDIRECT_URL);
-      }
-    } finally {
-      updateState({ loading: false });
     }
   };
 
