@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding-bottom: ${({ theme }) => theme.offset(3)};
 `;
 
@@ -24,9 +25,4 @@ export const BoardPlateWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`;
-
-export const Message = styled.p`
-  display: flex;
-  align-items: center;
 `;

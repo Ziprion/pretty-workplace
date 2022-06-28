@@ -84,6 +84,9 @@ const dropdownPosition = {
 
 export const boardPlate = {
   minWidth: '320px',
+};
+
+const workplacePlate = {
   addButtonHeight: '110px',
   addButtonWidth: '200px',
 };
@@ -116,6 +119,7 @@ const defaultTheme = {
   logo,
   avatar,
   boardPlate,
+  workplacePlate,
   spinner,
   dropdownPosition,
 };

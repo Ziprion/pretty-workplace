@@ -22,6 +22,7 @@
   "addBoardModalTitle": "Add board",
   "editBoardModalTitle": "Edit board",
   "deleteBoardModalTitle": "Delete board",
+  "addBoardButtonText": "Add board",
   "deleteBoardButtonText": "Delete board",
   "editBoardButtonText": "Edit board",
   "boardTitleLabel": "Title",
@@ -51,17 +52,15 @@
   "logoutModalTitle": "Are you sure to sign out?",
   "logoutButtonText": "Sign out",
 
-  "switchWorkplaceButtonText": "Switch",
+  "switchWorkplaceButtonText": "Switch workplace",
   "switchWorkplaceModalTitle": "Switch workplace",
   "selectWorkplaceLabel": "Select workplace",
   "addWorkplaceModalTitle": "Add workplace",
   "editWorkplaceModalTitle": "Edit workplace",
   "deleteWorkplaceModalTitle": "Delete workplace",
-  "addWorkplaceButtonText": "Add",
+  "addWorkplaceButtonText": "Add workplace",
   "workplaceTitleLabel": "Title",
   "workplaceTitlePlaceholder": "Enter workplace's title",
   "editWorkplaceButtonText": "Edit workplace",
-  "deleteWorkplaceButtonText": "Delete workplace",
-  
-  "addWorkplaceMessageText": "Please add a workplace"
+  "deleteWorkplaceButtonText": "Delete workplace"
 }

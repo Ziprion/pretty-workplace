@@ -2,7 +2,6 @@ export * from './auth-connector';
 export * from './login-form-connector';
 export * from './main-connector';
 export * from './user-menu-connector';
-export * from './workplace-switcher-connector';
 export * from './add-workplace-connector';
 export * from './add-item-connector';
 export * from './workplace-menu-connector';

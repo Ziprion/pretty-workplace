@@ -22,6 +22,7 @@
   "addBoardModalTitle": "Добавить группу",
   "editBoardModalTitle": "Редактировать группу",
   "deleteBoardModalTitle": "Удалить группу",
+  "addBoardButtonText": "Добавить группу",
   "deleteBoardButtonText": "Удалить группу",
   "editBoardButtonText": "Редактировать группу",
   "boardTitleLabel": "Название",
@@ -51,17 +52,15 @@
   "logoutModalTitle": "Вы уверены, что хотите выйти?",
   "logoutButtonText": "Выйти",
 
-  "switchWorkplaceButtonText": "Сменить",
+  "switchWorkplaceButtonText": "Сменить рабочее место",
   "switchWorkplaceModalTitle": "Сменить рабочее место",
   "selectWorkplaceLabel": "Выберите рабочее место",
   "addWorkplaceModalTitle": "Добавить рабочее место",
   "editWorkplaceModalTitle": "Редактировать рабочее место",
   "deleteWorkplaceModalTitle": "Удалить рабочее место",
-  "addWorkplaceButtonText": "Добавить",
+  "addWorkplaceButtonText": "Добавить рабочее место",
   "workplaceTitleLabel": "Название",
   "workplaceTitlePlaceholder": "Введите название рабочего места",
   "editWorkplaceButtonText": "Редактировать рабочее место",
-  "deleteWorkplaceButtonText": "Удалить рабочее место",
-
-  "addWorkplaceMessageText": "Добавьте, пожалуйста, рабочее место"
+  "deleteWorkplaceButtonText": "Удалить рабочее место"
 }

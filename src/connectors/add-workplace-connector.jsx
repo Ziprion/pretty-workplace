@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
 import {
-  AddIcon, Button, Modal, WorkplaceForm,
+  AddIcon, AddWorkplaceButton, Modal, WorkplaceForm,
 } from '@components';
 import { addWorkplace, setActiveWorkplace } from '@redux-store';
 import { l } from '@utils';
@@ -38,10 +38,9 @@ export const AddWorkplaceConnector = () => {
 
   return (
     <>
-      <Button textSize="medium" onClick={openModal}>
+      <AddWorkplaceButton onClick={openModal}>
         <AddIcon />
-        {l('addWorkplaceButtonText')}
-      </Button>
+      </AddWorkplaceButton>
       <Modal
         isDisabled={loading}
         isShow={isShowModal}

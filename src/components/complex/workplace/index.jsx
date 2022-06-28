@@ -2,13 +2,10 @@ import React from 'react'; /* eslint react/no-array-index-key: 0, no-unused-vars
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { Board } from '@components';
-import { AddBoardConnector } from '@connectors';
+import { AddWorkplaceConnector } from '@connectors';
 import { useBoardDnd, useColumnParameters } from '@hooks';
-import { l } from '@utils';
 
-import {
-  BoardColumn, Boards, Message, Wrapper,
-} from './parts';
+import { BoardColumn, Boards, Wrapper } from './parts';
 
 export const Workplace = ({
   activeWorkplaceId, boardsByPosition, itemsByBoardId, onBoardsPositionChange,
@@ -16,39 +13,39 @@ export const Workplace = ({
   const { columnCount, columnWidth } = useColumnParameters();
   const { boards, onDragEnd } = useBoardDnd(boardsByPosition, columnCount, onBoardsPositionChange);
 
-  const notFoundWorkplaceMessage = l('addWorkplaceMessageText');
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
-        {!activeWorkplaceId && <Message>{notFoundWorkplaceMessage}</Message>}
-        <Boards>
-          {[ ...Array(columnCount) ].map((_, columnIndex) => (
-            <Droppable key={columnIndex} droppableId={String(columnIndex)}>
-              {(provided, snapshot) => (
-                <BoardColumn
-                  key={columnIndex}
-                  ref={provided.innerRef}
-                  columnCount={columnCount}
-                  columnWidth={columnWidth}
-                >
-                  {boards && (boards[columnIndex] || [])
-                    .map((board, index) => (board && (
-                      <Board
-                        key={board.id}
-                        index={index}
-                        items={itemsByBoardId[board.id]}
-                        {...board}
-                      />
-                    )
-                    ))}
-                  {provided.placeholder}
-                </BoardColumn>
-              )}
-            </Droppable>
-          ))}
-        </Boards>
-        {activeWorkplaceId && boards && <AddBoardConnector activeWorkplaceId={activeWorkplaceId} />}
+        {!activeWorkplaceId
+          ? <AddWorkplaceConnector />
+          : (
+            <Boards>
+              {[ ...Array(columnCount) ].map((_, columnIndex) => (
+                <Droppable key={columnIndex} droppableId={String(columnIndex)}>
+                  {(provided, snapshot) => (
+                    <BoardColumn
+                      key={columnIndex}
+                      ref={provided.innerRef}
+                      columnCount={columnCount}
+                      columnWidth={columnWidth}
+                    >
+                      {boards && (boards[columnIndex] || [])
+                        .map((board, index) => (board && (
+                          <Board
+                            key={board.id}
+                            index={index}
+                            items={itemsByBoardId[board.id]}
+                            {...board}
+                          />
+                        )
+                        ))}
+                      {provided.placeholder}
+                    </BoardColumn>
+                  )}
+                </Droppable>
+              ))}
+            </Boards>
+          )}
       </Wrapper>
     </DragDropContext>
   );

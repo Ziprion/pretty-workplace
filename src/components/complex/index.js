@@ -14,4 +14,6 @@ export * from './workplace';
 export * from './workplaces-panel';
 export * from './workplace-menu';
 export * from './workplace-form';
+export * from './workplace-modal';
+export * from './workplace-switch-modal';
 export * from './workplace-switcher-form';

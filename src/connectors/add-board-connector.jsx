@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
 import {
-  AddBoardButton, AddIcon, BoardForm, Modal,
+  AddIcon, BoardForm, Button, Modal,
 } from '@components';
 import { NEW_BOARD_KEY } from '@constants';
 import { addBoard } from '@redux-store';
@@ -44,9 +44,10 @@ export const AddBoardConnector = ({ activeWorkplaceId }) => {
 
   return (
     <>
-      <AddBoardButton onClick={openModal}>
+      <Button textSize="medium" onClick={openModal}>
         <AddIcon />
-      </AddBoardButton>
+        <Button.Text>{l('addBoardButtonText')}</Button.Text>
+      </Button>
       <Modal
         isDisabled={loading}
         isShow={isShowModal}

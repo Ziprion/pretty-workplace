@@ -37,3 +37,7 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
 `;
+
+Button.Text = styled.p`
+  flex-shrink: 0;
+`;

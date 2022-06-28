@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import {
-  DeleteIcon, Dropdown, EditIcon, GhostButton, VerticalDotsIcon, VerticalMenu,
+  AddIcon, DeleteIcon, Dropdown, EditIcon, GhostButton, SwitchIcon, VerticalDotsIcon, VerticalMenu,
 } from '@components';
 import { l } from '@utils';
 
@@ -11,10 +11,22 @@ const WorkplaceMenuToggle = ({ onClick }) => (
   </GhostButton>
 );
 
-export const WorkplaceMenu = ({ onDeleteCallback, onEditCallback }) => {
+export const WorkplaceMenu = ({
+  onAddCallback, onDeleteCallback, onEditCallback, onSwitchCallback, workplaces,
+}) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
   const closeDropdown = () => setShowDropdown(() => false);
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
+
+  const onSwitchClick = () => {
+    closeDropdown();
+    onSwitchCallback();
+  };
+
+  const onAddClick = () => {
+    closeDropdown();
+    onAddCallback();
+  };
 
   const onEditClick = () => {
     closeDropdown();
@@ -26,6 +38,11 @@ export const WorkplaceMenu = ({ onDeleteCallback, onEditCallback }) => {
     onDeleteCallback();
   };
 
+  const switchButtonText = l('switchWorkplaceButtonText');
+  const addButtonText = l('addWorkplaceButtonText');
+  const editButtonText = l('editWorkplaceButtonText');
+  const deleteButtonText = l('deleteWorkplaceButtonText');
+
   return (
     <Dropdown
       close={closeDropdown}
@@ -33,13 +50,23 @@ export const WorkplaceMenu = ({ onDeleteCallback, onEditCallback }) => {
       toggleButton={<WorkplaceMenuToggle onClick={toggleDropdown} />}
     >
       <VerticalMenu.Wrapper>
+        {workplaces.length > 1 && (
+          <VerticalMenu.Item onClick={onSwitchClick}>
+            <SwitchIcon />
+            {switchButtonText}
+          </VerticalMenu.Item>
+        )}
+        <VerticalMenu.Item onClick={onAddClick}>
+          <AddIcon />
+          {addButtonText}
+        </VerticalMenu.Item>
         <VerticalMenu.Item onClick={onEditClick}>
           <EditIcon />
-          {l('editWorkplaceButtonText')}
+          {editButtonText}
         </VerticalMenu.Item>
         <VerticalMenu.Item onClick={onDeleteClick}>
           <DeleteIcon />
-          {l('deleteWorkplaceButtonText')}
+          {deleteButtonText}
         </VerticalMenu.Item>
       </VerticalMenu.Wrapper>
     </Dropdown>

@@ -1,4 +1,4 @@
-export * from './add-board-button';
+export * from './add-workplace-button';
 export * from './button';
 export * from './select';
 export * from './icons';
