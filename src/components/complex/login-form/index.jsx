@@ -56,10 +56,10 @@ export const LoginForm = ({
             width="100%"
             onChange={onChange}
           />
-          <Form.Feedback>{touched[name] && errors[name]}</Form.Feedback>
+          <Form.Feedback>{l(touched[name] && errors[name])}</Form.Feedback>
         </Form.Item>
       ))}
-      <Form.Feedback>{requestError?.status}</Form.Feedback>
+      <Form.Feedback>{l(requestError?.message)}</Form.Feedback>
       <Form.Space />
       <Form.Button
         disabled={isDisabled}

@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 import { API_EFFECTS } from '@api-effects';
 
 import { ROUTES } from '../routes';
-import { FORM_EMPTY_FIELD, FORM_FIELD_TYPE } from './form';
 
 export const SIGNIN = 'signin';
 export const SIGNUP = 'signup';
@@ -34,15 +33,15 @@ const FIELD_PLACEHOLDER = {
 
 export const INITIAL_VALUES = {
   [SIGNIN]: {
-    [FIELD_NAME.EMAIL]: FORM_EMPTY_FIELD,
-    [FIELD_NAME.PASSWORD]: FORM_EMPTY_FIELD,
+    [FIELD_NAME.EMAIL]: '',
+    [FIELD_NAME.PASSWORD]: '',
   },
   [SIGNUP]: {
-    [FIELD_NAME.EMAIL]: FORM_EMPTY_FIELD,
-    [FIELD_NAME.FIRST_NAME]: FORM_EMPTY_FIELD,
-    [FIELD_NAME.LAST_NAME]: FORM_EMPTY_FIELD,
-    [FIELD_NAME.PASSWORD]: FORM_EMPTY_FIELD,
-    [FIELD_NAME.CONFIRM]: FORM_EMPTY_FIELD,
+    [FIELD_NAME.EMAIL]: '',
+    [FIELD_NAME.FIRST_NAME]: '',
+    [FIELD_NAME.LAST_NAME]: '',
+    [FIELD_NAME.PASSWORD]: '',
+    [FIELD_NAME.CONFIRM]: '',
   },
 };
 
@@ -50,13 +49,13 @@ export const FIELDS = {
   [SIGNIN]: [
     {
       name: FIELD_NAME.EMAIL,
-      type: FORM_FIELD_TYPE.EMAIL,
+      type: 'text',
       label: FIELD_LABEL.EMAIL,
       placeholder: FIELD_PLACEHOLDER.EMAIL,
     },
     {
       name: FIELD_NAME.PASSWORD,
-      type: FORM_FIELD_TYPE.PASSWORD,
+      type: 'password',
       label: FIELD_LABEL.PASSWORD,
       placeholder: FIELD_PLACEHOLDER.PASSWORD,
     },
@@ -64,31 +63,31 @@ export const FIELDS = {
   [SIGNUP]: [
     {
       name: FIELD_NAME.EMAIL,
-      type: FORM_FIELD_TYPE.EMAIL,
+      type: 'text',
       label: FIELD_LABEL.EMAIL,
       placeholder: FIELD_PLACEHOLDER.EMAIL,
     },
     {
       name: FIELD_NAME.FIRST_NAME,
-      type: FORM_FIELD_TYPE.TEXT,
+      type: 'text',
       label: FIELD_LABEL.FIRST_NAME,
       placeholder: FIELD_PLACEHOLDER.FIRST_NAME,
     },
     {
       name: FIELD_NAME.LAST_NAME,
-      type: FORM_FIELD_TYPE.TEXT,
+      type: 'text',
       label: FIELD_LABEL.LAST_NAME,
       placeholder: FIELD_PLACEHOLDER.LAST_NAME,
     },
     {
       name: FIELD_NAME.PASSWORD,
-      type: FORM_FIELD_TYPE.PASSWORD,
+      type: 'password',
       label: FIELD_LABEL.PASSWORD,
       placeholder: FIELD_PLACEHOLDER.PASSWORD,
     },
     {
       name: FIELD_NAME.CONFIRM,
-      type: FORM_FIELD_TYPE.PASSWORD,
+      type: 'password',
       label: FIELD_LABEL.CONFIRM,
       placeholder: FIELD_PLACEHOLDER.CONFIRM,
     },
@@ -97,15 +96,15 @@ export const FIELDS = {
 
 export const VALIDATION_SCHEMA = {
   [SIGNIN]: Yup.object().shape({
-    [FIELD_NAME.EMAIL]: Yup.string().email().required('Required').trim(),
-    [FIELD_NAME.PASSWORD]: Yup.string().required('Required').trim(),
+    [FIELD_NAME.EMAIL]: Yup.string().email('emailFormError').required('requiredFormError').trim(),
+    [FIELD_NAME.PASSWORD]: Yup.string().required('requiredFormError').trim(),
   }),
   [SIGNUP]: Yup.object().shape({
-    [FIELD_NAME.EMAIL]: Yup.string().email().required('Required').trim(),
-    [FIELD_NAME.FIRST_NAME]: Yup.string().max(20, 'Must be 20 characters at least').required('Required').trim(),
-    [FIELD_NAME.LAST_NAME]: Yup.string().max(20, 'Must be 20 characters at least').required('Required').trim(),
-    [FIELD_NAME.PASSWORD]: Yup.string().min(8, 'Must be 8 characters at least').required('Required').trim(),
-    [FIELD_NAME.CONFIRM]: Yup.string().min(8, 'Must be 8 characters at least').required('Required').trim(),
+    [FIELD_NAME.EMAIL]: Yup.string().email('emailFormError').required('requiredFormError').trim(),
+    [FIELD_NAME.FIRST_NAME]: Yup.string().max(20, 'signupMaxLengthFormError').required('requiredFormError').trim(),
+    [FIELD_NAME.LAST_NAME]: Yup.string().max(20, 'signupMaxLengthFormError').required('requiredFormError').trim(),
+    [FIELD_NAME.PASSWORD]: Yup.string().min(8, 'signupMinLengthFormError').required('requiredFormError').trim(),
+    [FIELD_NAME.CONFIRM]: Yup.string().min(8, 'signupMinLengthFormError').required('requiredFormError').trim(),
   }),
 };
 

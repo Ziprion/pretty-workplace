@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 
 import { Form, Input } from '@components';
-import {
-  FORM_EMPTY_FIELD, WORKPLACE_FORM_FIELD_NAME, WORKPLACE_FORM_FIELDS, WORKPLACE_FORM_VALIDATION_SCHEMA,
-} from '@constants';
+import { WORKPLACE_FORM_FIELD_NAME, WORKPLACE_FORM_FIELDS, WORKPLACE_FORM_VALIDATION_SCHEMA } from '@constants';
 import { l } from '@utils';
 
 export const WorkplaceForm = ({
@@ -13,7 +11,7 @@ export const WorkplaceForm = ({
   onOk,
   onCancel,
   isLoading,
-  initialTitle = FORM_EMPTY_FIELD,
+  initialTitle = '',
   onOkText = 'okModalButtonText',
   onCancelText = 'cancelModalButtonText',
 }) => {
@@ -60,10 +58,10 @@ export const WorkplaceForm = ({
             width="100%"
             onChange={onChange}
           />
-          <Form.Feedback>{touched[name] && errors[name]}</Form.Feedback>
+          <Form.Feedback>{l(touched[name] && errors[name])}</Form.Feedback>
         </Form.Item>
       ))}
-      <Form.Feedback>{requestError?.status}</Form.Feedback>
+      <Form.Feedback>{l(requestError?.message)}</Form.Feedback>
       <Form.ButtonGroup>
         <Form.Button
           disabled={isDisabled}

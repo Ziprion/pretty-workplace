@@ -29,13 +29,13 @@ itemsRouter.post('', async (req, res) => {
   const url = rawUrl?.trim();
 
   if (!(title && url && boardId)) {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -43,19 +43,19 @@ itemsRouter.post('', async (req, res) => {
   const board = toCamelCase(await getBoardById(boardId));
 
   if (!(board && board.workplaceId === workplaceId)) {
-    return res.status(404).send({ message: 'BoardNotFoundError' });
+    return res.status(404).send({ message: 'boardNotFoundError' });
   }
 
   const itemByTitle = await getItemByTitle(title, boardId);
 
   if (itemByTitle) {
-    return res.status(400).send({ message: 'ItemSameTitleError' });
+    return res.status(400).send({ message: 'itemSameTitleError' });
   }
 
   const itemByUrl = await getItemByUrl(url, boardId);
 
   if (itemByUrl) {
-    return res.status(400).send({ message: 'ItemSameUrlError' });
+    return res.status(400).send({ message: 'itemSameUrlError' });
   }
 
   const pathToIcon = await downloadIcon(url);
@@ -92,19 +92,19 @@ itemsRouter.patch('/:id', async (req, res) => {
   const url = rawUrl?.trim();
 
   if (!id || id === 'null') {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const editedItem = toCamelCase(await getItemById(id));
 
   if (!editedItem) {
-    return res.status(404).send({ message: 'ItemNotFoundError' });
+    return res.status(404).send({ message: 'itemNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -113,13 +113,13 @@ itemsRouter.patch('/:id', async (req, res) => {
   const board = toCamelCase(await getBoardById(boardId));
 
   if (!(board && board.workplaceId === workplaceId)) {
-    return res.status(404).send({ message: 'BoardNotFoundError' });
+    return res.status(404).send({ message: 'boardNotFoundError' });
   }
 
   if (title) {
     const itemByTitle = await getItemByTitle(title, boardId);
     if (itemByTitle && Number(id) !== itemByTitle.id) {
-      return res.status(400).send({ message: 'ItemSameTitleError' });
+      return res.status(400).send({ message: 'itemSameTitleError' });
     }
   }
 
@@ -127,7 +127,7 @@ itemsRouter.patch('/:id', async (req, res) => {
     const itemByUrl = await getItemByUrl(url, boardId);
 
     if (itemByUrl && Number(id) !== itemByUrl.id) {
-      return res.status(400).send({ message: 'ItemSameUrlError' });
+      return res.status(400).send({ message: 'itemSameUrlError' });
     }
   }
 
@@ -154,19 +154,19 @@ itemsRouter.delete('/:id', async (req, res) => {
   } = req;
 
   if (!id || id === 'null') {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const deletedItem = toCamelCase(await getItemById(id));
 
   if (!deletedItem) {
-    return res.status(404).send({ message: 'ItemNotFoundError' });
+    return res.status(404).send({ message: 'itemNotFoundError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { boardId } = deletedItem;
@@ -175,7 +175,7 @@ itemsRouter.delete('/:id', async (req, res) => {
   const board = toCamelCase(await getBoardById(boardId));
 
   if (!(board && board.workplaceId === workplaceId)) {
-    return res.status(404).send({ message: 'BoardNotFoundError' });
+    return res.status(404).send({ message: 'boardNotFoundError' });
   }
 
   await deleteItem(id);

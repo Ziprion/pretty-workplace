@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 
 import { Form, Input } from '@components';
 import {
-  BOARD_FORM_FIELDS, BOARD_FORM_NAME, BOARD_FORM_VALIDATION_SCHEMA, FORM_EMPTY_FIELD,
+  BOARD_FORM_FIELDS, BOARD_FORM_NAME, BOARD_FORM_VALIDATION_SCHEMA,
 } from '@constants';
 import { l } from '@utils';
 
@@ -13,7 +13,7 @@ export const BoardForm = ({
   onOk,
   onCancel,
   isLoading,
-  initialTitle = FORM_EMPTY_FIELD,
+  initialTitle = '',
   onOkText = 'okModalButtonText',
   onCancelText = 'cancelModalButtonText',
 }) => {
@@ -60,10 +60,10 @@ export const BoardForm = ({
             width="100%"
             onChange={onChange}
           />
-          <Form.Feedback>{touched[name] && errors[name]}</Form.Feedback>
+          <Form.Feedback>{l(touched[name] && errors[name])}</Form.Feedback>
         </Form.Item>
       ))}
-      <Form.Feedback>{requestError?.status}</Form.Feedback>
+      <Form.Feedback>{l(requestError?.message)}</Form.Feedback>
       <Form.ButtonGroup>
         <Form.Button
           disabled={isDisabled}

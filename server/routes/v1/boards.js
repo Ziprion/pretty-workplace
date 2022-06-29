@@ -26,13 +26,13 @@ boardsRouter.post('', async (req, res) => {
   const title = rawTitle?.trim();
 
   if (!title) {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -40,7 +40,7 @@ boardsRouter.post('', async (req, res) => {
   const boardByTitle = await getBoardByTitle(title, workplaceId);
 
   if (boardByTitle) {
-    return res.status(400).send({ message: 'BoardSameTitleError' });
+    return res.status(400).send({ message: 'boardSameTitleError' });
   }
 
   const { id } = await createBoard({
@@ -69,13 +69,13 @@ boardsRouter.patch('/:id', async (req, res) => {
   const title = rawTitle?.trim();
 
   if (!id || id === 'null') {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -83,14 +83,14 @@ boardsRouter.patch('/:id', async (req, res) => {
   const board = await getBoardById(id);
 
   if (!board) {
-    return res.status(404).send({ message: 'BoardNotFoundError' });
+    return res.status(404).send({ message: 'boardNotFoundError' });
   }
 
   if (title) {
     const boardByTitle = await getBoardByTitle(title, workplaceId);
 
     if (boardByTitle) {
-      return res.status(400).send({ message: 'BoardSameTitleError' });
+      return res.status(400).send({ message: 'boardSameTitleError' });
     }
   }
 
@@ -113,13 +113,13 @@ boardsRouter.delete('/:id', async (req, res) => {
   } = req;
 
   if (!deletedBoardId || deletedBoardId === 'null') {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -127,7 +127,7 @@ boardsRouter.delete('/:id', async (req, res) => {
   const board = toCamelCase(await getBoardById(deletedBoardId));
 
   if (!(board && board.workplaceId === workplaceId)) {
-    return res.status(404).send({ message: 'BoardNotFoundError' });
+    return res.status(404).send({ message: 'boardNotFoundError' });
   }
 
   await deleteBoard(deletedBoardId);

@@ -9,7 +9,7 @@ export const authorizationMiddleware = async (req, res, next) => {
   const { cookies: { accessToken } } = req;
 
   if (!accessToken) {
-    return res.status(401).send({ message: 'UnauthorizedError' });
+    return res.status(401).send({ message: 'unauthorizedError' });
   }
 
   try {
@@ -19,6 +19,6 @@ export const authorizationMiddleware = async (req, res, next) => {
 
     return next();
   } catch {
-    return res.status(401).send({ message: 'UnauthorizedError' });
+    return res.status(401).send({ message: 'unauthorizedError' });
   }
 };

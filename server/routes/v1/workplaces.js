@@ -41,13 +41,13 @@ workplacesRouter.post('', async (req, res) => {
   const title = rawTitle?.trim();
 
   if (!title) {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const workplaceByTitle = await getWorkplaceByTitle(title, userId);
 
   if (workplaceByTitle) {
-    return res.status(400).send({ message: 'WorkplaceSameTitleError' });
+    return res.status(400).send({ message: 'workplaceSameTitleError' });
   }
 
   const { id } = await createWorkplace({
@@ -75,7 +75,7 @@ workplacesRouter.get('/active', async (req, res) => {
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace || activeWorkplace.id === null) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -100,13 +100,13 @@ workplacesRouter.patch('/active/boardsPosition', async (req, res) => {
   } = req;
 
   if (!Array.isArray(boardsPosition)) {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -127,13 +127,13 @@ workplacesRouter.patch('/active/change', async (req, res) => {
   } = req;
 
   if (!id || id === 'null') {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const workplace = toCamelCase(await getWorkplaceById(id));
 
   if (!workplace || workplace.userId !== userId) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   await updateActiveWorkplace(id, userId);
@@ -160,7 +160,7 @@ workplacesRouter.patch('/active', async (req, res) => {
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: workplaceId } = activeWorkplace;
@@ -168,14 +168,14 @@ workplacesRouter.patch('/active', async (req, res) => {
   const workplace = await getWorkplaceById(workplaceId);
 
   if (!workplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   if (title) {
     const workplaceByTitle = await getWorkplaceByTitle(title, userId);
 
     if (workplaceByTitle) {
-      return res.status(400).send({ message: 'WorkplaceSameTitleError' });
+      return res.status(400).send({ message: 'workplaceSameTitleError' });
     }
   }
 
@@ -195,7 +195,7 @@ workplacesRouter.delete('/active', async (req, res) => {
   const activeWorkplace = await getActiveWorkplace(userId);
 
   if (!activeWorkplace) {
-    return res.status(404).send({ message: 'WorkplaceNotFoundError' });
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
   }
 
   const { id: deletedWorkplaceId } = activeWorkplace;

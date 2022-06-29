@@ -21,7 +21,7 @@ authRouter.get('/refresh', async (req, res) => {
   const { cookies: { refreshToken } } = req;
 
   if (!refreshToken) {
-    return res.status(401).send({ message: 'UnauthorizedError' });
+    return res.status(401).send({ message: 'unauthorizedError' });
   }
 
   try {
@@ -30,7 +30,7 @@ authRouter.get('/refresh', async (req, res) => {
 
     return setTokensToCookie(res, tokens).sendStatus(200);
   } catch {
-    return res.status(401).send({ message: 'UnauthorizedError' });
+    return res.status(401).send({ message: 'unauthorizedError' });
   }
 });
 
@@ -46,17 +46,17 @@ authRouter.post('/signin', async (req, res) => {
       password,
     },
   } = req;
-  const email = rawEmail.toLowerCase();
+  const email = rawEmail.toLowerCase().trim();
 
   if (!(email && password)) {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   const user = toCamelCase(await getUser(email));
-  const isCorrectPassword = await bcrypt.compare(password, user.password);
+  const isCorrectPassword = await bcrypt.compare(password, user?.password || '');
 
   if (!user || !isCorrectPassword) {
-    return res.status(404).send({ message: 'SigninError' });
+    return res.status(404).send({ message: 'signinError' });
   }
 
   const tokens = generateTokens(user.id, email);
@@ -77,22 +77,22 @@ authRouter.post('/signup', async (req, res) => {
     },
   } = req;
 
-  const email = rawEmail?.toLowerCase();
-  const firstName = rawFirstName?.toLowerCase();
-  const lastName = rawLastName?.toLowerCase();
+  const email = rawEmail?.toLowerCase().trim();
+  const firstName = rawFirstName?.toLowerCase().trim();
+  const lastName = rawLastName?.toLowerCase().trim();
 
   if (!(email && password && confirm && lastName && firstName)) {
-    return res.status(400).send({ message: 'BadRequestError' });
+    return res.status(400).send({ message: 'badRequestError' });
   }
 
   if (password !== confirm) {
-    return res.status(400).send({ message: 'PasswordConfirmError' });
+    return res.status(400).send({ message: 'passwordConfirmError' });
   }
 
   const sameUser = await getUser(email);
 
   if (sameUser) {
-    return res.status(400).send({ message: 'UserSameEmailError' });
+    return res.status(400).send({ message: 'userSameEmailError' });
   }
 
   const { avatarBackground, avatarUrl } = getDefaultAvatar();

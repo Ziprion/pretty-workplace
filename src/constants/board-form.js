@@ -1,7 +1,5 @@
 import * as Yup from 'yup';
 
-import { FORM_FIELD_TYPE } from '@constants';
-
 export const BOARD_FORM_NAME = {
   TITLE: 'title',
 };
@@ -17,7 +15,7 @@ const BOARD_FORM_PLACEHOLDER = {
 export const BOARD_FORM_FIELDS = [
   {
     name: BOARD_FORM_NAME.TITLE,
-    type: FORM_FIELD_TYPE.TEXT,
+    type: 'text',
     label: BOARD_FORM_LABEL.TITLE,
     placeholder: BOARD_FORM_PLACEHOLDER.TITLE,
   },

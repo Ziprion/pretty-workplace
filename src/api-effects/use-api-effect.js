@@ -24,8 +24,8 @@ const DEFAULT_TIMEOUT = 10000;
 
 const UNKNOWN_ERROR = {
   status: 408,
-  statusText: 'Unknown error',
-  message: 'Unknown error',
+  statusText: 'unknownError',
+  message: 'unknownError',
 };
 
 const axiosInstance = axios.create({

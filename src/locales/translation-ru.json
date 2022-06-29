@@ -47,8 +47,7 @@
 
   "aboutFooterText": "О Нас",
   "supportFooterText": "Поддержка",
-  
-  
+
   "logoutModalTitle": "Вы уверены, что хотите выйти?",
   "logoutButtonText": "Выйти",
 
@@ -62,5 +61,24 @@
   "workplaceTitleLabel": "Название",
   "workplaceTitlePlaceholder": "Введите название рабочего места",
   "editWorkplaceButtonText": "Редактировать рабочее место",
-  "deleteWorkplaceButtonText": "Удалить рабочее место"
+  "deleteWorkplaceButtonText": "Удалить рабочее место",
+
+  "requiredFormError": "Обязательное поле",
+  "emailFormError": "Почта не корректная",
+  "signupMaxLengthFormError": "Должно быть не более 20 символов",
+  "signupMinLengthFormError": "Должно быть не меньше 8 символов",
+
+  "unknownError": "Неизвестная ошибка",
+  "signinError": "Неверное имя пользователь или пароль",
+  "badRequestError": "Неверный запрос",
+  "unauthorizedError": "Пользователь не авторизован",
+  "passwordConfirmError": "Пароли должны совпадать",
+  "userSameEmailError": "Пользователь с такой почтой уже существует",
+  "workplaceNotFoundError": "Рабочее место не найдено",
+  "workplaceSameTitleError": "Рабочее место с таким названием уже существует",
+  "boardSameTitleError": "Группа с таким названием уже существует",
+  "boardNotFoundError": "Группа не найдена",
+  "itemSameTitleError": "Закладка с таким название уже существует",
+  "itemSameUrlError": "Закладка с такой ссылкой уже существует",
+  "itemNotFoundError": "Закладка не найдена"
 }

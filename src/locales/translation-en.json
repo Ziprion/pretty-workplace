@@ -47,8 +47,7 @@
 
   "aboutFooterText": "About us",
   "supportFooterText": "Support",
-  
-  
+
   "logoutModalTitle": "Are you sure to sign out?",
   "logoutButtonText": "Sign out",
 
@@ -62,5 +61,24 @@
   "workplaceTitleLabel": "Title",
   "workplaceTitlePlaceholder": "Enter workplace's title",
   "editWorkplaceButtonText": "Edit workplace",
-  "deleteWorkplaceButtonText": "Delete workplace"
+  "deleteWorkplaceButtonText": "Delete workplace",
+
+  "requiredFormError": "Required",
+  "emailFormError": "It must be a valid email",
+  "signupMaxLengthFormError": "Must be no more than 20 characters",
+  "signupMinLengthFormError": "Must be 8 characters at least",
+
+  "unknownError": "Unknown error",
+  "signinError": "User or password is incorrect",
+  "badRequestError": "Request is incorrect",
+  "unauthorizedError": "User is unauthorized",
+  "passwordConfirmError": "Passwords must be equal",
+  "userSameEmailError": "User with this email is already exist",
+  "workplaceNotFoundError": "Workplace was not found",
+  "workplaceSameTitleError": "Workplace with this title is already exist",
+  "boardSameTitleError": "Board with this title is already exist",
+  "boardNotFoundError": "Board was not found",
+  "itemSameTitleError": "Item with this title is already exist",
+  "itemSameUrlError": "Item with this url is already exist",
+  "itemNotFoundError": "Item was not found"
 }

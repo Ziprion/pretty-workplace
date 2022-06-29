@@ -12,7 +12,7 @@ userRouter.get('/me', async (req, res) => {
   const user = toCamelCase(await getUser(userEmail));
 
   if (!user) {
-    return res.status(401).send({ message: 'UnauthorizedError' });
+    return res.status(401).send({ message: 'unauthorizedError' });
   }
 
   return res.status(200).send(omit(user, [ 'id', 'password', 'email' ]));

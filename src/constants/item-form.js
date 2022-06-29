@@ -1,7 +1,5 @@
 import * as Yup from 'yup';
 
-import { FORM_FIELD_TYPE } from '@constants';
-
 export const ITEM_FORM_NAME = {
   TITLE: 'title',
   URL: 'url',
@@ -20,13 +18,13 @@ const ITEM_FORM_PLACEHOLDER = {
 export const ITEM_FORM_FIELDS = [
   {
     name: ITEM_FORM_NAME.TITLE,
-    type: FORM_FIELD_TYPE.TEXT,
+    type: 'text',
     label: ITEM_FORM_LABEL.TITLE,
     placeholder: ITEM_FORM_PLACEHOLDER.TITLE,
   },
   {
     name: ITEM_FORM_NAME.URL,
-    type: FORM_FIELD_TYPE.TEXT,
+    type: 'text',
     label: ITEM_FORM_LABEL.URL,
     placeholder: ITEM_FORM_PLACEHOLDER.URL,
   },
