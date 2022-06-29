@@ -23,4 +23,11 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { reducer: itemsReducer, actions: { addItem, editItem, deleteItem } } = itemsSlice;
+export const {
+  reducer: itemsReducer,
+  actions: {
+    addItem,
+    editItem,
+    deleteItem,
+  },
+} = itemsSlice;

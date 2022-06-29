@@ -11,4 +11,10 @@ const userSlice = createSlice({
   },
 });
 
-export const { reducer: userReducer, actions: { setUser, cleanup } } = userSlice;
+export const {
+  reducer: userReducer,
+  actions: {
+    setUser,
+    cleanup,
+  },
+} = userSlice;

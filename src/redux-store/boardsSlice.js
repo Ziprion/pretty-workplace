@@ -21,6 +21,11 @@ const boardsSlice = createSlice({
       const currentStatus = currentBoard.isExpanded;
       currentBoard.isExpanded = !currentStatus;
     },
+    collapseAllBoards: (state) => {
+      state.forEach((board) => {
+        board.isExpanded = false;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(setActiveWorkplace, (_, { payload: { boards } }) => formatBoards(boards));
@@ -29,7 +34,12 @@ const boardsSlice = createSlice({
 });
 
 export const {
-  reducer: boardsReducer, actions: {
-    addBoard, editBoard, deleteBoard, toggleExpandBoard,
+  reducer: boardsReducer,
+  actions: {
+    addBoard,
+    editBoard,
+    deleteBoard,
+    toggleExpandBoard,
+    collapseAllBoards,
   },
 } = boardsSlice;

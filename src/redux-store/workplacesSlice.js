@@ -30,6 +30,9 @@ const workplacesSlice = createSlice({
 export const {
   reducer: workplacesReducer,
   actions: {
-    setWorkplaces, addWorkplace, editWorkplace, deleteWorkplace,
+    setWorkplaces,
+    addWorkplace,
+    editWorkplace,
+    deleteWorkplace,
   },
 } = workplacesSlice;
