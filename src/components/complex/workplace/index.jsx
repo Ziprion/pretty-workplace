@@ -3,7 +3,9 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { Board } from '@components';
 import { AddWorkplaceConnector } from '@connectors';
+import { NEW_BOARD_KEY } from '@constants';
 import { useBoardDnd, useColumnParameters } from '@hooks';
+import { getStorageItem } from '@utils';
 
 import { BoardColumn, Boards, Wrapper } from './parts';
 
@@ -34,6 +36,7 @@ export const Workplace = ({
                           <Board
                             key={board.id}
                             index={index}
+                            isNew={Number(getStorageItem(NEW_BOARD_KEY)) === board.id}
                             items={itemsByBoardId[board.id]}
                             {...board}
                           />

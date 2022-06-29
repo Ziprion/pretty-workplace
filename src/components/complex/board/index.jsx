@@ -6,20 +6,20 @@ import { useDispatch } from 'react-redux';
 
 import { ChevronDoubleDownIcon, Item } from '@components';
 import { AddItemConnector, BoardMenuConnector } from '@connectors';
-import { DEFAULT_NEW_BOARD, NEW_BOARD_KEY } from '@constants';
+import { NEW_BOARD_KEY } from '@constants';
 import { toggleExpandBoard } from '@redux-store';
-import { getStorageItem, setStorageItem } from '@utils';
+import { removeStorageItem } from '@utils';
 
 import {
   ActionBar, Body, Header, Title, ToggleIcon, Wrapper,
 } from './parts';
 
 export const Board = memo(({
-  id, title, items = [], index, isExpanded,
+  id, title, items = [], index, isExpanded, isNew,
 }) => {
   const dispatch = useDispatch();
+
   const [ isOverflow, setOverflow ] = useState(!isExpanded);
-  const [ isNew ] = useState(Number(getStorageItem(NEW_BOARD_KEY)) === id);
 
   const toggleExpand = useCallback(() => {
     dispatch(toggleExpandBoard(id));
@@ -30,13 +30,11 @@ export const Board = memo(({
     let timer;
 
     if (isNew) {
-      timer = setTimeout(() => setStorageItem(NEW_BOARD_KEY, DEFAULT_NEW_BOARD));
-    } else {
-      clearTimeout(timer);
+      timer = setTimeout(() => removeStorageItem(NEW_BOARD_KEY));
     }
 
     return () => clearTimeout(timer);
-  }, [ isNew ]);
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line functional/no-let
