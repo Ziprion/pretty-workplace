@@ -8,6 +8,12 @@
   "signinLinkText": "Create an account",
   "signinSubmitText": "Sign in",
 
+  "nightGreetingMessage": "Good night",
+  "eveningGreetingMessage": "Good evening",
+  "dayGreetingMessage": "Good day",
+  "morningGreetingMessage": "Good morning",
+  "additionalGreetingMessage": "Preparing the workplace...",
+
   "emailLabel": "Email",
   "emailPlaceholder": "Enter your email",
   "firstNameLabel": "Name",

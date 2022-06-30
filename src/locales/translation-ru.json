@@ -8,6 +8,12 @@
   "signinLinkText": "Зарегистрироваться",
   "signinSubmitText": "Войти",
 
+  "nightGreetingMessage": "Доброй ночи",
+  "eveningGreetingMessage": "Добрый вечер",
+  "dayGreetingMessage": "Добрый день",
+  "morningGreetingMessage": "Доброе утро",
+  "additionalGreetingMessage": "Готовим рабочее место...",
+
   "emailLabel": "Почта",
   "emailPlaceholder": "Введите почту",
   "firstNameLabel": "Имя",

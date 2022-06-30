@@ -2,25 +2,35 @@ import React from 'react';
 import Lottie from 'lottie-react';
 import { useSelector } from 'react-redux';
 
-import { getFullName, getTimeOfDay } from '@utils';
+import { getFullName, getTimeOfDay, l } from '@utils';
 
 import animationData from './animation-data.json';
 import {
-  AdditionalMessage, GreetingMessage, LoadingWrapper, WelcomeMessage, Wrapper,
+  AdditionalMessage, GreetingMessage, LoadingWrapper, UserName, WelcomeMessage, Wrapper,
 } from './parts';
 
 export const Greeting = () => {
-  const currentGreeting = getTimeOfDay();
+  const currentGreetingKey = getTimeOfDay();
+  const currentGreeting = l(currentGreetingKey);
+  const additionalMessage = l('additionalGreetingMessage');
+
   const { user } = useSelector((state) => state);
 
   return (
     <Wrapper>
       <WelcomeMessage>
         <GreetingMessage>
-          {user && `${currentGreeting}, ${getFullName(user)}!`}
+          {currentGreeting}
+          {user && (
+            <UserName>
+              {', '}
+              {getFullName(user)}
+            </UserName>
+          )}
+          !
         </GreetingMessage>
         <AdditionalMessage>
-          We are putting it all together...
+          {additionalMessage}
         </AdditionalMessage>
       </WelcomeMessage>
       <LoadingWrapper>

@@ -32,6 +32,9 @@ export const WelcomeMessage = styled.div`
 export const GreetingMessage = styled.div`
   font-size: ${({ theme }) => theme.headingFontSize.h4};
   line-height: ${({ theme }) => theme.headingLineHeight.h4};
+`;
+
+export const UserName = styled.span`
   text-transform: capitalize;
 `;
 

@@ -7,16 +7,16 @@ export const getTimeOfDay = () => {
   const currentTime = currentDate.getHours();
 
   if (currentTime >= NIGHT_TIME) {
-    return 'Good Night';
+    return 'nightGreetingMessage';
   }
 
   if (currentTime >= EVENING_TIME) {
-    return 'Good Evening';
+    return 'eveningGreetingMessage';
   }
 
   if (currentTime >= DAY_TIME) {
-    return 'Good Day';
+    return 'dayGreetingMessage';
   }
 
-  return 'Good Morning';
+  return 'morningGreetingMessage';
 };
