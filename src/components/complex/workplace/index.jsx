@@ -10,7 +10,7 @@ import { getStorageItem } from '@utils';
 import { BoardColumn, Boards, Wrapper } from './parts';
 
 export const Workplace = ({
-  activeWorkplaceId, boardsByPosition, itemsByBoardId, onBoardsPositionChange,
+  activeWorkplaceId, boardsByPosition, itemsByBoardId, onBoardsPositionChange, isChangingBoardsPosition,
 }) => {
   const { columnCount, columnWidth } = useColumnParameters();
   const { boards, onDragEnd } = useBoardDnd(boardsByPosition, columnCount, onBoardsPositionChange);
@@ -36,6 +36,7 @@ export const Workplace = ({
                           <Board
                             key={board.id}
                             index={index}
+                            isChangingBoardsPosition={isChangingBoardsPosition}
                             isNew={Number(getStorageItem(NEW_BOARD_KEY)) === board.id}
                             items={itemsByBoardId[board.id]}
                             {...board}

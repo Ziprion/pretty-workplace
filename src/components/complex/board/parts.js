@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
   ${({ isNew }) => isNew && css`
     animation: ${fadeIn} 1.5s ease 1
   `}
+  opacity: ${({ isDragging }) => (isDragging ? 0.4 : 1)};
 `;
 
 export const Header = styled.div`

@@ -15,7 +15,7 @@ import {
 } from './parts';
 
 export const Board = memo(({
-  id, title, items = [], index, isExpanded, isNew,
+  id, title, items = [], index, isExpanded, isNew, isChangingBoardsPosition,
 }) => {
   const dispatch = useDispatch();
 
@@ -60,11 +60,15 @@ export const Board = memo(({
       {(provided, snapshot) => (
         <Wrapper
           ref={provided.innerRef}
+          isDragging={snapshot.isDragging}
           isNew={isNew}
           {...provided.draggableProps}
           {...provided.draggableProps.style}
         >
-          <Header {...provided.dragHandleProps} onClick={toggleExpand}>
+          <Header
+            {...provided.dragHandleProps}
+            onClick={!isChangingBoardsPosition ? toggleExpand : undefined}
+          >
             <ToggleIcon isExpanded={isExpanded}>
               <ChevronDoubleDownIcon />
             </ToggleIcon>

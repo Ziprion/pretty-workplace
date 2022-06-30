@@ -7,7 +7,7 @@ import { updateBoardsPosition } from '@redux-store';
 
 export const WorkplaceConnector = (props) => {
   const dispatch = useDispatch();
-  const { data, run } = useApiEffect(API_EFFECTS.WORKPLACES.CHANGE_BOARDS_POSITION);
+  const { data, run, loading } = useApiEffect(API_EFFECTS.WORKPLACES.CHANGE_BOARDS_POSITION);
 
   const onBoardsPositionChange = (boardsPosition) => {
     run({ boardsPosition });
@@ -23,6 +23,7 @@ export const WorkplaceConnector = (props) => {
 
   return (
     <Workplace
+      isChangingBoardsPosition={loading}
       onBoardsPositionChange={onBoardsPositionChange}
       {...props}
     />
