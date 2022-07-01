@@ -10,7 +10,7 @@
 
   "nightGreetingMessage": "Доброй ночи",
   "eveningGreetingMessage": "Добрый вечер",
-  "dayGreetingMessage": "Добрый день",
+  "afternoonGreetingMessage": "Добрый день",
   "morningGreetingMessage": "Доброе утро",
   "additionalGreetingMessage": "Готовим рабочее место...",
 

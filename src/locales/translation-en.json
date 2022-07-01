@@ -10,7 +10,7 @@
 
   "nightGreetingMessage": "Good night",
   "eveningGreetingMessage": "Good evening",
-  "dayGreetingMessage": "Good day",
+  "afternoonGreetingMessage": "Good afternoon",
   "morningGreetingMessage": "Good morning",
   "additionalGreetingMessage": "Preparing the workplace...",
 

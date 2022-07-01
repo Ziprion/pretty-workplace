@@ -15,7 +15,7 @@ export const getTimeOfDay = () => {
   }
 
   if (currentTime >= DAY_TIME) {
-    return 'dayGreetingMessage';
+    return 'afternoonGreetingMessage';
   }
 
   return 'morningGreetingMessage';
