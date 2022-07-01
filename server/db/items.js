@@ -1,95 +1,47 @@
 import { db } from './db.js';
 
 export const getItems = async (boardId) => {
-  try {
-    const { rows } = await db.query(`SELECT * FROM items WHERE board_id='${boardId}'`);
+  const { rows } = await db.query(`SELECT * FROM items WHERE board_id='${boardId}'`);
 
-    return rows;
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  return rows;
 };
 
 export const createItem = async ({
   title, url, boardId, pathToIcon,
 }) => {
-  try {
-    const { rows } = await db.query(`INSERT INTO items(title, url, board_id, path_to_icon) VALUES ('${title}', '${url}', '${boardId}', '${pathToIcon}') RETURNING items.id`);
+  const { rows } = await db.query(`INSERT INTO items(title, url, board_id, path_to_icon) VALUES ('${title}', '${url}', '${boardId}', '${pathToIcon}') RETURNING items.id`);
 
-    return rows[0];
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  return rows[0];
 };
 
 export const getItemByTitle = async (title, boardId) => {
-  try {
-    const { rows } = await db.query(`SELECT * FROM items WHERE title='${title}' AND board_id='${boardId}'`);
+  const { rows } = await db.query(`SELECT * FROM items WHERE title='${title}' AND board_id='${boardId}'`);
 
-    return rows[0];
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  return rows[0];
 };
 
 export const getItemByUrl = async (url, boardId) => {
-  try {
-    const { rows } = await db.query(`SELECT * FROM items WHERE url='${url}' AND board_id='${boardId}'`);
+  const { rows } = await db.query(`SELECT * FROM items WHERE url='${url}' AND board_id='${boardId}'`);
 
-    return rows[0];
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  return rows[0];
 };
 
 export const getItemById = async (id) => {
-  try {
-    const { rows } = await db.query(`SELECT * FROM items WHERE id='${id}'`);
+  const { rows } = await db.query(`SELECT * FROM items WHERE id='${id}'`);
 
-    return rows[0];
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  return rows[0];
 };
 
 export const updateItem = async ({
   id, title, url, pathToIcon,
 }) => {
-  try {
-    await db.query(`UPDATE items SET title='${title}', url='${url}', path_to_icon='${pathToIcon}' WHERE id='${id}'`);
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  await db.query(`UPDATE items SET title='${title}', url='${url}', path_to_icon='${pathToIcon}' WHERE id='${id}'`);
 };
 
 export const deleteItem = async (id) => {
-  try {
-    await db.query(`DELETE FROM items WHERE id='${id}'`);
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  await db.query(`DELETE FROM items WHERE id='${id}'`);
 };
 
 export const deleteItemsByBoardId = async (boardId) => {
-  try {
-    await db.query(`DELETE FROM items WHERE board_id='${boardId}'`);
-  } catch (e) {
-    console.log(e.stack);
-
-    throw (e);
-  }
+  await db.query(`DELETE FROM items WHERE board_id='${boardId}'`);
 };

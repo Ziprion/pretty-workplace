@@ -46,8 +46,8 @@ export const MainConnector = ({ children }) => {
     let timer;
 
     if (
-      (activeWorkplaceStatus !== null || activeWorkplaceStatus !== STATUSES.PENDING)
-      && (workplacesStatus !== null || workplacesStatus !== STATUSES.PENDING)
+      (activeWorkplaceStatus !== null && activeWorkplaceStatus !== STATUSES.PENDING)
+      && (workplacesStatus !== null && workplacesStatus !== STATUSES.PENDING)
     ) {
       timer = setTimeout(() => setReady(true), 4500);
     }

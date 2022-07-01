@@ -34,7 +34,7 @@ export const Greeting = () => {
         </AdditionalMessage>
       </WelcomeMessage>
       <LoadingWrapper>
-        <Lottie animationData={animationData} />
+        <Lottie animationData={animationData} loop={false} />
       </LoadingWrapper>
     </Wrapper>
   );
