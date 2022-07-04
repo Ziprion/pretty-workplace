@@ -1,3 +1,6 @@
+import { NEW_BOARD_KEY } from '@constants';
+import { getStorageItem, removeStorageItem, setStorageItem } from '@utils';
+
 export const formatBoards = (boards) => boards.map((board) => ({
   ...board,
   isExpanded: false,
@@ -17,6 +20,8 @@ export const getBoardsByPosition = (boards, boardsPosition = []) => {
 
 export const getBoardsByColumn = (boardsByPosition, columnCount) => {
   const boardsByColumn = boardsByPosition.reduce((acc, board, index) => {
+    if (!board) return acc;
+
     const columnIndex = index % columnCount;
 
     if (acc[columnIndex]) {
@@ -44,3 +49,10 @@ export const getFormattedBoardsPosition = (boardsByColumn, columnCount) => Objec
 
     return acc;
   }, []);
+
+export const setIsBoardFade = (id) => {
+  setStorageItem(NEW_BOARD_KEY, id);
+  setTimeout(() => removeStorageItem(NEW_BOARD_KEY));
+};
+
+export const getIsBoardFade = (id) => Number(getStorageItem(NEW_BOARD_KEY)) === id;

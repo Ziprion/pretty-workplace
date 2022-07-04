@@ -1,67 +1,39 @@
-import React, {
-  memo, useCallback, useEffect, useState,
-} from 'react';
+import React, { memo, useCallback } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 
 import { ChevronDoubleDownIcon, Item } from '@components';
 import { AddItemConnector, BoardMenuConnector } from '@connectors';
-import { NEW_BOARD_KEY } from '@constants';
+import { useBoardOverflow } from '@hooks';
 import { toggleExpandBoard } from '@redux-store';
-import { removeStorageItem } from '@utils';
 
 import {
   ActionBar, Body, Header, Title, ToggleIcon, Wrapper,
 } from './parts';
 
 export const Board = memo(({
-  id, title, items = [], index, isExpanded, isNew, isChangingBoardsPosition,
+  id, title, items = [], boardIndex, isExpanded, isFade, isChangingBoardsPosition,
 }) => {
   const dispatch = useDispatch();
 
-  const [ isOverflow, setOverflow ] = useState(!isExpanded);
+  const { isOverflow } = useBoardOverflow(isExpanded);
 
   const toggleExpand = useCallback(() => {
     dispatch(toggleExpandBoard(id));
   }, []);
 
-  useEffect(() => {
-    // eslint-disable-next-line functional/no-let
-    let timer;
-
-    if (isNew) {
-      timer = setTimeout(() => removeStorageItem(NEW_BOARD_KEY));
-    }
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line functional/no-let
-    let timer;
-
-    if (isExpanded) {
-      timer = setTimeout(() => setOverflow(false), 200);
-    } else {
-      clearTimeout(timer);
-      setOverflow(true);
-    }
-
-    return () => clearTimeout(timer);
-  }, [ isExpanded ]);
-
   return (
     <Draggable
       key={id}
       draggableId={String(id)}
-      index={Number(index)}
+      index={Number(boardIndex)}
     >
       {/* eslint-disable-next-line no-unused-vars */}
       {(provided, snapshot) => (
         <Wrapper
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
-          isNew={isNew}
+          isFade={isFade}
           {...provided.draggableProps}
           {...provided.draggableProps.style}
         >

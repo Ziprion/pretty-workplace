@@ -6,6 +6,7 @@ export * from './item';
 export * from './item-form';
 export * from './item-menu';
 export * from './board';
+export * from './boards-column';
 export * from './board-menu';
 export * from './board-form';
 export * from './user-panel';

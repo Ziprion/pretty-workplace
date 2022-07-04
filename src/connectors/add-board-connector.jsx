@@ -5,9 +5,8 @@ import { API_EFFECTS, useApiEffect } from '@api-effects';
 import {
   AddIcon, BoardForm, Button, Modal,
 } from '@components';
-import { NEW_BOARD_KEY } from '@constants';
 import { addBoard } from '@redux-store';
-import { l, setStorageItem } from '@utils';
+import { l, setIsBoardFade } from '@utils';
 
 export const AddBoardConnector = ({ activeWorkplaceId }) => {
   const dispatch = useDispatch();
@@ -31,8 +30,8 @@ export const AddBoardConnector = ({ activeWorkplaceId }) => {
   useEffect(() => {
     if (data) {
       dispatch(addBoard(data));
-      setStorageItem(NEW_BOARD_KEY, data.id);
       closeModal();
+      setIsBoardFade(data.id);
     }
   }, [ data ]);
 

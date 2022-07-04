@@ -24,10 +24,12 @@ export const Wrapper = styled.div`
   box-shadow:
     0 2px 4px 0 #64748b1a,
     0 1px 1px 0 #64748b0f;
-  ${({ isNew }) => isNew && css`
+  ${({ isFade }) => isFade && css`
     animation: ${fadeIn} 1.5s ease 1
   `}
-  opacity: ${({ isDragging }) => (isDragging ? 0.4 : 1)};
+  ${({ isDragging }) => isDragging && css`
+    opacity: 0.4;
+  `}
 `;
 
 export const Header = styled.div`
