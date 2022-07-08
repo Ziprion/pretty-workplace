@@ -38,7 +38,7 @@ export const deleteWorkplace = async (id) => {
   await db.query(`DELETE FROM workplaces WHERE id='${id}'`);
 };
 
-export const addBoardsPosition = async (boardId, workplaceId) => {
+export const addBoardPosition = async (boardId, workplaceId) => {
   await db.query(`UPDATE workplaces SET boards_position=array_append(boards_position, '${boardId}') WHERE id='${workplaceId}'`);
 };
 

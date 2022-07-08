@@ -1,7 +1,7 @@
 import { db } from './db.js';
 
 export const getBoards = async (workplaceId) => {
-  const { rows } = await db.query(`SELECT id, title FROM boards WHERE workplace_id='${workplaceId}'`);
+  const { rows } = await db.query(`SELECT id, title, items_position FROM boards WHERE workplace_id='${workplaceId}'`);
 
   return rows;
 };
@@ -36,4 +36,18 @@ export const deleteBoardsByWorkplaceId = async (workplaceId) => {
   const { rows } = await db.query(`DELETE FROM boards WHERE workplace_id='${workplaceId}' RETURNING id`);
 
   return rows;
+};
+
+export const updateItemsPosition = async (id, itemsPosition) => {
+  const { rows } = await db.query(`UPDATE boards SET items_position='{${itemsPosition.toString()}}' WHERE id='${id}' RETURNING items_position`);
+
+  return rows[0];
+};
+
+export const addItemPosition = async (itemId, boardId) => {
+  await db.query(`UPDATE boards SET items_position=array_append(items_position, '${itemId}') WHERE id='${boardId}'`);
+};
+
+export const deleteItemPosition = async (itemId, boardId) => {
+  await db.query(`UPDATE boards SET items_position=array_replace(items_position, ${itemId}, 0) WHERE id='${boardId}'`);
 };

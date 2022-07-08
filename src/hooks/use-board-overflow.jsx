@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export const useBoardOverflow = (initialState) => {
-  const [ isOverflow, setOverflow ] = useState(initialState);
+export const useBoardOverflow = (isExpanded) => {
+  const [ isOverflow, setOverflow ] = useState(!isExpanded);
 
   useEffect(() => {
     // eslint-disable-next-line functional/no-let
     let timer;
 
-    if (initialState) {
+    if (isExpanded) {
       timer = setTimeout(() => setOverflow(false), 200);
     } else {
       clearTimeout(timer);
@@ -15,7 +15,7 @@ export const useBoardOverflow = (initialState) => {
     }
 
     return () => clearTimeout(timer);
-  }, [ initialState ]);
+  }, [ isExpanded ]);
 
   return { isOverflow };
 };

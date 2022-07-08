@@ -2,8 +2,10 @@ import express from 'express';
 import omit from 'lodash/omit.js';
 
 import {
+  addItemPosition,
   createItem,
   deleteItem,
+  deleteItemPosition,
   getActiveWorkplace,
   getBoardById,
   getItemById,
@@ -66,6 +68,8 @@ itemsRouter.post('', async (req, res) => {
     boardId,
     pathToIcon,
   });
+
+  await addItemPosition(id, boardId);
 
   return res.status(201).send({
     id,
@@ -179,6 +183,7 @@ itemsRouter.delete('/:id', async (req, res) => {
   }
 
   await deleteItem(id);
+  await deleteItemPosition(id, boardId);
 
   return res.sendStatus(200);
 });

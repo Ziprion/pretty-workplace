@@ -14,3 +14,9 @@ export const DELETE = (id) => ({
   method: 'delete',
   url: `/api/boards/${id}`,
 });
+
+export const CHANGE_ITEMS_POSITION = (data) => ({
+  method: 'patch',
+  url: '/api/boards/itemsPosition',
+  data,
+});

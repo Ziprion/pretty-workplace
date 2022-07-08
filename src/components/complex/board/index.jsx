@@ -24,7 +24,6 @@ export const Board = memo(({
 
   return (
     <Draggable
-      key={id}
       draggableId={String(id)}
       index={Number(boardIndex)}
     >

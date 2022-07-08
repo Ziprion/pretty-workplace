@@ -2,7 +2,7 @@ import express from 'express';
 import omit from 'lodash/omit.js';
 
 import {
-  addBoardsPosition,
+  addBoardPosition,
   createBoard,
   deleteBoard,
   deleteBoardPosition,
@@ -11,6 +11,7 @@ import {
   getBoardById,
   getBoardByTitle,
   updateBoard,
+  updateItemsPosition,
 } from '../../db/index.js';
 import { toCamelCase } from '../../utils/index.js';
 
@@ -48,7 +49,7 @@ boardsRouter.post('', async (req, res) => {
     workplaceId,
   });
 
-  await addBoardsPosition(id, workplaceId);
+  await addBoardPosition(id, workplaceId);
 
   return res.status(201).send({
     id,
@@ -80,9 +81,9 @@ boardsRouter.patch('/:id', async (req, res) => {
 
   const { id: workplaceId } = activeWorkplace;
 
-  const board = await getBoardById(id);
+  const board = toCamelCase(await getBoardById(id));
 
-  if (!board) {
+  if (!(board && board.workplaceId === workplaceId)) {
     return res.status(404).send({ message: 'boardNotFoundError' });
   }
 
@@ -102,6 +103,67 @@ boardsRouter.patch('/:id', async (req, res) => {
   await updateBoard(updatedBoard);
 
   return res.status(200).send((omit(updatedBoard, 'workplace_id')));
+});
+
+boardsRouter.patch('/itemsPosition', async (req, res) => {
+  const {
+    userId,
+    body: {
+      source: {
+        boardId: sourceBoardId,
+        itemsPosition: sourceItemsPosition,
+      },
+      destination: {
+        boardId: destinationBoardId,
+        itemsPosition: destinationItemsPosition,
+      },
+    },
+  } = req;
+
+  if (
+    !Array.isArray(sourceItemsPosition)
+      || !Array.isArray(destinationItemsPosition)
+      || !sourceBoardId
+      || !destinationBoardId
+  ) {
+    return res.status(400).send({ message: 'badRequestError' });
+  }
+
+  const activeWorkplace = await getActiveWorkplace(userId);
+
+  if (!activeWorkplace) {
+    return res.status(404).send({ message: 'workplaceNotFoundError' });
+  }
+
+  const { id: workplaceId } = activeWorkplace;
+
+  const sourceBoard = await getBoardById(sourceBoardId);
+  const destinationBoard = await getBoardById(destinationBoardId);
+
+  if (
+    !(sourceBoard && sourceBoard.workplaceId === workplaceId)
+      || !(destinationBoard && destinationBoard.workplaceId === workplaceId)
+  ) {
+    return res.status(404).send({ message: 'boardNotFoundError' });
+  }
+
+  const updatedSourceItemsPosition = toCamelCase(await updateItemsPosition(
+    sourceBoardId, sourceItemsPosition,
+  ));
+  const updatedDestinationItemsPosition = toCamelCase(await updateItemsPosition(
+    destinationBoardId, destinationItemsPosition,
+  ));
+
+  return res.status(200).send({
+    source: {
+      boardId: sourceBoardId,
+      itemsPosition: updatedSourceItemsPosition,
+    },
+    destination: {
+      boardId: destinationBoardId,
+      itemsPosition: updatedDestinationItemsPosition,
+    },
+  });
 });
 
 boardsRouter.delete('/:id', async (req, res) => {

@@ -9,25 +9,23 @@ import { Wrapper } from './parts';
 export const BoardsColumn = ({
   boards = [], columnIndex, columnWidth, itemsByBoardId, isChangingBoardsPosition,
 }) => (
-  <Droppable key={columnIndex} droppableId={String(columnIndex)}>
+  <Droppable droppableId={String(columnIndex)}>
     {(provided, snapshot) => (
       <Wrapper
-        key={columnIndex}
         ref={provided.innerRef}
         columnWidth={columnWidth}
       >
-        {boards
-          .map(({ id, ...rest }, index) => (
-            <Board
-              key={id}
-              boardIndex={index}
-              id={id}
-              isChangingBoardsPosition={isChangingBoardsPosition}
-              isFade={getIsBoardFade(id)}
-              items={itemsByBoardId[id]}
-              {...rest}
-            />
-          ))}
+        {boards.map(({ id, ...rest }, index) => (
+          <Board
+            key={id}
+            boardIndex={index}
+            id={id}
+            isChangingBoardsPosition={isChangingBoardsPosition}
+            isFade={getIsBoardFade(id)}
+            items={itemsByBoardId[id]}
+            {...rest}
+          />
+        ))}
         {provided.placeholder}
       </Wrapper>
     )}
