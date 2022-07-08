@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
-import { Workplace } from '@components';
+import { WorkplaceDataConnector } from '@data-connectors';
 import { updateBoardsPosition } from '@redux-store';
 
-export const WorkplaceConnector = (props) => {
+export const WorkplaceConnector = () => {
   const dispatch = useDispatch();
   const { data, run, loading } = useApiEffect(API_EFFECTS.WORKPLACES.CHANGE_BOARDS_POSITION);
 
@@ -22,10 +22,9 @@ export const WorkplaceConnector = (props) => {
   }, [ data ]);
 
   return (
-    <Workplace
+    <WorkplaceDataConnector
       isChangingBoardsPosition={loading}
       onBoardsPositionChange={onBoardsPositionChange}
-      {...props}
     />
   );
 };

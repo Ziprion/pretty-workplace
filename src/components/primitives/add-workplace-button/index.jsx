@@ -5,7 +5,7 @@ import { Button } from '../button';
 export const AddWorkplaceButton = styled(Button)`
   width: ${({ theme }) => theme.workplacePlate.addButtonWidth};
   height: ${({ theme }) => theme.workplacePlate.addButtonHeight};
-  margin: ${({ theme }) => `${theme.offset(15)} 0`};
+  margin: ${({ theme }) => `${theme.offset(15)} auto`};
   color: ${({ theme }) => theme.colors.secondary1};
   background: ${({ theme }) => theme.colors.additional3};
   border: 2px dashed ${({ theme }) => theme.colors.secondary1};

@@ -1,37 +1,40 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { WorkplacesPanel } from '@components';
-import { WorkplaceConnector } from '@connectors';
-import { getBoardsByPosition, getItemsByBoardId } from '@utils';
+import { Workplace } from '@components';
+import { AddWorkplaceConnector } from '@connectors';
+import { useColumnParameters } from '@hooks';
+import { getBoardsByColumn, getItemsByBoardId } from '@utils';
 
-export const WorkplaceDataConnector = () => {
+export const WorkplaceDataConnector = ({ isChangingBoardsPosition, onBoardsPositionChange }) => {
   const {
     boards,
     items,
-    workplaces,
     activeWorkplace: {
       id: activeWorkplaceId,
-      title: activeWorkplaceTitle,
       boardsPosition,
     },
   } = useSelector((state) => state);
 
-  const boardsByPosition = useMemo(() => getBoardsByPosition(boards, boardsPosition), [ boards, boardsPosition ]);
+  const { columnCount, columnWidth } = useColumnParameters();
+
   const itemsByBoardId = useMemo(() => getItemsByBoardId(items), [ items ]);
 
+  const boardsByColumn = useMemo(() => getBoardsByColumn(boards, boardsPosition, columnCount),
+    [ boards, boardsPosition, columnCount ]);
+
   return (
-    <>
-      <WorkplacesPanel
-        activeWorkplaceId={activeWorkplaceId}
-        activeWorkplaceTitle={activeWorkplaceTitle}
-        workplaces={workplaces}
-      />
-      <WorkplaceConnector
-        activeWorkplaceId={activeWorkplaceId}
-        boardsByPosition={boardsByPosition}
-        itemsByBoardId={itemsByBoardId}
-      />
-    </>
+    activeWorkplaceId
+      ? (
+        <Workplace
+          boardsByColumn={boardsByColumn}
+          columnCount={columnCount}
+          columnWidth={columnWidth}
+          isChangingBoardsPosition={isChangingBoardsPosition}
+          itemsByBoardId={itemsByBoardId}
+          onBoardsPositionChange={onBoardsPositionChange}
+        />
+      )
+      : <AddWorkplaceConnector />
   );
 };

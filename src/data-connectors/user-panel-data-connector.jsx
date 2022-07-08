@@ -7,6 +7,8 @@ export const UserPanelDataConnector = () => {
   const { user } = useSelector((state) => state);
 
   return (
-    <UserPanel user={user} />
+    <>
+      {user && <UserPanel user={user} />}
+    </>
   );
 };

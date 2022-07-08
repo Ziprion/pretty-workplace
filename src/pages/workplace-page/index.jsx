@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Footer, Header } from '@components';
-import { MainConnector } from '@connectors';
-import { WorkplaceDataConnector } from '@data-connectors';
+import { MainConnector, WorkplaceConnector } from '@connectors';
+import { WorkplacePanelDataConnector } from '@data-connectors';
 
 import {
   FooterWrapper, HeaderWrapper, MainWrapper, Wrapper,
@@ -15,7 +15,8 @@ export const WorkplacePage = () => (
         <Header />
       </HeaderWrapper>
       <MainWrapper>
-        <WorkplaceDataConnector />
+        <WorkplacePanelDataConnector />
+        <WorkplaceConnector />
       </MainWrapper>
       <FooterWrapper>
         <Footer />

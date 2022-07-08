@@ -1,36 +1,30 @@
-import React from 'react'; /* eslint react/no-array-index-key: 0 */
+import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import { BoardsColumn } from '@components';
-import { AddWorkplaceConnector } from '@connectors';
-import { useBoardsDnd, useColumnParameters } from '@hooks';
+import { useBoardsDnd } from '@hooks';
 
 import { Wrapper } from './parts';
 
 export const Workplace = ({
-  activeWorkplaceId, boardsByPosition, itemsByBoardId, onBoardsPositionChange, isChangingBoardsPosition,
+  boardsByColumn, itemsByBoardId, isChangingBoardsPosition, columnWidth, columnCount, onBoardsPositionChange,
 }) => {
-  const { columnCount, columnWidth } = useColumnParameters();
-  const { boards, onDragEnd } = useBoardsDnd(boardsByPosition, columnCount, onBoardsPositionChange);
+  const { boards, onDragEnd } = useBoardsDnd(boardsByColumn, columnCount, onBoardsPositionChange);
 
   return (
     <Wrapper>
-      {!activeWorkplaceId
-        ? <AddWorkplaceConnector />
-        : (
-          <DragDropContext onDragEnd={onDragEnd}>
-            {[ ...Array(columnCount) ].map((_, columnIndex) => (
-              <BoardsColumn
-                key={columnIndex}
-                boards={boards[columnIndex]}
-                columnIndex={columnIndex}
-                columnWidth={columnWidth}
-                isChangingBoardsPosition={isChangingBoardsPosition}
-                itemsByBoardId={itemsByBoardId}
-              />
-            ))}
-          </DragDropContext>
-        )}
+      <DragDropContext onDragEnd={onDragEnd}>
+        {Object.entries(boards).map(([ columnIndex, columnBoards ]) => (
+          <BoardsColumn
+            key={columnIndex}
+            boards={columnBoards}
+            columnIndex={columnIndex}
+            columnWidth={columnWidth}
+            isChangingBoardsPosition={isChangingBoardsPosition}
+            itemsByBoardId={itemsByBoardId}
+          />
+        ))}
+      </DragDropContext>
     </Wrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react'; /* eslint react/no-array-index-key: 0, no-unused-vars: 0 */
+import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { Board } from '@components';
@@ -7,9 +7,10 @@ import { getIsBoardFade } from '@utils';
 import { Wrapper } from './parts';
 
 export const BoardsColumn = ({
-  boards = [], columnIndex, columnWidth, itemsByBoardId, isChangingBoardsPosition,
+  boards = [], columnIndex, columnWidth, isChangingBoardsPosition, itemsByBoardId,
 }) => (
   <Droppable droppableId={String(columnIndex)}>
+    {/* eslint-disable-next-line no-unused-vars */}
     {(provided, snapshot) => (
       <Wrapper
         ref={provided.innerRef}

@@ -18,8 +18,10 @@ export const getBoardsByPosition = (boards, boardsPosition = []) => {
   return boardsPosition.map((id) => boardsById[id]);
 };
 
-export const getBoardsByColumn = (boardsByPosition, columnCount) => boardsByPosition
-  .reduce((acc, board, index) => {
+export const getBoardsByColumn = (boards, boardsPosition, columnCount) => {
+  const boardsByPosition = getBoardsByPosition(boards, boardsPosition);
+
+  return boardsByPosition.reduce((acc, board, index) => {
     if (!board) return acc;
 
     const columnIndex = index % columnCount;
@@ -32,6 +34,7 @@ export const getBoardsByColumn = (boardsByPosition, columnCount) => boardsByPosi
 
     return acc;
   }, {});
+};
 
 export const getFormattedBoardsPosition = (boardsByColumn, columnCount) => Object.values(boardsByColumn)
   .reduce((acc, boardColumn, columnIndex) => {

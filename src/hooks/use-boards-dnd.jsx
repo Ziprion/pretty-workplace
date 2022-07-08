@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import {
-  addToList, getBoardsByColumn, getFormattedBoardsPosition, removeFromList,
-} from '@utils';
+import { addToList, getFormattedBoardsPosition, removeFromList } from '@utils';
 
-export const useBoardsDnd = (boardsByPosition, columnCount, onPositionChange) => {
+export const useBoardsDnd = (boardsByColumn, columnCount, onPositionChange) => {
   const [ boards, setBoards ] = useState({});
 
   const onDragEnd = useCallback((result) => {
@@ -23,7 +21,7 @@ export const useBoardsDnd = (boardsByPosition, columnCount, onPositionChange) =>
 
     if (dragColumnIndex === dropColumnIndex && dragBoardIndex === dropBoardIndex) return;
 
-    const boardsCopy = boards ? { ...boards } : {};
+    const boardsCopy = { ...boards };
 
     const sourceList = boardsCopy[dragColumnIndex];
 
@@ -49,8 +47,7 @@ export const useBoardsDnd = (boardsByPosition, columnCount, onPositionChange) =>
     onPositionChange(updatedBoardsPosition);
   }, [ boards, columnCount, onPositionChange ]);
 
-  useEffect(() => columnCount && setBoards(() => getBoardsByColumn(boardsByPosition, columnCount)),
-    [ columnCount, boardsByPosition ]);
+  useEffect(() => columnCount && setBoards(() => boardsByColumn), [ columnCount, boardsByColumn ]);
 
   return {
     boards,
