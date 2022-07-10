@@ -25,7 +25,7 @@ export const ItemsList = memo(({
             isOverflow={isOverflow}
             itemCount={items.length || 1}
           >
-            {!itemsByPosition.length && <EmptyWrapper>{emptyItemMessage}</EmptyWrapper>}
+            {!items.length && <EmptyWrapper>{emptyItemMessage}</EmptyWrapper>}
             {items.length > 1 && items
               .filter((item) => !!item)
               .map((item, index) => <DraggableItem key={item.id} itemIndex={index} {...item} />)}
