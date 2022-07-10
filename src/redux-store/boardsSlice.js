@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'; /* eslint no-param-reassign: 0, 
 import { formatBoards } from '@utils';
 
 import { setActiveWorkplace } from './activeWorkplaceSlice';
+import { addItem, deleteItem } from './itemsSlice';
 import { cleanup } from './userSlice';
 
 const initialState = [];
@@ -26,9 +27,21 @@ const boardsSlice = createSlice({
         board.isExpanded = false;
       });
     },
+    updateItemsPosition: (state, { payload: { boardId, itemsPosition } }) => {
+      const currentBoard = state.find(({ id }) => id === boardId);
+      currentBoard.itemsPosition = itemsPosition;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(setActiveWorkplace, (_, { payload: { boards } }) => formatBoards(boards));
+    builder.addCase(addItem, (state, { payload: { id: itemId, boardId } }) => {
+      const currentBoard = state.find(({ id }) => id === boardId);
+      currentBoard.itemsPosition.push(itemId);
+    });
+    builder.addCase(deleteItem, (state, { payload: { boardId, itemId } }) => {
+      const currentBoard = state.find(({ id }) => id === boardId);
+      currentBoard.itemsPosition = currentBoard.itemsPosition.filter((id) => itemId !== id);
+    });
     builder.addCase(cleanup, () => initialState);
   },
 });
@@ -41,5 +54,6 @@ export const {
     deleteBoard,
     toggleExpandBoard,
     collapseAllBoards,
+    updateItemsPosition,
   },
 } = boardsSlice;

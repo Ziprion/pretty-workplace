@@ -21,7 +21,7 @@ export const getBoardsByPosition = (boards, boardsPosition = []) => {
 export const getBoardsByColumn = (boards, boardsPosition, columnCount) => {
   const boardsByPosition = getBoardsByPosition(boards, boardsPosition);
 
-  return boardsByPosition.reduce((acc, board, index) => {
+  const boardsByColumn = boardsByPosition.reduce((acc, board, index) => {
     if (!board) return acc;
 
     const columnIndex = index % columnCount;
@@ -31,6 +31,12 @@ export const getBoardsByColumn = (boards, boardsPosition, columnCount) => {
     } else {
       acc[columnIndex] = [ board ];
     }
+
+    return acc;
+  }, {});
+
+  return [ ...new Array(columnCount) ].reduce((acc, _, index) => {
+    acc[index] = boardsByColumn[index] || [];
 
     return acc;
   }, {});

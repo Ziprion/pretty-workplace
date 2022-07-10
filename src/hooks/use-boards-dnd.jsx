@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { addToList, getFormattedBoardsPosition, removeFromList } from '@utils';
 
 export const useBoardsDnd = (boardsByColumn, columnCount, onPositionChange) => {
-  const [ boards, setBoards ] = useState({});
+  const [ boards, setBoards ] = useState(boardsByColumn);
 
-  const onDragEnd = useCallback((result) => {
+  const onBoardsDragEnd = useCallback((result) => {
     if (!result.destination) return;
 
     const {
@@ -51,6 +51,6 @@ export const useBoardsDnd = (boardsByColumn, columnCount, onPositionChange) => {
 
   return {
     boards,
-    onDragEnd,
+    onBoardsDragEnd,
   };
 };

@@ -15,7 +15,7 @@ const itemsSlice = createSlice({
       editedItem.title = title;
       editedItem.url = url;
     },
-    deleteItem: (state, { payload }) => (state.filter(({ id }) => id !== payload)),
+    deleteItem: (state, { payload: { itemId } }) => (state.filter(({ id }) => id !== itemId)),
   },
   extraReducers: (builder) => {
     builder.addCase(setActiveWorkplace, (_, { payload: { items } }) => items);

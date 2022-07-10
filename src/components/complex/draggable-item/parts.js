@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
   position: relative;
   background: ${({ theme }) => theme.colors.additional2};
   border-top: ${({ theme }) => `1px solid ${theme.colors.primary3}`};
-  opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
 
   :hover {
     background: ${({ theme }) => theme.colors.primary3};

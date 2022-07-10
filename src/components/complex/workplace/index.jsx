@@ -9,15 +9,16 @@ import { Wrapper } from './parts';
 export const Workplace = ({
   boardsByColumn, itemsByBoardId, isChangingBoardsPosition, columnWidth, columnCount, onBoardsPositionChange,
 }) => {
-  const { boards, onDragEnd } = useBoardsDnd(boardsByColumn, columnCount, onBoardsPositionChange);
+  const { boards, onBoardsDragEnd } = useBoardsDnd(boardsByColumn, columnCount, onBoardsPositionChange);
 
   return (
     <Wrapper>
-      <DragDropContext onDragEnd={onDragEnd}>
-        {Object.entries(boards).map(([ columnIndex, columnBoards ]) => (
+      <DragDropContext onDragEnd={onBoardsDragEnd}>
+        {[ ...Array(columnCount) ].map((_, columnIndex) => (
           <BoardsColumn
+            // eslint-disable-next-line react/no-array-index-key
             key={columnIndex}
-            boards={columnBoards}
+            boards={boards[columnIndex]}
             columnIndex={columnIndex}
             columnWidth={columnWidth}
             isChangingBoardsPosition={isChangingBoardsPosition}

@@ -57,7 +57,10 @@ export const ItemMenuConnector = ({
   useEffect(() => {
     if (deletingStatus === STATUSES.SUCCESS) {
       closeDeleteModal();
-      dispatch(deleteItem(id));
+      dispatch(deleteItem({
+        boardId,
+        itemId: id,
+      }));
     }
   }, [ deletingStatus ]);
 

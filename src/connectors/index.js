@@ -8,4 +8,5 @@ export * from './workplace-menu-connector';
 export * from './add-board-connector';
 export * from './workplace-connector';
 export * from './board-menu-connector';
+export * from './items-list-connector';
 export * from './item-menu-connector';

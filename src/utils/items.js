@@ -18,3 +18,5 @@ export const getItemsByBoardId = (items) => items.reduce((acc, item) => {
 
   return acc;
 }, {});
+
+export const getFormattedItemsPosition = (items) => items.map(({ id }) => id);

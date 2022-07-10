@@ -49,5 +49,5 @@ export const addItemPosition = async (itemId, boardId) => {
 };
 
 export const deleteItemPosition = async (itemId, boardId) => {
-  await db.query(`UPDATE boards SET items_position=array_replace(items_position, ${itemId}, 0) WHERE id='${boardId}'`);
+  await db.query(`UPDATE boards SET items_position=array_remove(items_position, '${itemId}') WHERE id='${boardId}'`);
 };

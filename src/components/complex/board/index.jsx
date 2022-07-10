@@ -1,22 +1,25 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 
-import { ChevronDoubleDownIcon, Item } from '@components';
-import { AddItemConnector, BoardMenuConnector } from '@connectors';
+import { ChevronDoubleDownIcon } from '@components';
+import { AddItemConnector, BoardMenuConnector, ItemsListConnector } from '@connectors';
 import { useBoardOverflow } from '@hooks';
 import { toggleExpandBoard } from '@redux-store';
+import { getItemsByPosition } from '@utils';
 
 import {
-  ActionBar, Body, Header, Title, ToggleIcon, Wrapper,
+  ActionBar, Header, Title, ToggleIcon, Wrapper,
 } from './parts';
 
 export const Board = memo(({
-  id, title, items = [], boardIndex, isExpanded, isFade, isChangingBoardsPosition,
+  id, title, items = [], itemsPosition, boardIndex, isExpanded, isFade, isChangingBoardsPosition,
 }) => {
   const dispatch = useDispatch();
 
   const { isOverflow } = useBoardOverflow(isExpanded);
+
+  const itemsByPosition = useMemo(() => getItemsByPosition(items, itemsPosition), [ items, itemsPosition ]);
 
   const toggleExpand = useCallback(() => {
     dispatch(toggleExpandBoard(id));
@@ -27,7 +30,6 @@ export const Board = memo(({
       draggableId={String(id)}
       index={Number(boardIndex)}
     >
-      {/* eslint-disable-next-line no-unused-vars */}
       {(provided, snapshot) => (
         <Wrapper
           ref={provided.innerRef}
@@ -49,14 +51,13 @@ export const Board = memo(({
               <BoardMenuConnector id={id} title={title} />
             </ActionBar>
           </Header>
-          <Body
+          <ItemsListConnector
+            boardId={id}
             isExpanded={isExpanded}
             isOverflow={isOverflow}
-            itemCount={items.length || 1}
-          >
-            {items.map((item) => <Item key={item.id} {...item} />)}
-            {!items.length && <Item key={0} isEmpty />}
-          </Body>
+            itemCount={itemsByPosition.length || 1}
+            itemsByPosition={itemsByPosition}
+          />
           {provided.placeholder}
         </Wrapper>
       )}
