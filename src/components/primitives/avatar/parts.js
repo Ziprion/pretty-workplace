@@ -6,7 +6,7 @@ export const AvatarWrapper = styled.div`
   justify-content: center;
   width: ${({ theme, size = 'small' }) => theme.avatar[size].width};
   height: ${({ theme, size = 'small' }) => theme.avatar[size].height};
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ theme, backgroundColor }) => backgroundColor || theme.colors.primary1};
   border-radius: 50%;
 `;
 
