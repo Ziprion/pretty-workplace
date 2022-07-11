@@ -62,6 +62,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   main {
+    position: relative;
     height: 100%;
     min-height: 100vh;
   }

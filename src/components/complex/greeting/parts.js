@@ -9,7 +9,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background: ${({ theme }) => theme.colors.additional3};
   opacity: ${({ isFade }) => (isFade ? 0 : 1)};
   transition: opacity 0.5s ease;
