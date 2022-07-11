@@ -13,14 +13,10 @@ export const WorkplacePanelDataConnector = () => {
   } = useSelector((state) => state);
 
   return (
-    <>
-      {activeWorkplaceId && activeWorkplaceTitle && (
-        <WorkplacesPanel
-          activeWorkplaceId={activeWorkplaceId}
-          activeWorkplaceTitle={activeWorkplaceTitle}
-          workplaces={workplaces}
-        />
-      )}
-    </>
+    <WorkplacesPanel
+      activeWorkplaceId={activeWorkplaceId}
+      activeWorkplaceTitle={activeWorkplaceTitle}
+      workplaces={workplaces}
+    />
   );
 };
