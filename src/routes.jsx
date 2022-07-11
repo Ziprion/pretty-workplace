@@ -7,43 +7,44 @@ export const ROUTES = {
   SIGNIN: '/signin',
   SIGNUP: '/signup',
   WORKPLACE: '/workplace',
-  HOME: '/',
-  NOT_FOUND: '*',
+  OTHERS: '*',
 };
 
 const RedirectToWorkplacePage = () => <Redirect to={ROUTES.WORKPLACE} />;
 const RedirectToLoginPage = () => <Redirect to={ROUTES.SIGNIN} />;
-const NotFoundPage = () => <div>NotFoundPage</div>;
 
 export const APP_ROUTES = [
   {
     id: 1,
     exact: true,
     path: ROUTES.SIGNIN,
-    getComponentByStatus: (status) => (status ? RedirectToWorkplacePage : LoginPage),
+    component: LoginPage,
   },
   {
     id: 2,
     exact: true,
     path: ROUTES.SIGNUP,
-    getComponentByStatus: (status) => (status ? RedirectToWorkplacePage : LoginPage),
+    component: LoginPage,
   },
   {
     id: 3,
+    exact: false,
+    path: ROUTES.OTHERS,
+    component: RedirectToLoginPage,
+  },
+];
+
+export const AUTH_APP_ROUTES = [
+  {
+    id: 1,
     exact: true,
     path: ROUTES.WORKPLACE,
-    getComponentByStatus: (status) => (status ? WorkplacePage : RedirectToLoginPage),
+    component: WorkplacePage,
   },
   {
-    id: 4,
-    exact: true,
-    path: ROUTES.HOME,
-    getComponentByStatus: (status) => (status ? RedirectToWorkplacePage : RedirectToLoginPage),
-  },
-  {
-    id: 5,
+    id: 2,
     exact: false,
-    path: ROUTES.NOT_FOUND,
-    getComponentByStatus: (status) => (status ? NotFoundPage : RedirectToLoginPage),
+    path: ROUTES.OTHERS,
+    component: RedirectToWorkplacePage,
   },
 ];

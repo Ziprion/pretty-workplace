@@ -8,21 +8,22 @@ import {
 import { AuthConnector } from '@connectors';
 import { useAuth } from '@hooks';
 
-import { APP_ROUTES } from './routes';
+import { APP_ROUTES, AUTH_APP_ROUTES } from './routes';
 
 export const App = () => {
   const { status } = useAuth();
+  const currentRoutes = status ? AUTH_APP_ROUTES : APP_ROUTES;
 
   return (
     <AuthConnector>
       <Router>
         <Switch>
-          {APP_ROUTES.map(({
-            id, exact, path, getComponentByStatus,
+          {currentRoutes.map(({
+            id, exact, path, component,
           }) => (
             <Route
               key={id}
-              component={getComponentByStatus(status)}
+              component={component}
               exact={exact}
               path={path}
             />
