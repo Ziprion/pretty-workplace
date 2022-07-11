@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, STATUSES, useApiEffect } from '@api-effects';
-import { Greeting } from '@components';
+import { GreetingDataConnector } from '@data-connectors';
 import { setActiveWorkplace, setWorkplaces } from '@redux-store';
 
 export const MainConnector = ({ children }) => {
@@ -60,8 +60,9 @@ export const MainConnector = ({ children }) => {
   }
 
   return (
-    isReady
-      ? <>{children}</>
-      : <Greeting />
+    <>
+      <GreetingDataConnector isFade={isReady} />
+      {children}
+    </>
   );
 };
