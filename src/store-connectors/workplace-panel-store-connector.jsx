@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { WorkplacesPanel } from '@components';
 
-export const WorkplacePanelDataConnector = () => {
+export const WorkplacePanelStoreConnector = () => {
   const {
     workplaces,
     activeWorkplace: {

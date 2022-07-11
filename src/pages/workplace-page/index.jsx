@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Footer, Header } from '@components';
 import { MainConnector, WorkplaceConnector } from '@connectors';
-import { WorkplacePanelDataConnector } from '@data-connectors';
+import { WorkplacePanelStoreConnector } from '@store-connectors';
 
 import {
   FooterWrapper, HeaderWrapper, MainWrapper, Wrapper,
@@ -15,7 +15,7 @@ export const WorkplacePage = () => (
         <Header />
       </HeaderWrapper>
       <MainWrapper>
-        <WorkplacePanelDataConnector />
+        <WorkplacePanelStoreConnector />
         <WorkplaceConnector />
       </MainWrapper>
       <FooterWrapper>

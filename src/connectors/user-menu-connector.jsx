@@ -7,7 +7,7 @@ import { useAuth } from '@hooks';
 import { cleanup } from '@redux-store';
 import { l } from '@utils';
 
-export const UserMenuConnector = (props) => {
+export const UserMenuConnector = () => {
   const dispatch = useDispatch();
 
   const [ isShowLogoutModal, setShowLogoutModal ] = useState(false);
@@ -33,7 +33,7 @@ export const UserMenuConnector = (props) => {
 
   return (
     <>
-      <UserMenu onLogoutCallback={onLogoutCallback} {...props} />
+      <UserMenu onLogoutCallback={onLogoutCallback} />
       <ConfirmModal
         isDisabled={loading}
         isShow={isShowLogoutModal}

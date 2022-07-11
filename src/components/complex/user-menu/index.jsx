@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   Avatar, Dropdown, LogoutIcon, VerticalMenu,
 } from '@components';
+import { WithUserHOC } from '@hocs';
 import { l } from '@utils';
 
 import { AvatarButton } from './parts';
@@ -13,7 +14,7 @@ const UserMenuToggle = ({ user, onClick }) => (
   </AvatarButton>
 );
 
-export const UserMenu = ({ user, onLogoutCallback }) => {
+export const UserMenu = ({ onLogoutCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
   const closeDropdown = () => setShowDropdown(() => false);
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
@@ -27,7 +28,7 @@ export const UserMenu = ({ user, onLogoutCallback }) => {
     <Dropdown
       close={closeDropdown}
       isShow={isShowDropdown}
-      toggleButton={<UserMenuToggle user={user} onClick={toggleDropdown} />}
+      toggleButton={<WithUserHOC Component={UserMenuToggle} onClick={toggleDropdown} />}
     >
       <VerticalMenu.Wrapper>
         <VerticalMenu.Item onClick={onLogoutClick}>

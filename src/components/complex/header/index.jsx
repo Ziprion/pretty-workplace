@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Logo } from '@components';
-import { UserPanelDataConnector } from '@data-connectors';
+import { Logo, UserPanel } from '@components';
+import { WithUserHOC } from '@hocs';
 
 import { Wrapper } from './parts';
 
 export const Header = () => (
   <Wrapper>
     <Logo />
-    <UserPanelDataConnector />
+    <WithUserHOC Component={UserPanel} />
   </Wrapper>
 );

@@ -8,6 +8,6 @@ import { UserName, Wrapper } from './parts';
 export const UserPanel = ({ user }) => (
   <Wrapper>
     {user && <UserName>{getFullName(user)}</UserName>}
-    <UserMenuConnector user={user} />
+    <UserMenuConnector />
   </Wrapper>
 );

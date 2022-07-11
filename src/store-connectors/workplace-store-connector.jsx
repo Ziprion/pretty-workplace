@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Workplace } from '@components';
 import { AddWorkplaceConnector } from '@connectors';
 
-export const WorkplaceDataConnector = ({ isChangingBoardsPosition, onBoardsPositionChange }) => {
+export const WorkplaceStoreConnector = (props) => {
   const {
     boards,
     items,
@@ -20,9 +20,8 @@ export const WorkplaceDataConnector = ({ isChangingBoardsPosition, onBoardsPosit
         <Workplace
           boardsList={boards}
           boardsPosition={boardsPosition}
-          isChangingBoardsPosition={isChangingBoardsPosition}
           items={items}
-          onBoardsPositionChange={onBoardsPositionChange}
+          {...props}
         />
       )
       : <AddWorkplaceConnector />

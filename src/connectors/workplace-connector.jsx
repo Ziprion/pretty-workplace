@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
-import { WorkplaceDataConnector } from '@data-connectors';
 import { updateBoardsPosition } from '@redux-store';
+import { WorkplaceStoreConnector } from '@store-connectors';
 
 export const WorkplaceConnector = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export const WorkplaceConnector = () => {
   }, [ data ]);
 
   return (
-    <WorkplaceDataConnector
+    <WorkplaceStoreConnector
       isChangingBoardsPosition={loading}
       onBoardsPositionChange={onBoardsPositionChange}
     />

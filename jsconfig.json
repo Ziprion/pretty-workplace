@@ -12,7 +12,8 @@
       "@api-effects": [ "./src/api-effects/index" ],
       "@locales": [ "./src/locales/index" ],
       "@style": [ "./src/style/index" ],
-      "@data-connectors": [ "./src/data-connectors/index" ],
+      "@store-connectors": [ "src/store-connectors/index" ],
+      "@hocs": [ "src/hocs/index" ],
       "@constants": [ "./src/constants/index" ],
     },
     "moduleResolution": "node"
