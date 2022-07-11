@@ -1,41 +1,31 @@
 import { createGlobalStyle } from 'styled-components';
 
-import Robotottf from '../../assets/fonts/roboto.ttf';
-import Robotowoff from '../../assets/fonts/roboto.woff';
-import Robotowoff2 from '../../assets/fonts/roboto.woff2';
-import RobotoBoldttf from '../../assets/fonts/roboto-bold.ttf';
-import RobotoBoldwoff from '../../assets/fonts/roboto-bold.woff';
-import RobotoBoldwoff2 from '../../assets/fonts/roboto-bold.woff2';
-import RobotoThinttf from '../../assets/fonts/roboto-thin.ttf';
-import RobotoThinwoff from '../../assets/fonts/roboto-thin.woff';
-import RobotoThinwoff2 from '../../assets/fonts/roboto-thin.woff2';
-
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Roboto';
     font-style: normal;
     src:
-      url(${Robotottf}) format('ttf'),
-      url(${Robotowoff}) format('woff'),
-      url(${Robotowoff2}) format('woff2');
+      url('/fonts/roboto.woff2') format('woff2'),
+      url('/fonts/roboto.woff') format('woff'),
+      url('/fonts/roboto.ttf') format('ttf');
   }
 
   @font-face {
     font-family: 'RobotoThin';
     font-style: normal;
     src:
-      url(${RobotoThinttf}) format('ttf'),
-      url(${RobotoThinwoff}) format('woff'),
-      url(${RobotoThinwoff2}) format('woff2');
+      url('/fonts/roboto-thin.woff2') format('woff2'),
+      url('/fonts/roboto-thin.woff') format('woff'),
+      url('/fonts/roboto-thin.ttf') format('ttf');
   }
 
   @font-face {
     font-family: 'RobotoBold';
     font-style: normal;
     src:
-      url(${RobotoBoldttf}) format('ttf'),
-      url(${RobotoBoldwoff}) format('woff'),
-      url(${RobotoBoldwoff2}) format('woff2');
+      url('/fonts/roboto-bold.woff2') format('woff2'),
+      url('/fonts/roboto-bold.woff') format('woff'),
+      url('/fonts/roboto-bold.ttf') format('ttf');
   }
 
   * {
