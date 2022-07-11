@@ -13,7 +13,7 @@ export const Dropdown = ({
   const [ direction, setDirection ] = useState('right');
 
   const setDropdownDirection = useCallback(() => {
-    const { right } = dropdownWrapper?.current.getBoundingClientRect();
+    const { right } = dropdownWrapper?.current?.getBoundingClientRect();
     setDirection(() => (right + 210 > window.innerWidth ? 'left' : 'right'));
   }, []);
 
