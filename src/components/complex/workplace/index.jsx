@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import { BoardsColumn } from '@components';
-import { useBoardsDnd } from '@hooks';
+import { useBoardsDnd, useColumnParameters } from '@hooks';
+import { getBoardsByColumn, getItemsByBoardId } from '@utils';
 
 import { Wrapper } from './parts';
 
 export const Workplace = ({
-  boardsByColumn, itemsByBoardId, isChangingBoardsPosition, columnWidth, columnCount, onBoardsPositionChange,
+  boardsList, items, boardsPosition, isChangingBoardsPosition, onBoardsPositionChange,
 }) => {
+  const { columnCount, columnWidth } = useColumnParameters();
+
+  const itemsByBoardId = useMemo(() => getItemsByBoardId(items), [ items ]);
+
+  const boardsByColumn = useMemo(() => getBoardsByColumn(boardsList, boardsPosition, columnCount),
+    [ boardsList, boardsPosition, columnCount ]);
+
   const { boards, onBoardsDragEnd } = useBoardsDnd(boardsByColumn, columnCount, onBoardsPositionChange);
 
   return (
