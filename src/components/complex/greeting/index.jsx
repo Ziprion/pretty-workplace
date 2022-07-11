@@ -27,27 +27,23 @@ export const Greeting = ({ user, isFade }) => {
   }, [ isFade ]);
 
   return isShow && (
-    <>
-      <Wrapper isFade={isFade}>
-        {user && (
-          <>
-            <WelcomeMessage>
-              <GreetingMessage>
-                { `${currentGreeting}, `}
-                <UserName>
-                  {`${getFullName(user)}!`}
-                </UserName>
-              </GreetingMessage>
-              <AdditionalMessage>
-                {additionalMessage}
-              </AdditionalMessage>
-            </WelcomeMessage>
-            <LoadingWrapper>
-              <Lottie animationData={animationData} loop={false} />
-            </LoadingWrapper>
-          </>
-        )}
-      </Wrapper>
-    </>
+    <Wrapper isFade={isFade}>
+      {user && (
+        <WelcomeMessage>
+          <GreetingMessage>
+            { `${currentGreeting}, `}
+            <UserName>
+              {`${getFullName(user)}!`}
+            </UserName>
+          </GreetingMessage>
+          <AdditionalMessage>
+            {additionalMessage}
+          </AdditionalMessage>
+        </WelcomeMessage>
+      )}
+      <LoadingWrapper>
+        <Lottie animationData={animationData} loop={false} />
+      </LoadingWrapper>
+    </Wrapper>
   );
 };
