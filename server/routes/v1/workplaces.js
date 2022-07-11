@@ -186,7 +186,7 @@ workplacesRouter.patch('/active', async (req, res) => {
 
   await updateWorkplace(updatedWorkplace);
 
-  return res.status(200).send(omit(updatedWorkplace, 'boards_position'));
+  return res.status(200).send(omit(updatedWorkplace, 'user_id', 'boards_position'));
 });
 
 workplacesRouter.delete('/active', async (req, res) => {
