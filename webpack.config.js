@@ -66,8 +66,8 @@ export default {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(dirname, 'assets/images'),
-          to: path.resolve(dirname, 'dist/images'),
+          from: path.resolve(dirname, 'assets'),
+          to: path.resolve(dirname, 'dist'),
         },
       ],
     }),
@@ -83,30 +83,6 @@ export default {
         resolve: { fullySpecified: false },
         exclude: /node_modules/,
         use: babelLoaders(),
-      },
-      {
-        test: /\.(png|jpg|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'images/icons/',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(ttf|woff|woff2|eot)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
       },
     ],
   },
