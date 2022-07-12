@@ -9,3 +9,4 @@ export * from './switch-icon';
 export * from './arrow-down-icon';
 export * from './horizontal-dots-icon';
 export * from './chevron-double-down-icon';
+export * from './copy-icon';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import {
-  DeleteIcon, Dropdown, EditIcon, GhostButton, HorizontalDotsIcon, VerticalMenu,
+  CopyIcon, DeleteIcon, Dropdown, EditIcon, GhostButton, HorizontalDotsIcon, VerticalMenu,
 } from '@components';
 import { l } from '@utils';
 
@@ -17,21 +17,15 @@ const ItemMenuToggle = ({ onClick }) => (
   </GhostButton>
 );
 
-export const ItemMenu = ({ onDeleteCallback, onEditCallback }) => {
+export const ItemMenu = ({ onCopyCallback, onDeleteCallback, onEditCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
   const closeDropdown = () => setShowDropdown(() => false);
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
 
-  const onEditClick = (e) => {
+  const onClick = (callback) => (e) => {
     e.preventDefault();
     closeDropdown();
-    onEditCallback();
-  };
-
-  const onDeleteClick = (e) => {
-    e.preventDefault();
-    closeDropdown();
-    onDeleteCallback();
+    callback();
   };
 
   return (
@@ -41,11 +35,15 @@ export const ItemMenu = ({ onDeleteCallback, onEditCallback }) => {
       toggleButton={<ItemMenuToggle onClick={toggleDropdown} />}
     >
       <VerticalMenu.Wrapper>
-        <VerticalMenu.Item onClick={onEditClick}>
+        <VerticalMenu.Item onClick={onClick(onCopyCallback)}>
+          <CopyIcon />
+          {l('copyItemButtonText')}
+        </VerticalMenu.Item>
+        <VerticalMenu.Item onClick={onClick(onEditCallback)}>
           <EditIcon />
           {l('editItemButtonText')}
         </VerticalMenu.Item>
-        <VerticalMenu.Item onClick={onDeleteClick}>
+        <VerticalMenu.Item onClick={onClick(onDeleteCallback)}>
           <DeleteIcon />
           {l('deleteItemButtonText')}
         </VerticalMenu.Item>

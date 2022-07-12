@@ -38,6 +38,7 @@
   "addItemModalTitle": "Add bookmark",
   "editItemModalTitle": "Edit bookmark",
   "deleteItemModalTitle": "Delete bookmark",
+  "copyItemButtonText": "Copy link",
   "editItemButtonText": "Edit bookmark",
   "deleteItemButtonText": "Delete bookmark",
   "itemTitleLabel": "Title",

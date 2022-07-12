@@ -9,7 +9,7 @@ import { deleteItem, editItem } from '@redux-store';
 import { l } from '@utils';
 
 export const ItemMenuConnector = ({
-  title, id, url, boardId,
+  title, id, url, boardId, onCopyCallback,
 }) => {
   const dispatch = useDispatch();
 
@@ -79,7 +79,11 @@ export const ItemMenuConnector = ({
 
   return (
     <>
-      <ItemMenu onDeleteCallback={onDeleteCallback} onEditCallback={onEditCallback} />
+      <ItemMenu
+        onCopyCallback={onCopyCallback}
+        onDeleteCallback={onDeleteCallback}
+        onEditCallback={onEditCallback}
+      />
       <ConfirmModal
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}

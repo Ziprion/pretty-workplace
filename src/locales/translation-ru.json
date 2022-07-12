@@ -38,6 +38,7 @@
   "addItemModalTitle": "Добавить закладку",
   "editItemModalTitle": "Редактировать закладку",
   "deleteItemModalTitle": "Удалить закладку",
+  "copyItemButtonText": "Копировать ссылку",
   "editItemButtonText": "Редактировать закладку",
   "deleteItemButtonText": "Удалить закладку",
   "itemTitleLabel": "Название",
