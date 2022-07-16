@@ -24,7 +24,7 @@ export const AuthConnector = ({ children }) => {
     }
   }, [ data ]);
 
-  if (error && error.status !== 401) {
+  if (error) {
     return <div>Something went wrong</div>;
   }
 
