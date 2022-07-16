@@ -87,5 +87,6 @@
   "boardNotFoundError": "Группа не найдена",
   "itemSameTitleError": "Закладка с таким название уже существует",
   "itemSameUrlError": "Закладка с такой ссылкой уже существует",
-  "itemNotFoundError": "Закладка не найдена"
+  "itemNotFoundError": "Закладка не найдена",
+  "internalServerError": "Внутренняя ошибка сервера"
 }

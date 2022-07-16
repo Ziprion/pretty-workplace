@@ -60,7 +60,7 @@ export const WorkplaceSwitcherForm = ({
         </SelectIcon>
         <Form.Feedback>{touched[name] && errors[name]}</Form.Feedback>
       </Form.Item>
-      <Form.Feedback>{requestError?.status}</Form.Feedback>
+      <Form.Feedback>{l(requestError?.message)}</Form.Feedback>
       <Form.ButtonGroup>
         <Form.Button
           disabled={isDisabled}

@@ -87,5 +87,6 @@
   "boardNotFoundError": "Board was not found",
   "itemSameTitleError": "Item with this title is already exist",
   "itemSameUrlError": "Item with this url is already exist",
-  "itemNotFoundError": "Item was not found"
+  "itemNotFoundError": "Item was not found",
+  "internalServerError": "Internal server error"
 }
