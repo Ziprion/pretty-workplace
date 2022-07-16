@@ -5,13 +5,19 @@ import { GhostButton } from '../ghost-button';
 export const TextGroup = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.offset(1.5)};
+
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 export const Title = styled.div`
   padding-bottom: ${({ theme }) => theme.offset(1)};
+  overflow: hidden;
   color: ${({ theme }) => theme.colors.additional1};
   font-size: ${({ theme }) => theme.fontSize.large};
   line-height: ${({ theme }) => theme.lineHeight.large};
+  overflow-wrap: break-word;
 `;
 
 export const Feedback = styled.div`
