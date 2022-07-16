@@ -22,12 +22,6 @@ const DEFAULT_STATE = {
 
 const DEFAULT_TIMEOUT = 10000;
 
-const UNKNOWN_ERROR = {
-  status: 408,
-  statusText: 'unknownError',
-  message: 'unknownError',
-};
-
 const axiosInstance = axios.create({
   timeout: DEFAULT_TIMEOUT,
 });
@@ -90,36 +84,29 @@ export const useApiEffect = (apiEffect) => {
         loading: false,
       });
     } catch (e) {
-      if (!e.response) {
+      const {
+        response: {
+          status,
+          data: {
+            message,
+          },
+        },
+      } = e;
+
+      if (status === NO_AUTHORIZATION_STATUS) {
+        signout();
+
         updateState({
-          error: UNKNOWN_ERROR,
           status: STATUSES.ERROR,
           loading: false,
         });
 
-        throw e;
-      }
-
-      const {
-        status,
-        statusText,
-        data: {
-          message,
-        },
-        config: {
-          url,
-        },
-      } = e.response;
-
-      if (!NO_AUTHORIZATION_URL.includes(url) && status === NO_AUTHORIZATION_STATUS) {
-        signout();
-        if (url !== '/api/user/me') return;
+        return;
       }
 
       updateState({
         error: {
           status,
-          statusText,
           message,
         },
         status: STATUSES.ERROR,

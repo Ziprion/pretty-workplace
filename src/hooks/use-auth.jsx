@@ -6,10 +6,7 @@ const useProvideAuth = () => {
   const [ status, changeStatus ] = useState(true);
 
   const signin = () => changeStatus(true);
-
-  const signout = () => {
-    changeStatus(false);
-  };
+  const signout = () => changeStatus(false);
 
   return {
     status,

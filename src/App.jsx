@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -11,8 +11,12 @@ import { useAuth } from '@hooks';
 import { APP_ROUTES, AUTH_APP_ROUTES } from './routes';
 
 export const App = () => {
+  const [ currentRoutes, setCurrentRoutes ] = useState([]);
   const { status } = useAuth();
-  const currentRoutes = status ? AUTH_APP_ROUTES : APP_ROUTES;
+
+  useEffect(() => {
+    setCurrentRoutes(() => (status ? AUTH_APP_ROUTES : APP_ROUTES));
+  }, [ status ]);
 
   return (
     <AuthConnector>
