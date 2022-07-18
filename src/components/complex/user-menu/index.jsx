@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import {
   Avatar, Dropdown, LogoutIcon, VerticalMenu,
@@ -8,21 +8,21 @@ import { l } from '@utils';
 
 import { AvatarButton } from './parts';
 
-const UserMenuToggle = ({ user, onClick }) => (
+const UserMenuToggle = memo(({ user, onClick }) => (
   <AvatarButton onClick={onClick}>
     <Avatar {...user} />
   </AvatarButton>
-);
+));
 
-export const UserMenu = ({ onLogoutCallback }) => {
+export const UserMenu = memo(({ onLogoutCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
   const closeDropdown = () => setShowDropdown(() => false);
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
 
-  const onLogoutClick = () => {
+  const onLogoutClick = useCallback(() => {
     closeDropdown();
     onLogoutCallback();
-  };
+  }, []);
 
   return (
     <Dropdown
@@ -38,4 +38,4 @@ export const UserMenu = ({ onLogoutCallback }) => {
       </VerticalMenu.Wrapper>
     </Dropdown>
   );
-};
+});

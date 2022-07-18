@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  memo, useCallback, useEffect, useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, STATUSES, useApiEffect } from '@api-effects';
@@ -7,7 +9,7 @@ import { useAuth } from '@hooks';
 import { cleanup } from '@redux-store';
 import { l } from '@utils';
 
-export const UserMenuConnector = () => {
+export const UserMenuConnector = memo(() => {
   const dispatch = useDispatch();
 
   const [ isShowLogoutModal, setShowLogoutModal ] = useState(false);
@@ -28,8 +30,8 @@ export const UserMenuConnector = () => {
     }
   }, [ status ]);
 
-  const onLogoutCallback = () => openLogoutModal();
-  const onLogoutConfirm = () => run();
+  const onLogoutCallback = useCallback(() => openLogoutModal(), []);
+  const onLogoutConfirm = useCallback(() => run(), []);
 
   return (
     <>
@@ -44,4 +46,4 @@ export const UserMenuConnector = () => {
       />
     </>
   );
-};
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { Board } from '@components';
@@ -6,7 +6,7 @@ import { getIsBoardFade } from '@utils';
 
 import { Wrapper } from './parts';
 
-export const BoardsColumn = ({
+export const BoardsColumn = memo(({
   boards = [], columnIndex, columnWidth, isChangingBoardsPosition, itemsByBoardId,
 }) => (
   <Droppable droppableId={String(columnIndex)}>
@@ -31,4 +31,4 @@ export const BoardsColumn = ({
       </Wrapper>
     )}
   </Droppable>
-);
+));

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { AddBoardConnector, WorkplaceMenuConnector } from '@connectors';
 
 import { ActionBar, Title, Wrapper } from './parts';
 
-export const WorkplacesPanel = ({ activeWorkplaceTitle, workplaces = [], activeWorkplaceId }) => (
+export const WorkplacesPanel = memo(({ activeWorkplaceTitle, workplaces = [], activeWorkplaceId }) => (
   <Wrapper>
     {activeWorkplaceId && activeWorkplaceTitle && (
       <>
@@ -20,4 +20,4 @@ export const WorkplacesPanel = ({ activeWorkplaceTitle, workplaces = [], activeW
       </>
     )}
   </Wrapper>
-);
+));
