@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const AuthContext = createContext();
 
 const useProvideAuth = () => {
-  const [ status, changeStatus ] = useState(true);
+  const [ status, changeStatus ] = useState(false);
 
   const signin = () => changeStatus(true);
   const signout = () => changeStatus(false);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
 
 import { API_EFFECTS } from '@api-effects';
@@ -29,39 +29,37 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
+    try {
+      const originalRequest = error.config;
 
-    if (
-      error.response?.status === NO_AUTHORIZATION_STATUS
+      if (
+        error.response?.status === NO_AUTHORIZATION_STATUS
       && originalRequest
       && !originalRequest.isRetry
       && !NO_AUTHORIZATION_URL.includes(originalRequest.url)
-    ) {
-      originalRequest.isRetry = true;
+      ) {
+        originalRequest.isRetry = true;
 
-      try {
         await axios({
           timeout: DEFAULT_TIMEOUT,
           ...API_EFFECTS.AUTH.REFRESH(),
         });
 
         return axios.request(originalRequest);
-      } catch {
-        throw error;
       }
+    } catch {
+      throw error;
     }
-
-    throw error;
   },
 );
 
 export const useApiEffect = (apiEffect) => {
   const { signout } = useAuth();
   const [ state, setState ] = useState(DEFAULT_STATE);
-  const updateState = (nextState) => setState((prevState) => ({
+  const updateState = useCallback((nextState) => setState((prevState) => ({
     ...prevState,
     ...nextState,
-  }));
+  })), []);
 
   const run = async (params) => {
     updateState({
@@ -94,12 +92,12 @@ export const useApiEffect = (apiEffect) => {
       } = e;
 
       if (status === NO_AUTHORIZATION_STATUS) {
-        signout();
-
         updateState({
           status: STATUSES.ERROR,
           loading: false,
         });
+
+        signout();
 
         return;
       }
