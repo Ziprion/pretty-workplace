@@ -6,9 +6,8 @@ import { ProvideAuth, ProvideTheme } from '@hooks';
 import store from '@redux-store';
 import { GlobalStyle } from '@style';
 
+import './i18n';
 import { App } from './App';
-// eslint-disable-next-line no-unused-vars
-import i18n from './i18n';
 
 export default () => {
   render(

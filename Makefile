@@ -27,6 +27,10 @@ lint:
 	npx stylelint './src/**/*.{js,jsx}'
 
 test:
-	npm test -s
+	npm test
 
-.PHONY: test
+test-update:
+	npm test -- -u
+
+test-coverage:
+	npm test -- --coverage

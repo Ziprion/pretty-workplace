@@ -4,8 +4,9 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    'jest/globals': true,
   },
-  plugins: [ 'functional', 'simple-import-sort' ],
+  plugins: [ 'functional', 'simple-import-sort', 'jest' ],
   extends: [
     'airbnb',
     'plugin:functional/external-recommended',

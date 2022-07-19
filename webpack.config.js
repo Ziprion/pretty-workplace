@@ -36,6 +36,7 @@ export default {
       '@store-connectors': path.resolve(dirname, 'src/store-connectors'),
       '@hocs': path.resolve(dirname, 'src/hocs'),
       '@constants': path.resolve(dirname, 'src/constants'),
+      '@test-utils': path.resolve(dirname, 'test-utils'),
     },
   },
   output: {

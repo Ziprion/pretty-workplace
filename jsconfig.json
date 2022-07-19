@@ -13,8 +13,9 @@
       "@locales": [ "./src/locales/index" ],
       "@style": [ "./src/style/index" ],
       "@store-connectors": [ "src/store-connectors/index" ],
-      "@hocs": [ "src/hocs/index" ],
+      "@hocs": [ "./src/hocs/index" ],
       "@constants": [ "./src/constants/index" ],
+      "@test-utils": [ "./test-utils" ],
     },
     "moduleResolution": "node"
   }
