@@ -1,42 +1,42 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import {
   AddIcon, DeleteIcon, Dropdown, EditIcon, GhostButton, SwitchIcon, VerticalDotsIcon, VerticalMenu,
 } from '@components';
 import { l } from '@utils';
 
-const WorkplaceMenuToggle = ({ onClick }) => (
+const WorkplaceMenuToggle = memo(({ onClick }) => (
   <GhostButton isSecondary onClick={onClick}>
     <VerticalDotsIcon />
   </GhostButton>
-);
+));
 
-export const WorkplaceMenu = ({
+export const WorkplaceMenu = memo(({
   onAddCallback, onDeleteCallback, onEditCallback, onSwitchCallback, workplaces,
 }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
-  const closeDropdown = () => setShowDropdown(() => false);
-  const toggleDropdown = () => setShowDropdown((prev) => !prev);
+  const closeDropdown = useCallback(() => setShowDropdown(() => false), []);
+  const toggleDropdown = useCallback(() => setShowDropdown((prev) => !prev), []);
 
-  const onSwitchClick = () => {
+  const onSwitchClick = useCallback(() => {
     closeDropdown();
     onSwitchCallback();
-  };
+  }, [ onSwitchCallback ]);
 
-  const onAddClick = () => {
+  const onAddClick = useCallback(() => {
     closeDropdown();
     onAddCallback();
-  };
+  }, [ onAddCallback ]);
 
-  const onEditClick = () => {
+  const onEditClick = useCallback(() => {
     closeDropdown();
     onEditCallback();
-  };
+  }, [ onEditCallback ]);
 
-  const onDeleteClick = () => {
+  const onDeleteClick = useCallback(() => {
     closeDropdown();
     onDeleteCallback();
-  };
+  }, [ onDeleteCallback ]);
 
   const switchButtonText = l('switchWorkplaceButtonText');
   const addButtonText = l('addWorkplaceButtonText');
@@ -71,4 +71,4 @@ export const WorkplaceMenu = ({
       </VerticalMenu.Wrapper>
     </Dropdown>
   );
-};
+});

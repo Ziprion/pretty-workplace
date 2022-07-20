@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  memo, useCallback, useEffect, useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
@@ -8,24 +10,31 @@ import {
 import { addBoard } from '@redux-store';
 import { l, setIsBoardFade } from '@utils';
 
+const AddBoardButton = memo(({ onClick }) => (
+  <Button textSize="medium" onClick={onClick}>
+    <AddIcon />
+    <Button.Text>{l('addBoardButtonText')}</Button.Text>
+  </Button>
+));
+
 export const AddBoardConnector = ({ activeWorkplaceId }) => {
   const dispatch = useDispatch();
 
   const [ isShowModal, setShowModal ] = useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openModal = useCallback(() => setShowModal(() => true), []);
+  const closeModal = useCallback(() => setShowModal(() => false), []);
 
   const [ requestError, setRequestError ] = useState(null);
-  const clearRequestError = () => setRequestError(() => null);
+  const clearRequestError = useCallback(() => setRequestError(() => null), []);
 
   const {
     data, loading, error, run,
   } = useApiEffect(API_EFFECTS.BOARDS.ADD);
 
-  const onAddConfirm = (values) => run({
+  const onAddConfirm = useCallback((values) => run({
     workplaceId: activeWorkplaceId,
     ...values,
-  });
+  }), [ activeWorkplaceId ]);
 
   useEffect(() => {
     if (data) {
@@ -43,10 +52,7 @@ export const AddBoardConnector = ({ activeWorkplaceId }) => {
 
   return (
     <>
-      <Button textSize="medium" onClick={openModal}>
-        <AddIcon />
-        <Button.Text>{l('addBoardButtonText')}</Button.Text>
-      </Button>
+      <AddBoardButton onClick={openModal} />
       <Modal
         isDisabled={loading}
         isShow={isShowModal}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
@@ -14,23 +14,23 @@ export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId
   const dispatch = useDispatch();
 
   const [ requestError, setRequestError ] = useState(null);
-  const clearRequestError = () => setRequestError(() => null);
+  const clearRequestError = useCallback(() => setRequestError(() => null), []);
 
   const [ isShowSwitchModal, setShowSwitchModal ] = useState(false);
-  const openSwitchModal = () => setShowSwitchModal(true);
-  const closeSwitchModal = () => setShowSwitchModal(false);
+  const openSwitchModal = useCallback(() => setShowSwitchModal(() => true), []);
+  const closeSwitchModal = useCallback(() => setShowSwitchModal(() => false), []);
 
   const [ isShowAddModal, setShowAddModal ] = useState(false);
-  const openAddModal = () => setShowAddModal(true);
-  const closeAddModal = () => setShowAddModal(false);
+  const openAddModal = useCallback(() => setShowAddModal(() => true), []);
+  const closeAddModal = useCallback(() => setShowAddModal(() => false), []);
 
   const [ isShowEditModal, setShowEditModal ] = useState(false);
-  const openEditModal = () => setShowEditModal(true);
-  const closeEditModal = () => setShowEditModal(false);
+  const openEditModal = useCallback(() => setShowEditModal(() => true), []);
+  const closeEditModal = useCallback(() => setShowEditModal(() => false), []);
 
   const [ isShowDeleteModal, setShowDeleteModal ] = useState(false);
-  const openDeleteModal = () => setShowDeleteModal(true);
-  const closeDeleteModal = () => setShowDeleteModal(false);
+  const openDeleteModal = useCallback(() => setShowDeleteModal(() => true), []);
+  const closeDeleteModal = useCallback(() => setShowDeleteModal(() => false), []);
 
   const {
     data: switchedWorkplace,
@@ -60,10 +60,10 @@ export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId
     run: runDeleteWorkplace,
   } = useApiEffect(API_EFFECTS.WORKPLACES.DELETE);
 
-  const onSwitchConfirm = ({ workplaceId }) => runSwitchWorkplace({ id: workplaceId });
-  const onAddConfirm = (data) => runAddWorkplace(data);
-  const onEditConfirm = (data) => runEditWorkplace(data);
-  const onDeleteConfirm = () => runDeleteWorkplace();
+  const onSwitchConfirm = useCallback(({ workplaceId: id }) => runSwitchWorkplace({ id }), []);
+  const onAddConfirm = useCallback((data) => runAddWorkplace(data), []);
+  const onEditConfirm = useCallback((data) => runEditWorkplace(data), []);
+  const onDeleteConfirm = useCallback(() => runDeleteWorkplace(), []);
 
   useEffect(() => {
     if (editingError) {

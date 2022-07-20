@@ -4,19 +4,19 @@ import { useSelector } from 'react-redux';
 import { WorkplacesPanel } from '@components';
 
 export const WorkplacePanelStoreConnector = () => {
-  const {
-    workplaces,
-    activeWorkplace: {
-      id: activeWorkplaceId,
-      title: activeWorkplaceTitle,
-    },
-  } = useSelector((state) => state);
+  const workplaces = useSelector((state) => state.workplaces);
+  const activeWorkplaceId = useSelector((state) => state.activeWorkplace.id);
+  const activeWorkplaceTitle = useSelector((state) => state.activeWorkplace.title);
 
   return (
-    <WorkplacesPanel
-      activeWorkplaceId={activeWorkplaceId}
-      activeWorkplaceTitle={activeWorkplaceTitle}
-      workplaces={workplaces}
-    />
+    <>
+      {!!workplaces.length && activeWorkplaceId && activeWorkplaceTitle && (
+        <WorkplacesPanel
+          activeWorkplaceId={activeWorkplaceId}
+          activeWorkplaceTitle={activeWorkplaceTitle}
+          workplaces={workplaces}
+        />
+      )}
+    </>
   );
 };

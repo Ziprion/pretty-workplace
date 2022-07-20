@@ -11,11 +11,11 @@ export const UserMenuConnector = () => {
   const dispatch = useDispatch();
 
   const [ isShowLogoutModal, setShowLogoutModal ] = useState(false);
-  const openLogoutModal = useCallback(() => setShowLogoutModal(true), []);
-  const closeLogoutModal = useCallback(() => setShowLogoutModal(false), []);
+  const openLogoutModal = useCallback(() => setShowLogoutModal(() => true), []);
+  const closeLogoutModal = useCallback(() => setShowLogoutModal(() => false), []);
 
   const [ requestError, setRequestError ] = useState(null);
-  const clearRequestError = () => setRequestError(() => null);
+  const clearRequestError = useCallback(() => setRequestError(() => null), []);
 
   const { signout } = useAuth();
 
