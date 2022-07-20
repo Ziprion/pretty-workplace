@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Button } from '../button';
 
-export const AddWorkplaceButton = styled(Button)`
+export const WorkplacePlateButton = styled(Button)`
   width: ${({ theme }) => theme.workplacePlate.addButtonWidth};
   height: ${({ theme }) => theme.workplacePlate.addButtonHeight};
   margin: ${({ theme }) => `${theme.offset(15)} auto`};

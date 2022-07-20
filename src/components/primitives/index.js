@@ -1,4 +1,4 @@
-export * from './add-workplace-button';
+export * from './workplace-plate-button';
 export * from './button';
 export * from './select';
 export * from './icons';
