@@ -7,8 +7,8 @@ export const LogoWrapper = styled.div`
 `;
 
 export const LogoImage = styled.img`
-  width: ${({ theme, size = 'small' }) => theme.logo[size].width};
-  height: ${({ theme, size = 'small' }) => theme.logo[size].height};
+  width: ${({ theme, size }) => theme.logo[size].width};
+  height: ${({ theme, size }) => theme.logo[size].height};
   margin-right: ${({ theme }) => theme.offset(1)};
 `;
 

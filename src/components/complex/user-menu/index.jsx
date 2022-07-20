@@ -16,13 +16,13 @@ const UserMenuToggle = memo(({ user, onClick }) => (
 
 export const UserMenu = memo(({ onLogoutCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
-  const closeDropdown = () => setShowDropdown(() => false);
-  const toggleDropdown = () => setShowDropdown((prev) => !prev);
+  const closeDropdown = useCallback(() => setShowDropdown(() => false), []);
+  const toggleDropdown = useCallback(() => setShowDropdown((prev) => !prev), []);
 
   const onLogoutClick = useCallback(() => {
     closeDropdown();
     onLogoutCallback();
-  }, []);
+  }, [ onLogoutCallback ]);
 
   return (
     <Dropdown

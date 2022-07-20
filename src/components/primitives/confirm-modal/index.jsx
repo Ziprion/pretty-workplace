@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { l } from '@utils';
 
@@ -16,35 +16,44 @@ export const ConfirmModal = ({
   onCancel,
   isDisabled,
   requestError,
+  clearRequestError,
   cancelText = 'cancelConfirmModalButtonText',
   okText = 'okConfirmModalButtonText',
-}) => (
-  <Modal
-    isDisabled={isDisabled}
-    isShow={isShow}
-    onCancel={onCancel}
-  >
-    <TextGroup>
-      <WarningIcon />
-      <Title>{title}</Title>
-    </TextGroup>
-    <Feedback>{requestError?.status}</Feedback>
-    <ButtonGroup>
-      <Button
-        disabled={isDisabled}
-        type="button"
-        isSecondary
-        onClick={onCancel}
-      >
-        {l(cancelText)}
-      </Button>
-      <Button
-        disabled={isDisabled}
-        type="button"
-        onClick={onOk}
-      >
-        {l(okText)}
-      </Button>
-    </ButtonGroup>
-  </Modal>
-);
+}) => {
+  useEffect(() => {
+    if (isShow) {
+      clearRequestError();
+    }
+  }, [ isShow ]);
+
+  return (
+    <Modal
+      isDisabled={isDisabled}
+      isShow={isShow}
+      onCancel={onCancel}
+    >
+      <TextGroup>
+        <WarningIcon />
+        <Title>{title}</Title>
+      </TextGroup>
+      <Feedback>{l(requestError?.message)}</Feedback>
+      <ButtonGroup>
+        <Button
+          disabled={isDisabled}
+          type="button"
+          isSecondary
+          onClick={onCancel}
+        >
+          {l(cancelText)}
+        </Button>
+        <Button
+          disabled={isDisabled}
+          type="button"
+          onClick={onOk}
+        >
+          {l(okText)}
+        </Button>
+      </ButtonGroup>
+    </Modal>
+  );
+};

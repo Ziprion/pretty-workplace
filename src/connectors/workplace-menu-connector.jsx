@@ -77,7 +77,11 @@ export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId
     if (switchingError) {
       setRequestError(() => switchingError);
     }
-  }, [ editingError, addingError, switchingError ]);
+
+    if (deletingError) {
+      setRequestError(() => deletingError);
+    }
+  }, [ editingError, addingError, switchingError, deletingError ]);
 
   useEffect(() => {
     if (switchedWorkplace) {
@@ -150,9 +154,10 @@ export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId
         onOk={onEditConfirm}
       />
       <ConfirmModal
+        clearRequestError={clearRequestError}
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}
-        requestError={deletingError}
+        requestError={requestError}
         title={`${l('deleteWorkplaceModalTitle')} ${activeWorkplaceTitle}?`}
         onCancel={closeDeleteModal}
         onOk={onDeleteConfirm}

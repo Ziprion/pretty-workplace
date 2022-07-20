@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
@@ -11,14 +11,16 @@ import { App } from './App';
 
 export default () => {
   render(
-    <ProvideTheme>
-      <GlobalStyle />
-      <Provider store={store}>
-        <ProvideAuth>
-          <App />
-        </ProvideAuth>
-      </Provider>
-    </ProvideTheme>,
+    <StrictMode>
+      <ProvideTheme>
+        <GlobalStyle />
+        <Provider store={store}>
+          <ProvideAuth>
+            <App />
+          </ProvideAuth>
+        </Provider>
+      </ProvideTheme>
+    </StrictMode>,
     document.getElementById('root'),
   );
 };

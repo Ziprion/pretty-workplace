@@ -244,11 +244,11 @@ exports[`test 1`] = `
   >
     <div
       className="c2"
-      onClick={[Function]}
     >
       <img
         alt="pretty workplace"
         className="c3"
+        size="small"
         src="images/icons/logo-small.png"
       />
       <h1
@@ -597,11 +597,11 @@ exports[`test2 1`] = `
   >
     <div
       className="c2"
-      onClick={[Function]}
     >
       <img
         alt="pretty workplace"
         className="c3"
+        size="small"
         src="images/icons/logo-small.png"
       />
       <h1

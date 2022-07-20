@@ -69,15 +69,20 @@ export const BoardMenuConnector = ({ title, id }) => {
     if (editingError) {
       setRequestError(() => editingError);
     }
-  }, [ editingError ]);
+
+    if (deletingError) {
+      setRequestError(() => deletingError);
+    }
+  }, [ deletingError, editingError ]);
 
   return (
     <>
       <BoardMenu onDeleteCallback={onDeleteCallback} onEditCallback={onEditCallback} />
       <ConfirmModal
+        clearRequestError={clearRequestError}
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}
-        requestError={deletingError}
+        requestError={requestError}
         title={`${l('deleteBoardModalTitle')} ${title}?`}
         onCancel={closeDeleteModal}
         onOk={onDeleteConfirm}

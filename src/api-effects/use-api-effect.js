@@ -50,6 +50,8 @@ axiosInstance.interceptors.response.use(
     } catch {
       throw error;
     }
+
+    throw error;
   },
 );
 

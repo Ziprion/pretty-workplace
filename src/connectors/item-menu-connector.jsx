@@ -75,7 +75,11 @@ export const ItemMenuConnector = ({
     if (editingError) {
       setRequestError(() => editingError);
     }
-  }, [ editingError ]);
+
+    if (deletingError) {
+      setRequestError(() => deletingError);
+    }
+  }, [ editingError, deletingError ]);
 
   return (
     <>
@@ -85,9 +89,10 @@ export const ItemMenuConnector = ({
         onEditCallback={onEditCallback}
       />
       <ConfirmModal
+        clearRequestError={clearRequestError}
         isDisabled={deletingLoading}
         isShow={isShowDeleteModal}
-        requestError={deletingError}
+        requestError={requestError}
         title={`${l('deleteItemModalTitle')} ${title}?`}
         onCancel={closeDeleteModal}
         onOk={onDeleteConfirm}
