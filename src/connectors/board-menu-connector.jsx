@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, STATUSES, useApiEffect } from '@api-effects';
@@ -12,15 +12,15 @@ export const BoardMenuConnector = ({ title, id }) => {
   const dispatch = useDispatch();
 
   const [ isShowDeleteModal, setShowDeleteModal ] = useState(false);
-  const openDeleteModal = () => setShowDeleteModal(true);
-  const closeDeleteModal = () => setShowDeleteModal(false);
+  const openDeleteModal = useCallback(() => setShowDeleteModal(() => true), []);
+  const closeDeleteModal = useCallback(() => setShowDeleteModal(() => false), []);
 
   const [ isShowEditModal, setShowEditModal ] = useState(false);
-  const openEditModal = () => setShowEditModal(true);
-  const closeEditModal = () => setShowEditModal(false);
+  const openEditModal = useCallback(() => setShowEditModal(() => true), []);
+  const closeEditModal = useCallback(() => setShowEditModal(() => false), []);
 
   const [ requestError, setRequestError ] = useState(null);
-  const clearRequestError = () => setRequestError(() => null);
+  const clearRequestError = useCallback(() => setRequestError(() => null), []);
 
   const {
     loading: deletingLoading,
@@ -36,20 +36,16 @@ export const BoardMenuConnector = ({ title, id }) => {
     run: runEditBoard,
   } = useApiEffect(API_EFFECTS.BOARDS.EDIT);
 
-  const onDeleteCallback = () => {
-    openDeleteModal();
-  };
+  const onDeleteCallback = useCallback(openDeleteModal, []);
 
-  const onEditCallback = () => {
-    openEditModal();
-  };
+  const onEditCallback = useCallback(openEditModal, []);
 
-  const onDeleteConfirm = () => runDeleteBoard(id);
+  const onDeleteConfirm = useCallback(() => runDeleteBoard(id), [ id ]);
 
-  const onEditConfirm = (data) => runEditBoard({
+  const onEditConfirm = useCallback((data) => runEditBoard({
     id,
     data,
-  });
+  }), [ id ]);
 
   useEffect(() => {
     if (deletingStatus === STATUSES.SUCCESS) {

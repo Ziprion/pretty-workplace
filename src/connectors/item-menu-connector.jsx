@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  memo, useCallback, useEffect, useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, STATUSES, useApiEffect } from '@api-effects';
@@ -8,21 +10,21 @@ import {
 import { deleteItem, editItem } from '@redux-store';
 import { l } from '@utils';
 
-export const ItemMenuConnector = ({
+export const ItemMenuConnector = memo(({
   title, id, url, boardId, onCopyCallback,
 }) => {
   const dispatch = useDispatch();
 
   const [ isShowDeleteModal, setShowDeleteModal ] = useState(false);
-  const openDeleteModal = () => setShowDeleteModal(true);
-  const closeDeleteModal = () => setShowDeleteModal(false);
+  const openDeleteModal = useCallback(() => setShowDeleteModal(() => true), []);
+  const closeDeleteModal = useCallback(() => setShowDeleteModal(() => false), []);
 
   const [ isShowEditModal, setShowEditModal ] = useState(false);
-  const openEditModal = () => setShowEditModal(true);
-  const closeEditModal = () => setShowEditModal(false);
+  const openEditModal = useCallback(() => setShowEditModal(() => true), []);
+  const closeEditModal = useCallback(() => setShowEditModal(() => false), []);
 
   const [ requestError, setRequestError ] = useState(null);
-  const clearRequestError = () => setRequestError(() => null);
+  const clearRequestError = useCallback(() => setRequestError(() => null), []);
 
   const {
     status: deletingStatus,
@@ -38,21 +40,17 @@ export const ItemMenuConnector = ({
     run: runEditItem,
   } = useApiEffect(API_EFFECTS.ITEMS.EDIT);
 
-  const onDeleteCallback = () => {
-    openDeleteModal();
-  };
+  const onDeleteCallback = useCallback(openDeleteModal, []);
 
-  const onEditCallback = () => {
-    openEditModal();
-  };
+  const onEditCallback = useCallback(openEditModal, []);
 
-  const onDeleteConfirm = () => runDeleteItem(id);
+  const onDeleteConfirm = useCallback(() => runDeleteItem(id), [ id ]);
 
-  const onEditConfirm = (data) => runEditItem({
+  const onEditConfirm = useCallback((data) => runEditItem({
     id,
     boardId,
     ...data,
-  });
+  }), [ id, boardId ]);
 
   useEffect(() => {
     if (deletingStatus === STATUSES.SUCCESS) {
@@ -115,4 +113,4 @@ export const ItemMenuConnector = ({
       </Modal>
     </>
   );
-};
+});

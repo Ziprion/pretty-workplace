@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 import { Item } from '@components';
 
-export const DraggableItem = ({ id, itemIndex, ...rest }) => (
+export const DraggableItem = memo(({ id, itemIndex, ...rest }) => (
   <Draggable
     draggableId={String(id)}
     index={Number(itemIndex)}
@@ -21,4 +21,4 @@ export const DraggableItem = ({ id, itemIndex, ...rest }) => (
       />
     )}
   </Draggable>
-);
+));

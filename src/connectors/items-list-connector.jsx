@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_EFFECTS, useApiEffect } from '@api-effects';
 import { ItemsList } from '@components';
 import { updateItemsPosition } from '@redux-store';
 
-export const ItemsListConnector = ({ boardId, ...rest }) => {
+export const ItemsListConnector = memo(({ boardId, ...rest }) => {
   const dispatch = useDispatch();
+
   const { data, run } = useApiEffect(API_EFFECTS.BOARDS.CHANGE_ITEMS_POSITION);
 
-  const onItemsPositionChange = (itemsPosition) => {
+  const onItemsPositionChange = useCallback((itemsPosition) => {
     run({
       id: boardId,
       itemsPosition,
     });
-  };
+  }, [ boardId ]);
 
   useEffect(() => {
     if (data) {
@@ -32,4 +33,4 @@ export const ItemsListConnector = ({ boardId, ...rest }) => {
       {...rest}
     />
   );
-};
+});

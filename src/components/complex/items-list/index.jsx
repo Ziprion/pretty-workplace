@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { DraggableItem, Item } from '@components';
 import { useItemsDnd } from '@hooks';
+import { ItemStoreConnector } from '@store-connectors';
 import { l } from '@utils';
 
 import { EmptyWrapper, Wrapper } from './parts';
 
 export const ItemsList = memo(({
-  itemsByPosition = [], isExpanded, isOverflow, boardId, onItemsPositionChange,
+  itemsPosition, boardId, onItemsPositionChange,
 }) => {
-  const { items, onItemsDragEnd } = useItemsDnd(itemsByPosition, onItemsPositionChange);
+  const { items, onItemsDragEnd } = useItemsDnd(itemsPosition, onItemsPositionChange);
 
   const emptyItemMessage = l('emptyBoard');
 
@@ -21,15 +21,11 @@ export const ItemsList = memo(({
         {(provided, snapshot) => (
           <Wrapper
             ref={provided.innerRef}
-            isExpanded={isExpanded}
-            isOverflow={isOverflow}
-            itemCount={items.length || 1}
           >
             {!items.length && <EmptyWrapper>{emptyItemMessage}</EmptyWrapper>}
             {items.length > 1 && items
-              .filter((item) => !!item)
-              .map((item, index) => <DraggableItem key={item.id} itemIndex={index} {...item} />)}
-            {items.length === 1 && <Item {...items[0]} />}
+              .map((itemId, index) => <ItemStoreConnector key={itemId} itemId={itemId} itemIndex={index} />)}
+            {items.length === 1 && <ItemStoreConnector isDraggable={false} itemId={items[0]} />}
             {provided.placeholder}
           </Wrapper>
         )}

@@ -5,14 +5,57 @@ import {
 } from '@components';
 import { l } from '@utils';
 
-const WorkplaceMenuToggle = memo(({ onClick }) => (
+const ToggleButton = memo(({ onClick }) => (
   <GhostButton isSecondary onClick={onClick}>
     <VerticalDotsIcon />
   </GhostButton>
 ));
 
+const MenuItems = memo(({
+  isHideSwitch, onSwitchClick, onAddClick, onEditClick, onDeleteClick,
+}) => {
+  const menuItems = [
+    {
+      Icon: SwitchIcon,
+      text: l('switchWorkplaceButtonText'),
+      onClick: onSwitchClick,
+      isHide: isHideSwitch,
+    },
+    {
+      Icon: AddIcon,
+      text: l('addWorkplaceButtonText'),
+      onClick: onAddClick,
+    },
+    {
+      Icon: EditIcon,
+      text: l('editWorkplaceButtonText'),
+      onClick: onEditClick,
+    },
+    {
+      Icon: DeleteIcon,
+      text: l('deleteWorkplaceButtonText'),
+      onClick: onDeleteClick,
+    },
+  ];
+
+  return (
+    <VerticalMenu.Wrapper>
+      {menuItems.map(({
+        Icon, text, onClick, isHide,
+      }) => (
+        !isHide && (
+          <VerticalMenu.Item key={text} onClick={onClick}>
+            <Icon />
+            {text}
+          </VerticalMenu.Item>
+        )
+      ))}
+    </VerticalMenu.Wrapper>
+  );
+});
+
 export const WorkplaceMenu = memo(({
-  onAddCallback, onDeleteCallback, onEditCallback, onSwitchCallback, workplaces,
+  onAddCallback, onDeleteCallback, onEditCallback, onSwitchCallback, isHideSwitch,
 }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
   const closeDropdown = useCallback(() => setShowDropdown(() => false), []);
@@ -38,37 +81,19 @@ export const WorkplaceMenu = memo(({
     onDeleteCallback();
   }, [ onDeleteCallback ]);
 
-  const switchButtonText = l('switchWorkplaceButtonText');
-  const addButtonText = l('addWorkplaceButtonText');
-  const editButtonText = l('editWorkplaceButtonText');
-  const deleteButtonText = l('deleteWorkplaceButtonText');
-
   return (
     <Dropdown
       close={closeDropdown}
       isShow={isShowDropdown}
-      toggleButton={<WorkplaceMenuToggle onClick={toggleDropdown} />}
+      toggleButton={<ToggleButton onClick={toggleDropdown} />}
     >
-      <VerticalMenu.Wrapper>
-        {workplaces.length > 1 && (
-          <VerticalMenu.Item onClick={onSwitchClick}>
-            <SwitchIcon />
-            {switchButtonText}
-          </VerticalMenu.Item>
-        )}
-        <VerticalMenu.Item onClick={onAddClick}>
-          <AddIcon />
-          {addButtonText}
-        </VerticalMenu.Item>
-        <VerticalMenu.Item onClick={onEditClick}>
-          <EditIcon />
-          {editButtonText}
-        </VerticalMenu.Item>
-        <VerticalMenu.Item onClick={onDeleteClick}>
-          <DeleteIcon />
-          {deleteButtonText}
-        </VerticalMenu.Item>
-      </VerticalMenu.Wrapper>
+      <MenuItems
+        isHideSwitch={isHideSwitch}
+        onAddClick={onAddClick}
+        onDeleteClick={onDeleteClick}
+        onEditClick={onEditClick}
+        onSwitchClick={onSwitchClick}
+      />
     </Dropdown>
   );
 });

@@ -21,7 +21,7 @@ export const ConfirmModal = ({
   okText = 'okConfirmModalButtonText',
 }) => {
   useEffect(() => {
-    if (isShow) {
+    if (isShow && requestError) {
       clearRequestError();
     }
   }, [ isShow ]);

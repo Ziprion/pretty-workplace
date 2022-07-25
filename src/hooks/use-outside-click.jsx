@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-export const useOutsideClick = (ref, callback, isDisabled) => {
+export const useOutsideClick = (isShow, ref, callback, isDisabled) => {
   const handleClick = useCallback(
     (e) => !isDisabled && ref.current && !ref.current.contains(e.target) && callback(),
     [ ref, callback, isDisabled ],
@@ -12,12 +12,14 @@ export const useOutsideClick = (ref, callback, isDisabled) => {
   );
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
-    document.addEventListener('keydown', handleEscape);
+    if (isShow) {
+      document.addEventListener('mousedown', handleClick);
+      document.addEventListener('keydown', handleEscape);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [ ref ]);
+      return () => {
+        document.removeEventListener('mousedown', handleClick);
+        document.removeEventListener('keydown', handleEscape);
+      };
+    }
+  }, [ ref, isShow ]);
 };

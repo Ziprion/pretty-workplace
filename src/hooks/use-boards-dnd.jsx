@@ -25,7 +25,7 @@ export const useBoardsDnd = (boardsByColumn, columnCount, onPositionChange) => {
 
     const sourceList = boardsCopy[dragColumnIndex];
 
-    const [ removedBoard, updatedSourceList ] = removeFromList(
+    const [ removedBoardId, updatedSourceList ] = removeFromList(
       sourceList,
       dragBoardIndex,
     );
@@ -37,7 +37,7 @@ export const useBoardsDnd = (boardsByColumn, columnCount, onPositionChange) => {
     boardsCopy[dropColumnIndex] = addToList(
       destinationList,
       dropBoardIndex,
-      removedBoard,
+      removedBoardId,
     );
 
     const updatedBoardsPosition = getFormattedBoardsPosition(boardsCopy, columnCount);

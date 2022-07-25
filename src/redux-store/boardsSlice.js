@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'; /* eslint no-param-reassign: 0, import/no-cycle: 0 */
-import { formatBoards } from '@utils';
 
 import { setActiveWorkplace } from './activeWorkplaceSlice';
 import { addItem, deleteItem } from './itemsSlice';
@@ -33,7 +32,7 @@ const boardsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(setActiveWorkplace, (_, { payload: { boards } }) => formatBoards(boards));
+    builder.addCase(setActiveWorkplace, (_, { payload: { boards } }) => boards);
     builder.addCase(addItem, (state, { payload: { id: itemId, boardId } }) => {
       const currentBoard = state.find(({ id }) => id === boardId);
       currentBoard.itemsPosition.push(itemId);

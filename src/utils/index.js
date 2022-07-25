@@ -4,5 +4,4 @@ export * from './theme';
 export * from './user';
 export * from './boards';
 export * from './dnd';
-export * from './items';
 export * from './time-of-day';

@@ -1,53 +1,82 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import {
   CopyIcon, DeleteIcon, Dropdown, EditIcon, GhostButton, HorizontalDotsIcon, VerticalMenu,
 } from '@components';
 import { l } from '@utils';
 
-const ItemMenuToggle = ({ onClick }) => (
-  <GhostButton
-    isSecondary
-    onClick={(e) => {
-      e.preventDefault();
-      onClick();
-    }}
-  >
+const ToggleButton = memo(({ onClick }) => (
+  <GhostButton isSecondary onClick={onClick}>
     <HorizontalDotsIcon />
   </GhostButton>
-);
+));
 
-export const ItemMenu = ({ onCopyCallback, onDeleteCallback, onEditCallback }) => {
+const MenuItems = memo(({ onCopyClick, onEditClick, onDeleteClick }) => {
+  const menuItems = [
+    {
+      Icon: CopyIcon,
+      text: l('copyItemButtonText'),
+      onClick: onCopyClick,
+    },
+    {
+      Icon: EditIcon,
+      text: l('editItemButtonText'),
+      onClick: onEditClick,
+    },
+    {
+      Icon: DeleteIcon,
+      text: l('deleteItemButtonText'),
+      onClick: onDeleteClick,
+    },
+  ];
+
+  return (
+    <VerticalMenu.Wrapper>
+      {menuItems.map(({
+        Icon, text, onClick, isHide,
+      }) => (
+        !isHide && (
+          <VerticalMenu.Item key={text} onClick={onClick}>
+            <Icon />
+            {text}
+          </VerticalMenu.Item>
+        )
+      ))}
+    </VerticalMenu.Wrapper>
+  );
+});
+
+export const ItemMenu = memo(({ onCopyCallback, onDeleteCallback, onEditCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
-  const closeDropdown = () => setShowDropdown(() => false);
-  const toggleDropdown = () => setShowDropdown((prev) => !prev);
+  const closeDropdown = useCallback(() => setShowDropdown(() => false), []);
+  const toggleDropdown = useCallback(() => setShowDropdown((prev) => !prev), []);
 
-  const onClick = (callback) => (e) => {
-    e.preventDefault();
+  const onCopyClick = useCallback(() => {
     closeDropdown();
-    callback();
-  };
+    onCopyCallback();
+  }, [ onCopyCallback ]);
+
+  const onEditClick = useCallback(() => {
+    closeDropdown();
+    onEditCallback();
+  }, [ onEditCallback ]);
+
+  const onDeleteClick = useCallback(() => {
+    closeDropdown();
+    onDeleteCallback();
+  }, [ onDeleteCallback ]);
 
   return (
     <Dropdown
       close={closeDropdown}
       isShow={isShowDropdown}
-      toggleButton={<ItemMenuToggle onClick={toggleDropdown} />}
+      toggleButton={<ToggleButton onClick={toggleDropdown} />}
     >
-      <VerticalMenu.Wrapper>
-        <VerticalMenu.Item onClick={onClick(onCopyCallback)}>
-          <CopyIcon />
-          {l('copyItemButtonText')}
-        </VerticalMenu.Item>
-        <VerticalMenu.Item onClick={onClick(onEditCallback)}>
-          <EditIcon />
-          {l('editItemButtonText')}
-        </VerticalMenu.Item>
-        <VerticalMenu.Item onClick={onClick(onDeleteCallback)}>
-          <DeleteIcon />
-          {l('deleteItemButtonText')}
-        </VerticalMenu.Item>
-      </VerticalMenu.Wrapper>
+      <MenuItems
+        onCopyClick={onCopyClick}
+        onDeleteClick={onDeleteClick}
+        onEditClick={onEditClick}
+      />
     </Dropdown>
   );
-};
+});

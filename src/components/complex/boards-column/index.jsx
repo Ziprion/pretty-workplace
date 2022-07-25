@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 
-import { Board } from '@components';
-import { getIsBoardFade } from '@utils';
+import { BoardStoreConnector } from '@store-connectors';
 
 import { Wrapper } from './parts';
 
 export const BoardsColumn = memo(({
-  boards = [], columnIndex, columnWidth, isChangingBoardsPosition, itemsByBoardId,
+  boards = [], columnIndex, columnWidth, isChangingBoardsPosition,
 }) => (
   <Droppable droppableId={String(columnIndex)}>
     {/* eslint-disable-next-line no-unused-vars */}
@@ -16,15 +15,12 @@ export const BoardsColumn = memo(({
         ref={provided.innerRef}
         columnWidth={columnWidth}
       >
-        {boards.map(({ id, ...rest }, index) => (
-          <Board
+        {boards.map((id, index) => (
+          <BoardStoreConnector
             key={id}
             boardIndex={index}
             id={id}
             isChangingBoardsPosition={isChangingBoardsPosition}
-            isFade={getIsBoardFade(id)}
-            items={itemsByBoardId[id]}
-            {...rest}
           />
         ))}
         {provided.placeholder}

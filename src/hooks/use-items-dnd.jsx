@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { addToList, getFormattedItemsPosition, removeFromList } from '@utils';
+import { addToList, removeFromList } from '@utils';
 
 export const useItemsDnd = (itemsByPosition, onPositionChange) => {
   const [ items, setItems ] = useState(itemsByPosition);
@@ -34,11 +34,9 @@ export const useItemsDnd = (itemsByPosition, onPositionChange) => {
       draggedItem,
     );
 
-    const updatedItemsPosition = getFormattedItemsPosition(updatedItemsCopy);
-
     setItems(() => updatedItemsCopy);
 
-    onPositionChange(updatedItemsPosition);
+    onPositionChange(updatedItemsCopy);
   }, [ items, onPositionChange ]);
 
   useEffect(() => setItems(() => itemsByPosition), [ itemsByPosition ]);

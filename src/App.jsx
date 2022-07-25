@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,13 +13,11 @@ import { APP_ROUTES, AUTH_APP_ROUTES } from './routes';
 export const App = () => {
   const { status } = useAuth();
 
-  const currentRoutes = useMemo(() => (status ? AUTH_APP_ROUTES : APP_ROUTES), [ status ]);
-
   return (
     <AuthConnector>
       <Router>
         <Switch>
-          {currentRoutes.map(({
+          {(status ? AUTH_APP_ROUTES : APP_ROUTES).map(({
             id, exact, path, component,
           }) => (
             <Route

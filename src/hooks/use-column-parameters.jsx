@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { boardPlate } from '@style';
 
 export const useColumnParameters = () => {
-  const [ columnCount, setColumnCount ] = useState(null);
+  const [ columnCount, setColumnCount ] = useState(0);
   const [ columnWidth, setColumnWidth ] = useState(null);
 
   const getCurrentColumnCount = useCallback(() => Math.trunc(window.innerWidth / boardPlate.minWidth.slice(0, 3)), []);

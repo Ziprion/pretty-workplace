@@ -12,7 +12,7 @@ export const Modal = ({
 }) => {
   const modalWrapper = useRef(null);
 
-  useOutsideClick(modalWrapper, onCancel, isDisabled);
+  useOutsideClick(isShow, modalWrapper, onCancel, isDisabled);
 
   return isShow && (
     <Mask>

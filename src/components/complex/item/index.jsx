@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import ReactImageFallback from 'react-image-fallback';
 
 import { ItemMenuConnector } from '@connectors';
@@ -7,7 +7,26 @@ import {
   Icon, Link, Menu, Text, Wrapper,
 } from './parts';
 
-export const Item = ({
+const Body = memo(({ title, url, pathToIcon }) => (
+  <Link
+    alt={title}
+    href={url}
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <Icon>
+      <ReactImageFallback
+        alt={title}
+        fallbackImage="/images/favicons/fallback-icon.ico"
+        initialImage={pathToIcon}
+        src={pathToIcon}
+      />
+    </Icon>
+    <Text>{title}</Text>
+  </Link>
+));
+
+export const Item = memo(({
   id, title, url, boardId, pathToIcon, placeholder, dragRef, isDragging, ...rest
 }) => {
   const onCopyCallback = useCallback(async () => {
@@ -15,23 +34,16 @@ export const Item = ({
   }, [ url ]);
 
   return (
-    <Wrapper ref={dragRef} isDragging={isDragging} {...rest}>
-      <Link
-        alt={title}
-        href={url}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <Icon>
-          <ReactImageFallback
-            alt={title}
-            fallbackImage="/images/favicons/fallback-icon.ico"
-            initialImage={pathToIcon}
-            src={pathToIcon}
-          />
-        </Icon>
-        <Text>{title}</Text>
-      </Link>
+    <Wrapper
+      ref={dragRef}
+      isDragging={isDragging}
+      {...rest}
+    >
+      <Body
+        pathToIcon={pathToIcon}
+        title={title}
+        url={url}
+      />
       <Menu>
         <ItemMenuConnector
           boardId={boardId}
@@ -44,4 +56,4 @@ export const Item = ({
       {placeholder}
     </Wrapper>
   );
-};
+});

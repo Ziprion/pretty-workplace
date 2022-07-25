@@ -17,7 +17,7 @@ const AddBoardButton = memo(({ onClick }) => (
   </Button>
 ));
 
-export const AddBoardConnector = ({ activeWorkplaceId }) => {
+export const AddBoardConnector = memo(({ activeWorkplaceId }) => {
   const dispatch = useDispatch();
 
   const [ isShowModal, setShowModal ] = useState(false);
@@ -70,4 +70,4 @@ export const AddBoardConnector = ({ activeWorkplaceId }) => {
       </Modal>
     </>
   );
-};
+});

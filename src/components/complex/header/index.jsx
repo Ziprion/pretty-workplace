@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Logo, UserPanel } from '@components';
@@ -10,9 +10,9 @@ import { Wrapper } from './parts';
 export const Header = () => {
   const dispatch = useDispatch();
 
-  const onClickLogo = useCallback(() => {
+  const onClickLogo = () => {
     dispatch(collapseAllBoards());
-  }, []);
+  };
 
   return (
     <Wrapper>

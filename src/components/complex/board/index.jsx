@@ -6,24 +6,45 @@ import { ChevronDoubleDownIcon } from '@components';
 import { AddItemConnector, BoardMenuConnector, ItemsListConnector } from '@connectors';
 import { useBoardOverflow } from '@hooks';
 import { toggleExpandBoard } from '@redux-store';
-import { getItemsByPosition } from '@utils';
+import { getIsBoardFade } from '@utils';
 
 import {
-  ActionBar, Header, Title, ToggleIcon, Wrapper,
+  ActionBar, Body, Header, Title, ToggleIcon, Wrapper,
 } from './parts';
 
+const HeaderToggleIcon = memo(({ isExpanded }) => (
+  <ToggleIcon isExpanded={isExpanded}>
+    <ChevronDoubleDownIcon />
+  </ToggleIcon>
+));
+
+const HeaderTitle = memo(({ title }) => (
+  <Title>{title}</Title>
+));
+
+const HeaderActionBar = memo(({ onClick, id, title }) => (
+  <ActionBar onClick={onClick}>
+    <AddItemConnector boardId={id} />
+    <BoardMenuConnector id={id} title={title} />
+  </ActionBar>
+));
+
 export const Board = memo(({
-  id, title, items = [], itemsPosition, boardIndex, isExpanded, isFade, isChangingBoardsPosition,
+  id, title, itemsPosition = [], boardIndex, isExpanded, isChangingBoardsPosition,
 }) => {
   const dispatch = useDispatch();
 
   const { isOverflow } = useBoardOverflow(isExpanded);
 
-  const itemsByPosition = useMemo(() => getItemsByPosition(items, itemsPosition), [ items, itemsPosition ]);
+  const isFade = useMemo(() => getIsBoardFade(id), [ id ]);
 
   const toggleExpand = useCallback(() => {
-    dispatch(toggleExpandBoard(id));
-  }, []);
+    if (!isChangingBoardsPosition) {
+      dispatch(toggleExpandBoard(id));
+    }
+  }, [ id, isChangingBoardsPosition ]);
+
+  const stopPropagation = useCallback((e) => e.stopPropagation(), []);
 
   return (
     <Draggable
@@ -40,24 +61,26 @@ export const Board = memo(({
         >
           <Header
             {...provided.dragHandleProps}
-            onClick={!isChangingBoardsPosition ? toggleExpand : undefined}
+            onClick={toggleExpand}
           >
-            <ToggleIcon isExpanded={isExpanded}>
-              <ChevronDoubleDownIcon />
-            </ToggleIcon>
-            <Title>{title}</Title>
-            <ActionBar onClick={(e) => e.stopPropagation()}>
-              <AddItemConnector boardId={id} />
-              <BoardMenuConnector id={id} title={title} />
-            </ActionBar>
+            <HeaderToggleIcon isExpanded={isExpanded} />
+            <HeaderTitle title={title} />
+            <HeaderActionBar
+              id={id}
+              title={title}
+              onClick={stopPropagation}
+            />
           </Header>
-          <ItemsListConnector
-            boardId={id}
+          <Body
             isExpanded={isExpanded}
             isOverflow={isOverflow}
-            itemCount={itemsByPosition.length || 1}
-            itemsByPosition={itemsByPosition}
-          />
+            itemCount={itemsPosition.length || 1}
+          >
+            <ItemsListConnector
+              boardId={id}
+              itemsPosition={itemsPosition}
+            />
+          </Body>
           {provided.placeholder}
         </Wrapper>
       )}

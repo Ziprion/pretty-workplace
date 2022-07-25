@@ -8,11 +8,36 @@ import { l } from '@utils';
 
 import { AvatarButton } from './parts';
 
-const UserMenuToggle = memo(({ user, onClick }) => (
+const ToggleButton = memo(({ user, onClick }) => (
   <AvatarButton onClick={onClick}>
     <Avatar {...user} />
   </AvatarButton>
 ));
+
+const MenuItems = memo(({ onLogoutClick }) => {
+  const menuItems = [
+    {
+      Icon: LogoutIcon,
+      text: l('logoutButtonText'),
+      onClick: onLogoutClick,
+    },
+  ];
+
+  return (
+    <VerticalMenu.Wrapper>
+      {menuItems.map(({
+        Icon, text, onClick, isHide,
+      }) => (
+        !isHide && (
+          <VerticalMenu.Item key={text} onClick={onClick}>
+            <Icon />
+            {text}
+          </VerticalMenu.Item>
+        )
+      ))}
+    </VerticalMenu.Wrapper>
+  );
+});
 
 export const UserMenu = memo(({ onLogoutCallback }) => {
   const [ isShowDropdown, setShowDropdown ] = useState(false);
@@ -28,14 +53,9 @@ export const UserMenu = memo(({ onLogoutCallback }) => {
     <Dropdown
       close={closeDropdown}
       isShow={isShowDropdown}
-      toggleButton={<WithUserHOC Component={UserMenuToggle} onClick={toggleDropdown} />}
+      toggleButton={<WithUserHOC Component={ToggleButton} onClick={toggleDropdown} />}
     >
-      <VerticalMenu.Wrapper>
-        <VerticalMenu.Item onClick={onLogoutClick}>
-          <LogoutIcon />
-          {l('logoutButtonText')}
-        </VerticalMenu.Item>
-      </VerticalMenu.Wrapper>
+      <MenuItems onLogoutClick={onLogoutClick} />
     </Dropdown>
   );
 });

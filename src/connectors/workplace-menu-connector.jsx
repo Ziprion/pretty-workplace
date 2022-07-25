@@ -116,7 +116,7 @@ export const WorkplaceMenuConnector = ({ activeWorkplaceTitle, activeWorkplaceId
   return (
     <>
       <WorkplaceMenu
-        workplaces={workplaces}
+        isHideSwitch={workplaces.length < 2}
         onAddCallback={openAddModal}
         onDeleteCallback={openDeleteModal}
         onEditCallback={openEditModal}
