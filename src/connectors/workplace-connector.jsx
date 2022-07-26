@@ -11,14 +11,12 @@ export const WorkplaceConnector = () => {
   const { data, run, loading } = useApiEffect(API_EFFECTS.WORKPLACES.CHANGE_BOARDS_POSITION);
 
   const onBoardsPositionChange = useCallback((boardsPosition) => {
-    run({ boardsPosition });
+    run(boardsPosition);
   }, []);
 
   useEffect(() => {
     if (data) {
-      const { boardsPosition } = data;
-
-      dispatch(updateBoardsPosition(boardsPosition));
+      dispatch(updateBoardsPosition(data));
     }
   }, [ data ]);
 

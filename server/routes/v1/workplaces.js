@@ -107,9 +107,7 @@ workplacesRouter.patch('/active/boardsPosition', async (req, res) => {
   try {
     const {
       userId,
-      body: {
-        boardsPosition,
-      },
+      body: boardsPosition,
     } = req;
 
     if (!Array.isArray(boardsPosition)) {
@@ -126,7 +124,9 @@ workplacesRouter.patch('/active/boardsPosition', async (req, res) => {
 
     const formattedBoardsPosition = boardsPosition.map((boardId) => (boardId || 0));
 
-    const updatedBoardsPosition = toCamelCase(await updateBoardsPosition(workplaceId, formattedBoardsPosition));
+    const { boardsPosition: updatedBoardsPosition } = toCamelCase(
+      await updateBoardsPosition(workplaceId, formattedBoardsPosition),
+    );
 
     return res.status(200).send(updatedBoardsPosition);
   } catch (e) {
