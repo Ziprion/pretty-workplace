@@ -27,18 +27,14 @@ const Body = memo(({ title, url, pathToIcon }) => (
 ));
 
 export const Item = memo(({
-  id, title, url, boardId, pathToIcon, placeholder, dragRef, isDragging, ...rest
+  id, title, url, boardId, pathToIcon,
 }) => {
   const onCopyCallback = useCallback(async () => {
     await navigator.clipboard.writeText(url);
   }, [ url ]);
 
   return (
-    <Wrapper
-      ref={dragRef}
-      isDragging={isDragging}
-      {...rest}
-    >
+    <Wrapper>
       <Body
         pathToIcon={pathToIcon}
         title={title}
@@ -53,7 +49,6 @@ export const Item = memo(({
           onCopyCallback={onCopyCallback}
         />
       </Menu>
-      {placeholder}
     </Wrapper>
   );
 });

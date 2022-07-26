@@ -3,22 +3,27 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import { Item } from '@components';
 
+import { Wrapper } from './parts';
+
 export const DraggableItem = memo(({ id, itemIndex, ...rest }) => (
   <Draggable
     draggableId={String(id)}
     index={Number(itemIndex)}
   >
     {(provided, snapshot) => (
-      <Item
-        dragRef={provided.innerRef}
-        id={id}
+      <Wrapper
+        ref={provided.innerRef}
         isDragging={snapshot.isDragging}
-        placeholder={provided.placeholder}
         {...provided.draggableProps}
         {...provided.draggableProps.style}
         {...provided.dragHandleProps}
-        {...rest}
-      />
+      >
+        <Item
+          id={id}
+          {...rest}
+        />
+        {provided.placeholder}
+      </Wrapper>
     )}
   </Draggable>
 ));
